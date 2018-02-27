@@ -12,14 +12,14 @@ public class Kweet implements Serializable {
     private Long id;
 
     private String messageBody;
-    private User sender;
+    private UserProfile sender;
     private List<Heart> hearts;
-    private List<User> mentions;
+    private List<UserProfile> mentions;
     private List<Hashtag> hashtags;
 
     public Kweet(){}
 
-    public Kweet(String messageBody, User sender, List<Heart> hearts, List<User> mentions, List<Hashtag> hashtags) {
+    public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<UserProfile> mentions, List<Hashtag> hashtags) {
         this.messageBody = messageBody;
         this.sender = sender;
         this.hearts = hearts;
@@ -40,11 +40,11 @@ public class Kweet implements Serializable {
         this.messageBody = messageBody;
     }
 
-    public User getSender() {
+    public UserProfile getSender() {
         return sender;
     }
 
-    public void setSender(User sender) {
+    public void setSender(UserProfile sender) {
         this.sender = sender;
     }
 
@@ -56,11 +56,11 @@ public class Kweet implements Serializable {
         this.hearts = hearts;
     }
 
-    public List<User> getMentions() {
+    public List<UserProfile> getMentions() {
         return mentions;
     }
 
-    public void setMentions(List<User> mentions) {
+    public void setMentions(List<UserProfile> mentions) {
         this.mentions = mentions;
     }
 
