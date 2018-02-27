@@ -1,5 +1,8 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,6 +10,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Getter
+@Setter
 @Entity
 @NamedQueries({
         @NamedQuery(name = "heart.findByKweet", query = "SELECT h FROM Heart h WHERE h.kweet = :kweet")
@@ -26,20 +31,6 @@ public class Heart implements Serializable {
     public Heart(Kweet kweet) {
         this.kweet = kweet;
     }
-
-    //<editor-fold desc="Getters/Setters">
-    public Long getId() {
-        return id;
-    }
-
-    public Kweet getKweet() {
-        return kweet;
-    }
-
-    public void setKweet(Kweet kweet) {
-        this.kweet = kweet;
-    }
-    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

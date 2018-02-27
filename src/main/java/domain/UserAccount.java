@@ -40,6 +40,9 @@ public class UserAccount implements Serializable {
     @OneToOne
     private UserProfile userProfile;
 
+    @OneToOne
+    private UserRole userRole;
+
     public UserAccount() {
     }
 

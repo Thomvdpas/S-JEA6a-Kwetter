@@ -1,5 +1,8 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -7,6 +10,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Getter
+@Setter
 @Entity
 public class Mention implements Serializable {
 
@@ -27,28 +32,6 @@ public class Mention implements Serializable {
         this.kweet = kweet;
         this.receiver = receiver;
     }
-
-    //<editor-fold desc="Getters/Setters">
-    public Long getId() {
-        return id;
-    }
-
-    public Kweet getKweet() {
-        return kweet;
-    }
-
-    public void setKweet(Kweet kweet) {
-        this.kweet = kweet;
-    }
-
-    public UserProfile getReceiver() {
-        return receiver;
-    }
-
-    public void setReceiver(UserProfile receiver) {
-        this.receiver = receiver;
-    }
-    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

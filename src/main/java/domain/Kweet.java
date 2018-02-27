@@ -1,5 +1,8 @@
 package domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +15,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Getter
+@Setter
 @Entity
 public class Kweet implements Serializable {
 
@@ -43,52 +48,6 @@ public class Kweet implements Serializable {
         this.mentions = mentions;
         this.hashtags = hashtags;
     }
-
-    //<editor-fold desc="Getters/Setters">
-    public Long getId() {
-        return id;
-    }
-
-    public String getMessageBody() {
-        return messageBody;
-    }
-
-    public void setMessageBody(String messageBody) {
-        this.messageBody = messageBody;
-    }
-
-    public UserProfile getSender() {
-        return sender;
-    }
-
-    public void setSender(UserProfile sender) {
-        this.sender = sender;
-    }
-
-    public List<Heart> getHearts() {
-        return hearts;
-    }
-
-    public void setHearts(List<Heart> hearts) {
-        this.hearts = hearts;
-    }
-
-    public List<UserProfile> getMentions() {
-        return mentions;
-    }
-
-    public void setMentions(List<UserProfile> mentions) {
-        this.mentions = mentions;
-    }
-
-    public List<Hashtag> getHashtags() {
-        return hashtags;
-    }
-
-    public void setHashtags(List<Hashtag> hashtags) {
-        this.hashtags = hashtags;
-    }
-    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override
