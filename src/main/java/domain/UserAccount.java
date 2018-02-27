@@ -3,6 +3,10 @@ package domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,16 +15,33 @@ import java.util.Objects;
  */
 @Getter
 @Setter
+@Entity
 public class UserAccount implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @NotNull
+    @Column(unique = true)
+    @Size(min = 4, max = 20)
     private String username;
+
+    @NotNull
+    @Column(unique = true)
+    @Email
     private String emailaddress;
+
+    @NotNull
+    @Size(min = 1, max = 16)
     private String password;
+
+    @Column(unique = true)
+    @OneToOne
     private UserProfile userProfile;
 
-    public UserAccount() {}
+    public UserAccount() {
+    }
 
     public UserAccount(String username, String emailaddress, String password) {
         this.username = username;

@@ -1,19 +1,27 @@
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-public class Mention implements Serializable{
+@Entity
+public class Mention implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @ManyToOne
     private Kweet kweet;
+
+    @OneToOne
     private UserProfile receiver;
 
-    public Mention() {}
+    public Mention() {
+    }
 
     public Mention(Kweet kweet, UserProfile receiver) {
         this.kweet = kweet;

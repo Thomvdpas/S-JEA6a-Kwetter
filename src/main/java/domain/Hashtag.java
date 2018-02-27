@@ -1,21 +1,31 @@
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "hashtag.findByBodyText", query = "SELECT h FROM Hashtag h WHERE h.bodyText = :bodyText")
+})
 public class Hashtag implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String bodyText;
+
+    @ManyToOne
     private Kweet kweet;
 
-    private Hashtag() {}
+    private Hashtag() {
+    }
 
-    private Hashtag(String bodyText, Kweet kweet){
+    private Hashtag(String bodyText, Kweet kweet) {
         this.bodyText = bodyText;
         this.kweet = kweet;
     }

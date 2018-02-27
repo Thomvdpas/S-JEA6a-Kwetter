@@ -1,18 +1,27 @@
 package domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "heart.findByKweet", query = "SELECT h FROM Heart h WHERE h.kweet = :kweet")
+})
 public class Heart implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @ManyToOne
     private Kweet kweet;
 
-    public Heart(){}
+    public Heart() {
+    }
 
     public Heart(Kweet kweet) {
         this.kweet = kweet;

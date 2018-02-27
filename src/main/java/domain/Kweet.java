@@ -1,5 +1,10 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -7,17 +12,29 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
+@Entity
 public class Kweet implements Serializable {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Size(min = 1, max = 280)
     private String messageBody;
+
     private UserProfile sender;
+
+    @OneToMany
     private List<Heart> hearts;
+
+    @OneToMany
     private List<UserProfile> mentions;
+
+    @OneToMany
     private List<Hashtag> hashtags;
 
-    public Kweet(){}
+    public Kweet() {
+    }
 
     public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<UserProfile> mentions, List<Hashtag> hashtags) {
         this.messageBody = messageBody;
