@@ -3,10 +3,7 @@ package domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -27,13 +24,14 @@ public class Kweet implements Serializable {
     @Size(min = 1, max = 280)
     private String messageBody;
 
+    @ManyToOne
     private UserProfile sender;
 
     @OneToMany
     private List<Heart> hearts;
 
     @OneToMany
-    private List<UserProfile> mentions;
+    private List<Mention> mentions;
 
     @OneToMany
     private List<Hashtag> hashtags;
@@ -41,7 +39,7 @@ public class Kweet implements Serializable {
     public Kweet() {
     }
 
-    public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<UserProfile> mentions, List<Hashtag> hashtags) {
+    public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<Mention> mentions, List<Hashtag> hashtags) {
         this.messageBody = messageBody;
         this.sender = sender;
         this.hearts = hearts;

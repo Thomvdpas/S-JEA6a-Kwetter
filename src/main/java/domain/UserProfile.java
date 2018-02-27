@@ -47,6 +47,7 @@ public class UserProfile implements Serializable {
         this.userAccount = userAccount;
     }
 
+    //<editor-fold desc="equals/hashCode">
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,4 +62,5 @@ public class UserProfile implements Serializable {
 
         return Objects.hash(id, userAccount);
     }
+    //</editor-fold>
 }

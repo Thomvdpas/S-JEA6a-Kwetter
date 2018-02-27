@@ -32,6 +32,11 @@ public class Heart implements Serializable {
         this.kweet = kweet;
     }
 
+    //TODO: Hoe werkt dit met lombok?
+    public Kweet getKweet() {
+        return kweet;
+    }
+
     //<editor-fold desc="equals/hashCode">
     @Override
     public boolean equals(Object o) {

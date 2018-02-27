@@ -35,6 +35,11 @@ public class Hashtag implements Serializable {
         this.kweet = kweet;
     }
 
+    //TODO: Hoe werkt dit met lombok?
+    public String getBodyText() {
+        return bodyText;
+    }
+
     //<editor-fold desc="hashCode/equals">
     @Override
     public boolean equals(Object o) {

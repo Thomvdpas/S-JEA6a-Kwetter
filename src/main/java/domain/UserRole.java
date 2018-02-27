@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 /**
@@ -16,8 +17,12 @@ import java.io.Serializable;
 @Entity
 public class UserRole implements Serializable {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @OneToOne
+    private UserAccount userAccount;
 
     public UserRole() {
     }
