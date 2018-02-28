@@ -30,23 +30,25 @@ public class UserAccount implements Serializable {
     private String emailaddress;
 
     @NotNull
-    @Size(min = 1, max = 16)
+    @Size(min = 4, max = 16)
     private String password;
 
     @Column(unique = true)
     @OneToOne
     private UserProfile userProfile;
 
-    @OneToOne
+    @NotNull
+    @Enumerated(value = EnumType.STRING)
     private UserRole userRole;
 
     public UserAccount() {
     }
 
-    public UserAccount(String username, String emailaddress, String password) {
+    public UserAccount(String username, String emailaddress, String password, UserRole userRole) {
         this.username = username;
         this.emailaddress = emailaddress;
         this.password = password;
+        this.userRole = userRole;
     }
 
     //<editor-fold desc="Getters/Setters">

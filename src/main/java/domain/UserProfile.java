@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,14 +29,17 @@ public class UserProfile implements Serializable {
     @OneToMany
     private List<Kweet> kweets;
     @ManyToMany
-    private List<UserProfile> following;
-    @Transient
     private List<UserProfile> followers;
+    @Transient
+    private List<UserProfile> followees;
 
     public UserProfile() {
+        this.followers = new ArrayList<UserProfile>();
+        this.followees = new ArrayList<UserProfile>();
     }
 
     public UserProfile(String firstName, String lastName, String avatarPath, String location, String biography, UserAccount userAccount) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatarPath = avatarPath;
@@ -105,14 +109,6 @@ public class UserProfile implements Serializable {
         this.kweets = kweets;
     }
 
-    public List<UserProfile> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(List<UserProfile> following) {
-        this.following = following;
-    }
-
     public List<UserProfile> getFollowers() {
         return followers;
     }
@@ -120,7 +116,15 @@ public class UserProfile implements Serializable {
     public void setFollowers(List<UserProfile> followers) {
         this.followers = followers;
     }
-    //</editor-fold>
+
+    public List<UserProfile> getFollowees() {
+        return followees;
+    }
+
+    public void setFollowees(List<UserProfile> followees) {
+        this.followees = followees;
+    }
+//</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

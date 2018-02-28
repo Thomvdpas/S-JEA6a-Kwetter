@@ -18,7 +18,7 @@ public class Kweet implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Size(min = 1, max = 280)
+    @Size(min = 1, max = 140)
     private String messageBody;
 
     @ManyToOne
