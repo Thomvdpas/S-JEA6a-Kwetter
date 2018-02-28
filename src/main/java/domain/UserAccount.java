@@ -1,8 +1,5 @@
 package domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -13,8 +10,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 public class UserAccount implements Serializable {
 
@@ -51,6 +48,52 @@ public class UserAccount implements Serializable {
         this.emailaddress = emailaddress;
         this.password = password;
     }
+
+    //<editor-fold desc="Getters/Setters">
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmailaddress() {
+        return emailaddress;
+    }
+
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

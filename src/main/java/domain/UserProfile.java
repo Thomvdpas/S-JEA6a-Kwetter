@@ -1,8 +1,5 @@
 package domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -11,8 +8,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 public class UserProfile implements Serializable {
 
@@ -30,10 +27,10 @@ public class UserProfile implements Serializable {
     private UserAccount userAccount;
     @OneToMany
     private List<Kweet> kweets;
-    @OneToMany
-    private List<UserProfile> followers;
-    @OneToMany
+    @ManyToMany
     private List<UserProfile> following;
+    @Transient
+    private List<UserProfile> followers;
 
     public UserProfile() {
     }
@@ -46,6 +43,84 @@ public class UserProfile implements Serializable {
         this.biography = biography;
         this.userAccount = userAccount;
     }
+
+    //<editor-fold desc="Getters/Setters">
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+
+    public List<Kweet> getKweets() {
+        return kweets;
+    }
+
+    public void setKweets(List<Kweet> kweets) {
+        this.kweets = kweets;
+    }
+
+    public List<UserProfile> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(List<UserProfile> following) {
+        this.following = following;
+    }
+
+    public List<UserProfile> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<UserProfile> followers) {
+        this.followers = followers;
+    }
+    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

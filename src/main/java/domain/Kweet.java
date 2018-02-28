@@ -1,8 +1,5 @@
 package domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -12,8 +9,8 @@ import java.util.Objects;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Entity
 public class Kweet implements Serializable {
 
@@ -31,7 +28,7 @@ public class Kweet implements Serializable {
     private List<Heart> hearts;
 
     @OneToMany
-    private List<Mention> mentions;
+    private List<UserProfile> mentions;
 
     @OneToMany
     private List<Hashtag> hashtags;
@@ -39,13 +36,59 @@ public class Kweet implements Serializable {
     public Kweet() {
     }
 
-    public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<Mention> mentions, List<Hashtag> hashtags) {
+    public Kweet(String messageBody, UserProfile sender, List<Heart> hearts, List<UserProfile> mentions, List<Hashtag> hashtags) {
         this.messageBody = messageBody;
         this.sender = sender;
         this.hearts = hearts;
         this.mentions = mentions;
         this.hashtags = hashtags;
     }
+
+    //<editor-fold desc="Getters/Setters">
+    public Long getId() {
+        return id;
+    }
+
+    public String getMessageBody() {
+        return messageBody;
+    }
+
+    public void setMessageBody(String messageBody) {
+        this.messageBody = messageBody;
+    }
+
+    public UserProfile getSender() {
+        return sender;
+    }
+
+    public void setSender(UserProfile sender) {
+        this.sender = sender;
+    }
+
+    public List<Heart> getHearts() {
+        return hearts;
+    }
+
+    public void setHearts(List<Heart> hearts) {
+        this.hearts = hearts;
+    }
+
+    public List<UserProfile> getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(List<UserProfile> mentions) {
+        this.mentions = mentions;
+    }
+
+    public List<Hashtag> getHashtags() {
+        return hashtags;
+    }
+
+    public void setHashtags(List<Hashtag> hashtags) {
+        this.hashtags = hashtags;
+    }
+    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override
