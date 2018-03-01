@@ -70,7 +70,7 @@ public class Hashtag implements Serializable {
             return false;
         }
         final Hashtag other = (Hashtag) o;
-        return Objects.equals(this.kweet, other.kweet);
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
