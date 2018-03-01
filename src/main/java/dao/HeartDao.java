@@ -8,15 +8,9 @@ import java.util.ArrayList;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-public interface HeartDao {
-
-    void addHeart(Heart heart);
-
-    void removeHeart(Heart heart);
+public interface HeartDao extends GenericDao<Heart> {
 
     Heart findByKweet(Kweet kweet);
-
-    Heart findById(Long id);
 
     ArrayList<Heart> getHearts();
 }

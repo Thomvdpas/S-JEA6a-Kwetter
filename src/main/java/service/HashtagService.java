@@ -2,6 +2,8 @@ package service;
 
 import dao.HashtagDao;
 import dao.JPA;
+import dao.collection.HashtagDaoColl;
+import dao.jpa.HashtagDaoJPA;
 import domain.Hashtag;
 
 import javax.ejb.Stateless;
@@ -16,21 +18,9 @@ public class HashtagService {
 
     @Inject
     @JPA
-    private HashtagDao hashtagDao;
+    private HashtagDaoJPA hashtagDao;
 
     public HashtagService() {
-    }
-
-    public void addHashtag(Hashtag hashtag) {
-        hashtagDao.addHashtag(hashtag);
-    }
-
-    public void removeHashtag(Hashtag hashtag) {
-        hashtagDao.removeHashtag(hashtag);
-    }
-
-    public void removeHashtag(String bodyText) {
-        hashtagDao.removeHashtag(findByBodyText(bodyText));
     }
 
     public Hashtag findByBodyText(String bodyText) {

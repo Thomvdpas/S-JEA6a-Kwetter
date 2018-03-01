@@ -7,15 +7,9 @@ import java.util.ArrayList;
 /**
  * @author Thom van de Pas on 27-2-2018
  */
-public interface HashtagDao {
-
-    void addHashtag(Hashtag hashtag);
-
-    void removeHashtag(Hashtag hashtag);
+public interface HashtagDao extends GenericDao<Hashtag> {
 
     Hashtag findByBodyText(String bodyText);
-
-    Hashtag findById(Long id);
 
     ArrayList<Hashtag> getHashtags();
 }

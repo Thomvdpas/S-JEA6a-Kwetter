@@ -1,5 +1,6 @@
 package dao.jpa;
 
+import dao.GenericDaoImpl;
 import dao.HeartDao;
 import dao.JPA;
 import domain.Hashtag;
@@ -19,33 +20,14 @@ import java.util.List;
  */
 @Stateless
 @JPA
-public class HeartDaoJPA implements HeartDao {
-
-    @PersistenceContext
-    private EntityManager entityManager;
+public class HeartDaoJPA extends GenericDaoImpl<Heart> implements HeartDao {
 
     public HeartDaoJPA() {
-    }
-
-
-    public void addHeart(Heart heart) {
-        entityManager.persist(heart);
-    }
-
-    public void removeHeart(Heart heart) {
-        entityManager.remove(entityManager.merge(heart));
     }
 
     public Heart findByKweet(Kweet kweet) {
         TypedQuery<Heart> query = entityManager.createNamedQuery("heart.findByKweet", Heart.class);
         query.setParameter("kweet", kweet);
-        List<Heart> result = query.getResultList();
-        return result.get(0);
-    }
-
-    public Heart findById(Long id) {
-        TypedQuery<Heart> query = entityManager.createNamedQuery("heart.findById", Heart.class);
-        query.setParameter("id", id);
         List<Heart> result = query.getResultList();
         return result.get(0);
     }

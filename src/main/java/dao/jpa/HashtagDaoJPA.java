@@ -1,5 +1,6 @@
 package dao.jpa;
 
+import dao.GenericDaoImpl;
 import dao.HashtagDao;
 import dao.JPA;
 import domain.Hashtag;
@@ -17,32 +18,14 @@ import java.util.List;
  */
 @Stateless
 @JPA
-public class HashtagDaoJPA implements HashtagDao {
-
-    @PersistenceContext
-    private EntityManager entityManager;
+public class HashtagDaoJPA extends GenericDaoImpl<Hashtag> implements HashtagDao {
 
     public HashtagDaoJPA() {
-    }
-
-    public void addHashtag(Hashtag hashtag) {
-        entityManager.persist(hashtag);
-    }
-
-    public void removeHashtag(Hashtag hashtag) {
-        entityManager.remove(entityManager.merge(hashtag));
     }
 
     public Hashtag findByBodyText(String bodyText) {
         TypedQuery<Hashtag> query = entityManager.createNamedQuery("hashtag.findByBodyText", Hashtag.class);
         query.setParameter("bodyText", bodyText);
-        List<Hashtag> result = query.getResultList();
-        return result.get(0);
-    }
-
-    public Hashtag findById(Long id) {
-        TypedQuery<Hashtag> query = entityManager.createNamedQuery("hashtag.findById", Hashtag.class);
-        query.setParameter("id", id);
         List<Hashtag> result = query.getResultList();
         return result.get(0);
     }

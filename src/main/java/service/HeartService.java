@@ -2,6 +2,7 @@ package service;
 
 import dao.HeartDao;
 import dao.JPA;
+import dao.jpa.HeartDaoJPA;
 import domain.Heart;
 import domain.Kweet;
 
@@ -17,19 +18,7 @@ public class HeartService {
 
     @Inject
     @JPA
-    private HeartDao heartDao;
-
-    public void addHeart(Heart heart) {
-        heartDao.addHeart(heart);
-    }
-
-    public void removeHeart(Heart heart) {
-        heartDao.removeHeart(heart);
-    }
-
-    public void removeHeart(Kweet kweet) {
-        heartDao.removeHeart(findByKweet(kweet));
-    }
+    private HeartDaoJPA heartDao;
 
     public Heart findByKweet(Kweet kweet) {
         return heartDao.findByKweet(kweet);

@@ -12,8 +12,7 @@ import java.util.Objects;
 //@Setter
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "heart.findByKweet", query = "SELECT h FROM Heart h WHERE h.kweet = :kweet"),
-        @NamedQuery(name = "heart.findById", query = "SELECT h FROM Heart h WHERE h.id = :id")
+        @NamedQuery(name = "heart.findByKweet", query = "SELECT h FROM Heart h WHERE h.kweet = :kweet")
 })
 public class Heart implements Serializable {
 
