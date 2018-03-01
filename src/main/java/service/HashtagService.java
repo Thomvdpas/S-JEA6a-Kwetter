@@ -1,5 +1,6 @@
 package service;
 
+import dao.HashtagDao;
 import dao.JPA;
 import dao.jpa.HashtagDaoJPA;
 import domain.Hashtag;
@@ -16,9 +17,13 @@ public class HashtagService {
 
     @Inject
     @JPA
-    private HashtagDaoJPA hashtagDao;
+    private HashtagDao hashtagDao;
 
     public HashtagService() {
+    }
+
+    public void save(Hashtag hashtag) {
+        hashtagDao.create(hashtag);
     }
 
     public Hashtag findByBodyText(String bodyText) {

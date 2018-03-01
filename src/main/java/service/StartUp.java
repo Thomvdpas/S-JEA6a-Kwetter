@@ -1,5 +1,7 @@
 package service;
 
+import domain.Hashtag;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -13,8 +15,8 @@ import javax.inject.Inject;
 @Startup
 public class StartUp {
 
-//    @Inject
-//    private KweetService kweetService;
+    @Inject
+    private HashtagService hashtagService;
 
     public StartUp() {
 
@@ -22,6 +24,8 @@ public class StartUp {
 
     @PostConstruct
     public void initData() {
-
+        Hashtag hashtag = new Hashtag();
+        hashtag.setBodyText("Test");
+        hashtagService.save(hashtag);
     }
 }

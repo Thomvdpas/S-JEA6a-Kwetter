@@ -38,6 +38,10 @@ public class Heart implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getDateOfHearting() {
         return dateOfHearting;
     }

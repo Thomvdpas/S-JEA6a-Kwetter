@@ -23,10 +23,10 @@ public class Hashtag implements Serializable {
     @ManyToOne
     private Kweet kweet;
 
-    private Hashtag() {
+    public Hashtag() {
     }
 
-    private Hashtag(String bodyText, Kweet kweet) {
+    public Hashtag(String bodyText, Kweet kweet) {
         this.bodyText = bodyText;
         this.kweet = kweet;
     }
@@ -38,6 +38,10 @@ public class Hashtag implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setBodyText(String bodyText) {

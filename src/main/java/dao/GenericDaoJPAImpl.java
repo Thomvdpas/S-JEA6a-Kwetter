@@ -1,5 +1,6 @@
 package dao;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
@@ -10,6 +11,8 @@ import java.util.Map;
 /**
  * @author Thom van de Pas on 1-3-2018
  */
+@Stateless
+@JPA
 public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
 
     @PersistenceContext

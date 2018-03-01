@@ -1,5 +1,6 @@
 package service;
 
+import dao.HeartDao;
 import dao.JPA;
 import dao.jpa.HeartDaoJPA;
 import domain.Heart;
@@ -17,7 +18,7 @@ public class HeartService {
 
     @Inject
     @JPA
-    private HeartDaoJPA heartDao;
+    private HeartDao heartDao;
 
     public Heart findByKweet(Kweet kweet) {
         return heartDao.findByKweet(kweet);

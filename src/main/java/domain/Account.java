@@ -33,7 +33,7 @@ public class Account implements Serializable {
     @Size(min = 4, max = 16)
     private String password;
 
-    @Column(unique = true)
+    @JoinColumn(unique = true)
     @OneToOne
     private Profile profile;
 
@@ -54,6 +54,10 @@ public class Account implements Serializable {
     //<editor-fold desc="Getters/Setters">
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
