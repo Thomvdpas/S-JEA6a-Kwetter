@@ -40,6 +40,13 @@ public class HashtagDaoJPA implements HashtagDao {
         return result.get(0);
     }
 
+    public Hashtag findById(Long id) {
+        TypedQuery<Hashtag> query = entityManager.createNamedQuery("hashtag.findById", Hashtag.class);
+        query.setParameter("id", id);
+        List<Hashtag> result = query.getResultList();
+        return result.get(0);
+    }
+
     public ArrayList<Hashtag> getHashtags() {
         Query query = entityManager.createQuery("SELECT h FROM Hashtag h");
         return new ArrayList<Hashtag>(query.getResultList());

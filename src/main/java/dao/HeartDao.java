@@ -16,5 +16,7 @@ public interface HeartDao {
 
     Heart findByKweet(Kweet kweet);
 
+    Heart findById(Long id);
+
     ArrayList<Heart> getHearts();
 }

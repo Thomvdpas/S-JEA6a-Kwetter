@@ -44,6 +44,15 @@ public class HeartDaoColl implements HeartDao {
         return null;
     }
 
+    public Heart findById(Long id) {
+        for (Heart heart : hearts) {
+            if (heart.getId().equals(id)) {
+                return heart;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Heart> getHearts() {
         return new ArrayList<Heart>();
     }

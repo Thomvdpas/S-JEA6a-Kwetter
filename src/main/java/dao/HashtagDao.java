@@ -15,5 +15,7 @@ public interface HashtagDao {
 
     Hashtag findByBodyText(String bodyText);
 
+    Hashtag findById(Long id);
+
     ArrayList<Hashtag> getHashtags();
 }

@@ -35,6 +35,15 @@ public class HashtagDaoColl implements HashtagDao {
         return null;
     }
 
+    public Hashtag findById(Long id) {
+        for (Hashtag hashtag : hashtags) {
+            if (hashtag.getId().equals(id)) {
+                return hashtag;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Hashtag> getHashtags() {
         return new ArrayList<Hashtag>();
     }

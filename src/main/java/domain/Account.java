@@ -13,7 +13,7 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Entity
-public class UserAccount implements Serializable {
+public class Account implements Serializable {
 
     @Id
     @GeneratedValue
@@ -35,20 +35,20 @@ public class UserAccount implements Serializable {
 
     @Column(unique = true)
     @OneToOne
-    private UserProfile userProfile;
+    private Profile profile;
 
     @NotNull
     @Enumerated(value = EnumType.STRING)
-    private UserRole userRole;
+    private Role role;
 
-    public UserAccount() {
+    public Account() {
     }
 
-    public UserAccount(String username, String emailaddress, String password, UserRole userRole) {
+    public Account(String username, String emailaddress, String password, Role role) {
         this.username = username;
         this.emailaddress = emailaddress;
         this.password = password;
-        this.userRole = userRole;
+        this.role = role;
     }
 
     //<editor-fold desc="Getters/Setters">
@@ -80,20 +80,20 @@ public class UserAccount implements Serializable {
         this.password = password;
     }
 
-    public UserProfile getUserProfile() {
-        return userProfile;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
     //</editor-fold>
 
@@ -102,10 +102,10 @@ public class UserAccount implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserAccount userAccount = (UserAccount) o;
-        return Objects.equals(id, userAccount.id) &&
-                Objects.equals(username, userAccount.username) &&
-                Objects.equals(emailaddress, userAccount.emailaddress);
+        Account account = (Account) o;
+        return Objects.equals(id, account.id) &&
+                Objects.equals(username, account.username) &&
+                Objects.equals(emailaddress, account.emailaddress);
     }
 
     @Override

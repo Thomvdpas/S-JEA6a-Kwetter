@@ -43,6 +43,13 @@ public class HeartDaoJPA implements HeartDao {
         return result.get(0);
     }
 
+    public Heart findById(Long id) {
+        TypedQuery<Heart> query = entityManager.createNamedQuery("heart.findById", Heart.class);
+        query.setParameter("id", id);
+        List<Heart> result = query.getResultList();
+        return result.get(0);
+    }
+
     public ArrayList<Heart> getHearts() {
         Query query = entityManager.createQuery("SELECT h FROM Heart h");
         return new ArrayList<Heart>(query.getResultList());

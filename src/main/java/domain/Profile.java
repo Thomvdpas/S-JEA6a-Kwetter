@@ -12,7 +12,7 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Entity
-public class UserProfile implements Serializable {
+public class Profile implements Serializable {
 
     @Id
     @GeneratedValue
@@ -25,27 +25,27 @@ public class UserProfile implements Serializable {
     private String biography;
 
     @OneToOne
-    private UserAccount userAccount;
+    private Account account;
     @OneToMany
     private List<Kweet> kweets;
     @ManyToMany
-    private List<UserProfile> followers;
+    private List<Profile> followers;
     @Transient
-    private List<UserProfile> followees;
+    private List<Profile> followees;
 
-    public UserProfile() {
-        this.followers = new ArrayList<UserProfile>();
-        this.followees = new ArrayList<UserProfile>();
+    public Profile() {
+        this.followers = new ArrayList<Profile>();
+        this.followees = new ArrayList<Profile>();
     }
 
-    public UserProfile(String firstName, String lastName, String avatarPath, String location, String biography, UserAccount userAccount) {
+    public Profile(String firstName, String lastName, String avatarPath, String location, String biography, Account account) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatarPath = avatarPath;
         this.location = location;
         this.biography = biography;
-        this.userAccount = userAccount;
+        this.account = account;
     }
 
     //<editor-fold desc="Getters/Setters">
@@ -93,12 +93,12 @@ public class UserProfile implements Serializable {
         this.biography = biography;
     }
 
-    public UserAccount getUserAccount() {
-        return userAccount;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setUserAccount(UserAccount userAccount) {
-        this.userAccount = userAccount;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public List<Kweet> getKweets() {
@@ -109,19 +109,19 @@ public class UserProfile implements Serializable {
         this.kweets = kweets;
     }
 
-    public List<UserProfile> getFollowers() {
+    public List<Profile> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<UserProfile> followers) {
+    public void setFollowers(List<Profile> followers) {
         this.followers = followers;
     }
 
-    public List<UserProfile> getFollowees() {
+    public List<Profile> getFollowees() {
         return followees;
     }
 
-    public void setFollowees(List<UserProfile> followees) {
+    public void setFollowees(List<Profile> followees) {
         this.followees = followees;
     }
 //</editor-fold>
@@ -131,15 +131,15 @@ public class UserProfile implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserProfile that = (UserProfile) o;
+        Profile that = (Profile) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(userAccount, that.userAccount);
+                Objects.equals(account, that.account);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, userAccount);
+        return Objects.hash(id, account);
     }
     //</editor-fold>
 }
