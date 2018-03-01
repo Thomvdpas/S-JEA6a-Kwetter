@@ -18,12 +18,12 @@ public class HashtagDaoColl implements HashtagDao {
 
     CopyOnWriteArrayList<Hashtag> hashtags = new CopyOnWriteArrayList<Hashtag>();
 
-    public void addHashtag(Hashtag hashtag) {
-        ;
+
+    @PostConstruct
+    private void init() {
     }
 
-    public void removeHashtag(Hashtag hashtag) {
-
+    public HashtagDaoColl() {
     }
 
     public Hashtag findByBodyText(String bodyText) {
@@ -35,24 +35,8 @@ public class HashtagDaoColl implements HashtagDao {
         return null;
     }
 
-    public Hashtag findById(Long id) {
-        for (Hashtag hashtag : hashtags) {
-            if (hashtag.getId().equals(id)) {
-                return hashtag;
-            }
-        }
-        return null;
-    }
-
     public ArrayList<Hashtag> getHashtags() {
         return new ArrayList<Hashtag>();
-    }
-
-    @PostConstruct
-    private void init() {
-    }
-
-    public HashtagDaoColl() {
     }
 
     public Hashtag create(Hashtag hashtag) {
@@ -65,6 +49,18 @@ public class HashtagDaoColl implements HashtagDao {
     }
 
     public void delete(Long id) {
-        hashtags.remove(id);
+        Hashtag hashtag = findById(id);
+        if (hashtag != null) {
+            hashtags.remove(hashtag);
+        }
+    }
+
+    public Hashtag findById(Long id) {
+        for (Hashtag hashtag : hashtags) {
+            if (hashtag.getId().equals(id)) {
+                return hashtag;
+            }
+        }
+        return null;
     }
 }

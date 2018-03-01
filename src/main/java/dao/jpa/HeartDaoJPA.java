@@ -1,15 +1,12 @@
 package dao.jpa;
 
-import dao.GenericDaoImpl;
+import dao.GenericDaoJPAImpl;
 import dao.HeartDao;
 import dao.JPA;
-import domain.Hashtag;
 import domain.Heart;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -20,7 +17,7 @@ import java.util.List;
  */
 @Stateless
 @JPA
-public class HeartDaoJPA extends GenericDaoImpl<Heart> implements HeartDao {
+public class HeartDaoJPA extends GenericDaoJPAImpl<Heart> implements HeartDao {
 
     public HeartDaoJPA() {
     }

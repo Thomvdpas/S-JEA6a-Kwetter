@@ -1,13 +1,11 @@
 package dao.jpa;
 
-import dao.GenericDaoImpl;
+import dao.GenericDaoJPAImpl;
 import dao.HashtagDao;
 import dao.JPA;
 import domain.Hashtag;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ import java.util.List;
  */
 @Stateless
 @JPA
-public class HashtagDaoJPA extends GenericDaoImpl<Hashtag> implements HashtagDao {
+public class HashtagDaoJPA extends GenericDaoJPAImpl<Hashtag> implements HashtagDao {
 
     public HashtagDaoJPA() {
     }

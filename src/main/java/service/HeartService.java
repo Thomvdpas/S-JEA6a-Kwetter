@@ -1,6 +1,5 @@
 package service;
 
-import dao.HeartDao;
 import dao.JPA;
 import dao.jpa.HeartDaoJPA;
 import domain.Heart;

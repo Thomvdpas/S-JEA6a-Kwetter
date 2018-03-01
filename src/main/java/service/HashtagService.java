@@ -1,8 +1,6 @@
 package service;
 
-import dao.HashtagDao;
 import dao.JPA;
-import dao.collection.HashtagDaoColl;
 import dao.jpa.HashtagDaoJPA;
 import domain.Hashtag;
 

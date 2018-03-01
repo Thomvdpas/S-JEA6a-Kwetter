@@ -10,14 +10,14 @@ import java.util.Map;
 /**
  * @author Thom van de Pas on 1-3-2018
  */
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
     private Class<T> type;
 
-    public GenericDaoImpl() {
+    public GenericDaoJPAImpl() {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];

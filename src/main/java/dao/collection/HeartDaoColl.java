@@ -35,6 +35,7 @@ public class HeartDaoColl implements HeartDao {
         }
         return null;
     }
+
     public ArrayList<Heart> getHearts() {
         return new ArrayList<Heart>();
     }
@@ -49,7 +50,10 @@ public class HeartDaoColl implements HeartDao {
     }
 
     public void delete(Long id) {
-        hearts.remove(id);
+        Heart heart = findById(id);
+        if (heart != null) {
+            hearts.remove(heart);
+        }
     }
 
     public Heart findById(Long id) {
