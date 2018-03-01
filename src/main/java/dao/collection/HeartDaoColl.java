@@ -27,14 +27,6 @@ public class HeartDaoColl implements HeartDao {
     public HeartDaoColl() {
     }
 
-    public void addHeart(Heart heart) {
-        hearts.add(heart);
-    }
-
-    public void removeHeart(Heart heart) {
-        hearts.remove(heart);
-    }
-
     public Heart findByKweet(Kweet kweet) {
         for (Heart heart : hearts) {
             if (heart.getKweet().equals(kweet)) {
@@ -42,6 +34,22 @@ public class HeartDaoColl implements HeartDao {
             }
         }
         return null;
+    }
+    public ArrayList<Heart> getHearts() {
+        return new ArrayList<Heart>();
+    }
+
+    public Heart create(Heart heart) {
+        hearts.add(heart);
+        return heart;
+    }
+
+    public Heart update(Heart heart) {
+        return null;
+    }
+
+    public void delete(Long id) {
+        hearts.remove(id);
     }
 
     public Heart findById(Long id) {
@@ -51,9 +59,5 @@ public class HeartDaoColl implements HeartDao {
             }
         }
         return null;
-    }
-
-    public ArrayList<Heart> getHearts() {
-        return new ArrayList<Heart>();
     }
 }

@@ -19,11 +19,11 @@ public class HashtagDaoColl implements HashtagDao {
     CopyOnWriteArrayList<Hashtag> hashtags = new CopyOnWriteArrayList<Hashtag>();
 
     public void addHashtag(Hashtag hashtag) {
-        hashtags.add(hashtag);
+        ;
     }
 
     public void removeHashtag(Hashtag hashtag) {
-        hashtags.remove(hashtag);
+
     }
 
     public Hashtag findByBodyText(String bodyText) {
@@ -53,5 +53,18 @@ public class HashtagDaoColl implements HashtagDao {
     }
 
     public HashtagDaoColl() {
+    }
+
+    public Hashtag create(Hashtag hashtag) {
+        hashtags.add(hashtag);
+        return hashtag;
+    }
+
+    public Hashtag update(Hashtag hashtag) {
+        return null;
+    }
+
+    public void delete(Long id) {
+        hashtags.remove(id);
     }
 }

@@ -28,15 +28,15 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         return t;
     }
 
-    public void delete(Object object) {
-        this.entityManager.remove(this.entityManager.merge(object));
-    }
-
-    public T findById(Object object) {
-        return (T) this.entityManager.find(type, object);
-    }
-
     public T update(T t) {
         return this.entityManager.merge(t);
+    }
+
+    public void delete(Long id) {
+        this.entityManager.remove(this.entityManager.merge(id));
+    }
+
+    public T findById(Long id) {
+        return (T) this.entityManager.find(type, id);
     }
 }
