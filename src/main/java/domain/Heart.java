@@ -20,6 +20,7 @@ public class Heart implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Temporal(TemporalType.DATE)
     private Date dateOfHearting;
 
     @ManyToOne

@@ -46,7 +46,7 @@ public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
     }
 
     public List<T> findAll() {
-        return entityManager.createNamedQuery("SELECT * FROM " + type.getClass()).getResultList();
+        return entityManager.createQuery("SELECT t FROM " + type.getSimpleName() + " t", type).getResultList();
     }
 
     //<editor-fold desc="Getters/Setters">
