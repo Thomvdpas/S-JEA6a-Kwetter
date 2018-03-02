@@ -3,9 +3,11 @@ package dao;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,4 +44,18 @@ public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
     public T findById(Long id) {
         return (T) this.entityManager.find(type, id);
     }
+
+    public List<T> findAll() {
+        return entityManager.createNamedQuery("SELECT * FROM " + type.getClass()).getResultList();
+    }
+
+    //<editor-fold desc="Getters/Setters">
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    //</editor-fold>
 }

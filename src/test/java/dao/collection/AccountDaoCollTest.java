@@ -25,15 +25,14 @@ public class AccountDaoCollTest {
 
     @Before
     public void setUp() {
-        accountDao = new AccountDaoColl();
-        account = new Account("testnaam", "testEmailadres@hotmail.com", "wachtwoord", Role.GENERAL);
-        account2 = new Account("TestName", "TestEmail@live.com", "Password", Role.ADMINISTRATOR);
+        this.accountDao = new AccountDaoColl();
+        this.account = new Account("testnaam", "testEmailadres@hotmail.com", "wachtwoord", Role.GENERAL);
+        this.account2 = new Account("TestName", "TestEmail@live.com", "Password", Role.ADMINISTRATOR);
     }
 
     @Test
     public void testCreate() {
-        accountDao.create(account);
-
-//        assertEquals(accountDao.);
+        this.accountDao.create(account);
+        assertEquals(1, accountDao.accounts.size());
     }
 }
