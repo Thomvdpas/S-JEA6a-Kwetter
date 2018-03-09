@@ -37,8 +37,12 @@ public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
         return this.entityManager.merge(t);
     }
 
-    public void delete(Long id) {
-        this.entityManager.remove(this.entityManager.merge(id));
+    public void delete(T t) {
+        this.entityManager.remove(this.entityManager.merge(t));
+    }
+
+    public void deleteById(Long id) {
+        this.delete(findById(id));
     }
 
     public T findById(Long id) {

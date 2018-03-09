@@ -10,6 +10,4 @@ import java.util.ArrayList;
 public interface HashtagDao extends GenericDao<Hashtag> {
 
     Hashtag findByBodyText(String bodyText);
-
-    ArrayList<Hashtag> getHashtags();
 }

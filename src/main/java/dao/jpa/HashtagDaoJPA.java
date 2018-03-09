@@ -27,9 +27,4 @@ public class HashtagDaoJPA extends GenericDaoJPAImpl<Hashtag> implements Hashtag
         List<Hashtag> result = query.getResultList();
         return result.get(0);
     }
-
-    public ArrayList<Hashtag> getHashtags() {
-        Query query = entityManager.createQuery("SELECT h FROM Hashtag h");
-        return new ArrayList<Hashtag>(query.getResultList());
-    }
 }

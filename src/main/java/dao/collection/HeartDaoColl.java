@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -49,7 +50,15 @@ public class HeartDaoColl implements HeartDao {
         return null;
     }
 
-    public void delete(Long id) {
+    public void delete(Heart heart) {
+        for (Heart foundHeart : hearts) {
+            if (foundHeart.equals(heart)) {
+                hearts.remove(foundHeart);
+            }
+        }
+    }
+
+    public void deleteById(Long id) {
         Heart heart = findById(id);
         if (heart != null) {
             hearts.remove(heart);
@@ -63,5 +72,9 @@ public class HeartDaoColl implements HeartDao {
             }
         }
         return null;
+    }
+
+    public List<Heart> findAll() {
+        return hearts;
     }
 }

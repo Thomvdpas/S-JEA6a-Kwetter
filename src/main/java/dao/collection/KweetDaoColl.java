@@ -6,6 +6,7 @@ import domain.Kweet;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -27,7 +28,14 @@ public class KweetDaoColl implements KweetDao{
         return null;
     }
 
-    public void delete(Long id) {
+    public void delete(Kweet kweet) {
+        for (Kweet foundKweet : kweets) {
+            if (foundKweet.equals(kweet)) {
+                kweets.remove(foundKweet);
+            }
+        }
+    }
+    public void deleteById(Long id) {
         Kweet kweet = findById(id);
         if (kweet != null) {
             kweets.remove(kweet);
@@ -41,5 +49,9 @@ public class KweetDaoColl implements KweetDao{
             }
         }
         return null;
+    }
+
+    public List<Kweet> findAll() {
+        return kweets;
     }
 }

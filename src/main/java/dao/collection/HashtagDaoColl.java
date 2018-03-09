@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -48,11 +49,20 @@ public class HashtagDaoColl implements HashtagDao {
         return null;
     }
 
-    public void delete(Long id) {
+    public void delete(Hashtag hashtag) {
+        for (Hashtag foundHashtag : hashtags) {
+            if (foundHashtag.equals(hashtag)) {
+                hashtags.remove(hashtag);
+            }
+        }
+    }
+
+    public void deleteById(Long id) {
         Hashtag hashtag = findById(id);
         if (hashtag != null) {
             hashtags.remove(hashtag);
         }
+
     }
 
     public Hashtag findById(Long id) {
@@ -62,5 +72,9 @@ public class HashtagDaoColl implements HashtagDao {
             }
         }
         return null;
+    }
+
+    public List<Hashtag> findAll() {
+        return hashtags;
     }
 }

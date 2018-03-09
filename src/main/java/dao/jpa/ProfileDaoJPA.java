@@ -1,12 +1,17 @@
 package dao.jpa;
 
 import dao.GenericDaoJPAImpl;
+import dao.JPA;
 import dao.ProfileDao;
 import domain.Profile;
+
+import javax.ejb.Stateless;
 
 /**
  * @author Thom van de Pas on 1-3-2018
  */
+@Stateless
+@JPA
 public class ProfileDaoJPA extends GenericDaoJPAImpl<Profile> implements ProfileDao {
 
     public ProfileDaoJPA() {

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +13,11 @@ public interface GenericDao<T> {
 
     T update(T t);
 
-    void delete(Long id);
+    void delete(T t);
+
+    void deleteById(Long id);
 
     T findById(Long id);
+
+    List<T> findAll();
 }

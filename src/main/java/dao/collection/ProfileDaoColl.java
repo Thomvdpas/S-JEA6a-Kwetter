@@ -7,6 +7,7 @@ import domain.Profile;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -27,7 +28,14 @@ public class ProfileDaoColl implements ProfileDao {
         return null;
     }
 
-    public void delete(Long id) {
+    public void delete(Profile profile) {
+        for (Profile foundProfile : profiles) {
+            if (foundProfile.equals(profile)) {
+                profiles.remove(foundProfile);
+            }
+        }
+    }
+    public void deleteById(Long id) {
         Profile profile = findById(id);
         if (profile != null) {
             profiles.remove(profile);
@@ -41,5 +49,9 @@ public class ProfileDaoColl implements ProfileDao {
             }
         }
         return null;
+    }
+
+    public List<Profile> findAll() {
+        return profiles;
     }
 }

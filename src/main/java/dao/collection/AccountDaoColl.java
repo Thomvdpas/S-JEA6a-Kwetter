@@ -3,9 +3,11 @@ package dao.collection;
 import dao.AccountDao;
 import domain.Account;
 import domain.Hashtag;
+import jdk.nashorn.api.scripting.AbstractJSObject;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -26,7 +28,15 @@ public class AccountDaoColl implements AccountDao {
         return null;
     }
 
-    public void delete(Long id) {
+
+    public void delete(Account account) {
+        for (Account foundAccount : accounts) {
+            if (foundAccount.equals(account)) {
+                accounts.remove(account);
+            }
+        }
+    }
+    public void deleteById(Long id) {
         Account account = findById(id);
         if (account != null) {
             accounts.remove(account);
@@ -40,5 +50,9 @@ public class AccountDaoColl implements AccountDao {
             }
         }
         return null;
+    }
+
+    public List<Account> findAll() {
+        return accounts;
     }
 }

@@ -16,7 +16,7 @@ import javax.inject.Inject;
 public class StartUp {
 
     @Inject
-    private HashtagService hashtagService;
+    private HashtagService service;
 
     public StartUp() {
 
@@ -26,6 +26,6 @@ public class StartUp {
     public void initData() {
         Hashtag hashtag = new Hashtag();
         hashtag.setBodyText("Test");
-        hashtagService.save(hashtag);
+        service.create(hashtag);
     }
 }
