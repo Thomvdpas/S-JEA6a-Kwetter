@@ -1,6 +1,7 @@
 package dao.collection;
 
 import dao.KweetDao;
+import domain.Account;
 import domain.Hashtag;
 import domain.Kweet;
 
@@ -53,5 +54,9 @@ public class KweetDaoColl implements KweetDao{
 
     public List<Kweet> findAll() {
         return kweets;
+    }
+
+    public List<Kweet> findBySender(Account sender) {
+        return null;
     }
 }

@@ -1,6 +1,9 @@
 package service;
 
+import domain.Account;
 import domain.Hashtag;
+import domain.Profile;
+import domain.Role;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -16,7 +19,7 @@ import javax.inject.Inject;
 public class StartUp {
 
     @Inject
-    private HashtagService service;
+    private AccountService accountService;
 
     public StartUp() {
 
@@ -24,8 +27,20 @@ public class StartUp {
 
     @PostConstruct
     public void initData() {
-        Hashtag hashtag = new Hashtag();
-        hashtag.setBodyText("Test");
-        service.create(hashtag);
+        Account account = new Account();
+        account.setUsername("thomvdpas");
+        account.setEmailaddress("thomvandepas@hotmail.com");
+        account.setPassword("Test!2");
+        account.setRole(Role.MODERATOR);
+        account.setProfile(new Profile());
+        accountService.create(account);
+
+        Account account2 = new Account();
+        account2.setUsername("sjef2");
+        account2.setEmailaddress("sjefbeun@hotmail.com");
+        account2.setPassword("sjefje!@#");
+        account2.setRole(Role.GENERAL);
+        account2.setProfile(new Profile());
+        accountService.create(account2);
     }
 }

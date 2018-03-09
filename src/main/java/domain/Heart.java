@@ -17,7 +17,7 @@ import java.util.Objects;
 public class Heart implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Temporal(TemporalType.DATE)

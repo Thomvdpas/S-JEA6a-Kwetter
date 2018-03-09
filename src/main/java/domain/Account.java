@@ -1,5 +1,7 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -16,7 +18,7 @@ import java.util.Objects;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -31,10 +33,12 @@ public class Account implements Serializable {
 
     @NotNull
     @Size(min = 4, max = 16)
+    @JsonIgnore
     private String password;
 
+    @NotNull
     @JoinColumn(unique = true)
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
     @NotNull
@@ -49,6 +53,7 @@ public class Account implements Serializable {
         this.emailaddress = emailaddress;
         this.password = password;
         this.role = role;
+        this.profile = new Profile();
     }
 
     //<editor-fold desc="Getters/Setters">

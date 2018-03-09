@@ -1,5 +1,10 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +20,7 @@ import java.util.Objects;
 public class Profile implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String firstName;
@@ -24,10 +29,12 @@ public class Profile implements Serializable {
     private String location;
     private String biography;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     @OneToMany
+    @JsonBackReference
     private List<Kweet> kweets;
+
     @ManyToMany
     private List<Profile> followers;
     @Transient

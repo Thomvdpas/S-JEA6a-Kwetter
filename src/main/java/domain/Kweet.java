@@ -1,5 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -12,25 +16,32 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "kweet.findByAccount", query = "SELECT k FROM Kweet k WHERE k.sender = :sender")
+})
 public class Kweet implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Size(min = 1, max = 140)
     private String messageBody;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Profile sender;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Heart> hearts;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Profile> mentions;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Hashtag> hashtags;
 
     public Kweet() {
