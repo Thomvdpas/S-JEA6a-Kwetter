@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface KweetDao extends GenericDao<Kweet> {
 
-    public List<Kweet> findBySender(Account sender);
+    List<Kweet> findBySender(Account sender);
 }

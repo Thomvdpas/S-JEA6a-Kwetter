@@ -2,6 +2,7 @@ package service;
 
 import dao.JPA;
 import dao.KweetDao;
+import domain.Account;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
@@ -19,6 +20,10 @@ public class KweetService {
     private KweetDao kweetDao;
 
     public KweetService() {
+    }
+
+    public List<Kweet> findBySender(Account account) {
+        return this.kweetDao.findBySender(account);
     }
 
     public Kweet create(Kweet kweet) {

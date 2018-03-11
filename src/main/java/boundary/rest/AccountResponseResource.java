@@ -33,7 +33,7 @@ public class AccountResponseResource {
     }
 
     @GET
-    @Path("/id")
+    @Path("id")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAccount(@QueryParam("id") Long id) {
         Account account = accountService.findById(id);

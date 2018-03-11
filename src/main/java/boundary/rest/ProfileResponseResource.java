@@ -1,8 +1,8 @@
 package boundary.rest;
 
-import domain.Hashtag;
-import jdk.nashorn.internal.objects.annotations.Getter;
-import service.HashtagService;
+import domain.Heart;
+import domain.Profile;
+import service.ProfileService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -13,19 +13,19 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
- * @author Thom van de Pas on 9-3-2018
+ * @author Thom van de Pas on 10-3-2018
  */
-@Path("hashtags")
+@Path("/profiles")
 @Stateless
-public class HashtagResponseResource {
+public class ProfileResponseResource {
 
     @Inject
-    private HashtagService hashtagService;
+    private ProfileService profileService;
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
-        GenericEntity entity = new GenericEntity<List<Hashtag>>(hashtagService.findAll()) {
+        GenericEntity entity = new GenericEntity<List<Profile>>(profileService.findAll()) {
         };
         return Response.ok(entity).build();
     }
@@ -33,11 +33,11 @@ public class HashtagResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getHashtag(@QueryParam("id") Long id) {
-        Hashtag hashtag = hashtagService.findById(id);
-        if (hashtag == null) {
+    public Response findById(@QueryParam("senderId") Long id) {
+        Profile profile = profileService.findById(id);
+        if (profile == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(hashtag).build();
+        return Response.ok(profile).build();
     }
 }
