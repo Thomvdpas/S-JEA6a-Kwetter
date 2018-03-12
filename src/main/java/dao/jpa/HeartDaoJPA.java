@@ -22,15 +22,9 @@ public class HeartDaoJPA extends GenericDaoJPAImpl<Heart> implements HeartDao {
     public HeartDaoJPA() {
     }
 
-    public Heart findByKweet(Kweet kweet) {
-        TypedQuery<Heart> query = entityManager.createNamedQuery("heart.findByKweet", Heart.class);
-        query.setParameter("kweet", kweet);
-        List<Heart> result = query.getResultList();
-        return result.get(0);
-    }
-
-    public ArrayList<Heart> getHearts() {
-        Query query = entityManager.createQuery("SELECT h FROM Heart h");
-        return new ArrayList<Heart>(query.getResultList());
+    public List<Heart> findByKweet(Kweet kweet) {
+        return getEntityManager().createNamedQuery("heart.findByKweet", Heart.class)
+                .setParameter("kweet", kweet)
+                .getResultList();
     }
 }

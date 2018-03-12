@@ -15,6 +15,9 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
+})
 public class Account implements Serializable {
 
     @Id

@@ -20,7 +20,7 @@ public class Hashtag implements Serializable {
 
     private String bodyText;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Kweet kweet;
 
     public Hashtag() {

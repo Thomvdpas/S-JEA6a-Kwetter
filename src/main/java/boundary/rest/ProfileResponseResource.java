@@ -1,7 +1,9 @@
 package boundary.rest;
 
+import domain.Account;
 import domain.Heart;
 import domain.Profile;
+import service.AccountService;
 import service.ProfileService;
 
 import javax.ejb.Stateless;
@@ -35,6 +37,17 @@ public class ProfileResponseResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response findById(@QueryParam("senderId") Long id) {
         Profile profile = profileService.findById(id);
+        if (profile == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return Response.ok(profile).build();
+    }
+
+    @GET
+    @Path("{username}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findByUsername(@QueryParam("username") String username) {
+        Profile profile = profileService.findByUsername(username);
         if (profile == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }

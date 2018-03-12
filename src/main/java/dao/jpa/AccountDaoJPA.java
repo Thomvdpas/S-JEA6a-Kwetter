@@ -16,4 +16,10 @@ public class AccountDaoJPA extends GenericDaoJPAImpl<Account> implements Account
 
     public AccountDaoJPA() {
     }
+
+    public Account findByUsername(String username) {
+        return getEntityManager().createNamedQuery("account.findByUsername", Account.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 }

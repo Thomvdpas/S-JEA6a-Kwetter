@@ -18,6 +18,9 @@ import javax.inject.Inject;
 @Startup
 public class StartUp {
 
+    /**
+     * Injects the AccountService for putting some Accounts in the DataBase.
+     */
     @Inject
     private AccountService accountService;
 
@@ -25,6 +28,9 @@ public class StartUp {
 
     }
 
+    /**
+     * Creates some Accounts.
+     */
     @PostConstruct
     public void initData() {
         Account account = new Account();

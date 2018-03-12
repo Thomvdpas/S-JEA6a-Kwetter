@@ -17,6 +17,9 @@ import java.util.Objects;
 //@Getter
 //@Setter
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "profile.findByUsername", query = "SELECT p FROM Profile p WHERE p.account.username = :username")
+})
 public class Profile implements Serializable {
 
     @Id
@@ -31,7 +34,7 @@ public class Profile implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Kweet> kweets;
 

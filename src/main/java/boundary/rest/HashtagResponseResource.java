@@ -1,6 +1,8 @@
 package boundary.rest;
 
 import domain.Hashtag;
+import domain.Heart;
+import domain.Kweet;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import service.HashtagService;
 
@@ -39,5 +41,18 @@ public class HashtagResponseResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return Response.ok(hashtag).build();
+    }
+
+    @GET
+    @Path("{bodyText}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getByBodyText(@QueryParam("bodyText") String bodyText) {
+        if (bodyText != null) {
+            GenericEntity entity = new GenericEntity<List<Hashtag>>(hashtagService.findByBodyText(bodyText)) {
+            };
+
+            return Response.ok(entity).build();
+        }
+        return null;
     }
 }

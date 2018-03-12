@@ -3,11 +3,12 @@ package dao;
 import domain.Hashtag;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Thom van de Pas on 27-2-2018
  */
 public interface HashtagDao extends GenericDao<Hashtag> {
 
-    Hashtag findByBodyText(String bodyText);
+    List<Hashtag> findByBodyText(String bodyText);
 }

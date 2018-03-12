@@ -41,7 +41,7 @@ public class KweetResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findAllKweetsByUserId(@QueryParam("senderId") Long id) {
+    public Response findKweetsBySender(@QueryParam("senderId") Long id) {
         Account account = accountService.findById(id);
         if (account != null) {
             GenericEntity entity = new GenericEntity<List<Kweet>>(kweetService.findBySender(account)) {
