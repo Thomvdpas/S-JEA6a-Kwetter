@@ -29,6 +29,7 @@ public class ProfileService {
 
     /**
      * Finds a Profile by the username of the Account.
+     *
      * @param username
      * @returns the found Profile or null.
      */
@@ -38,6 +39,7 @@ public class ProfileService {
 
     /**
      * Creates a new profile and stores it in the database via the dao.
+     *
      * @param profile
      * @returns the created Profile
      */
@@ -47,6 +49,7 @@ public class ProfileService {
 
     /**
      * Updates a Profile by storing it in the DataBase via the dao.
+     *
      * @param profile
      * @returns the updated Profile.
      */
@@ -56,6 +59,7 @@ public class ProfileService {
 
     /**
      * Deletes a Profile.
+     *
      * @param profile
      */
     public void delete(Profile profile) {
@@ -64,6 +68,7 @@ public class ProfileService {
 
     /**
      * Deletes a Profile based on the id of a Profile.
+     *
      * @param id
      */
     public void delete(Long id) {
@@ -72,6 +77,7 @@ public class ProfileService {
 
     /**
      * Finds a Profile using the id.
+     *
      * @param id
      * @returns the found Profile and returns null if there is no Profile with that id.
      */
@@ -81,6 +87,7 @@ public class ProfileService {
 
     /**
      * Finds all the Profiles
+     *
      * @returns a List of Profiles.
      */
     public List<Profile> findAll() {

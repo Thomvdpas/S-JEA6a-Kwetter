@@ -1,9 +1,6 @@
 package boundary.rest;
 
-import domain.Account;
-import domain.Heart;
 import domain.Profile;
-import service.AccountService;
 import service.ProfileService;
 
 import javax.ejb.Stateless;

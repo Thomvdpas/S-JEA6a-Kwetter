@@ -1,7 +1,6 @@
 package dao.collection;
 
 import dao.HeartDao;
-import domain.Hashtag;
 import domain.Heart;
 import domain.Kweet;
 
@@ -28,11 +27,13 @@ public class HeartDaoColl implements HeartDao {
     public HeartDaoColl() {
     }
 
-    public Heart findByKweet(Kweet kweet) {
+    public List<Heart> findByKweet(Kweet kweet) {
+        List<Heart> foundHearts = new ArrayList<Heart>();
         for (Heart heart : hearts) {
             if (heart.getKweet().equals(kweet)) {
-                return heart;
+                foundHearts.add(heart);
             }
+            return foundHearts;
         }
         return null;
     }

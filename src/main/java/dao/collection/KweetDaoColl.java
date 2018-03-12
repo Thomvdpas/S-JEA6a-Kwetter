@@ -2,7 +2,6 @@ package dao.collection;
 
 import dao.KweetDao;
 import domain.Account;
-import domain.Hashtag;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
@@ -15,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 @Stateless
 @Default
-public class KweetDaoColl implements KweetDao{
+public class KweetDaoColl implements KweetDao {
 
     CopyOnWriteArrayList<Kweet> kweets = new CopyOnWriteArrayList<Kweet>();
 
@@ -36,6 +35,7 @@ public class KweetDaoColl implements KweetDao{
             }
         }
     }
+
     public void deleteById(Long id) {
         Kweet kweet = findById(id);
         if (kweet != null) {

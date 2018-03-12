@@ -2,14 +2,11 @@ package service;
 
 import dao.HeartDao;
 import dao.JPA;
-import dao.jpa.HeartDaoJPA;
-import domain.Hashtag;
 import domain.Heart;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +24,7 @@ public class HeartService {
 
     /**
      * Persists a new Heart.
+     *
      * @param heart
      * @returns the newly persisted Heart.
      */
@@ -36,6 +34,7 @@ public class HeartService {
 
     /**
      * Updates a Heart
+     *
      * @param heart
      * @returns the updated Heart
      */
@@ -45,6 +44,7 @@ public class HeartService {
 
     /**
      * Deletes a Heart
+     *
      * @param heart
      */
     public void delete(Heart heart) {
@@ -53,6 +53,7 @@ public class HeartService {
 
     /**
      * Deletes an Heart based on its id.
+     *
      * @param id
      */
     public void delete(Long id) {
@@ -61,6 +62,7 @@ public class HeartService {
 
     /**
      * Finds an Heart based on its Id.
+     *
      * @param id
      * @return
      */
@@ -70,6 +72,7 @@ public class HeartService {
 
     /**
      * Finds all the Hearts known in the DataBase.
+     *
      * @return
      */
     public List<Heart> findAll() {
@@ -78,6 +81,7 @@ public class HeartService {
 
     /**
      * Finds all the Hearts by a specific Kweet.
+     *
      * @param kweet
      * @returns a list of Hearts
      */

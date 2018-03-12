@@ -1,8 +1,6 @@
 package dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Thom van de Pas on 1-3-2018

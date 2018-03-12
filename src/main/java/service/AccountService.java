@@ -29,6 +29,7 @@ public class AccountService {
 
     /**
      * Persists a new Account.
+     *
      * @param account
      * @returns the created Account.
      */
@@ -38,6 +39,7 @@ public class AccountService {
 
     /**
      * Updates a new Account by Merging it in the Dao.
+     *
      * @param account
      * @returns the updated Account.
      */
@@ -47,6 +49,7 @@ public class AccountService {
 
     /**
      * Deletes an Account.
+     *
      * @param account
      */
     public void delete(Account account) {
@@ -55,6 +58,7 @@ public class AccountService {
 
     /**
      * Deletes an Account using its id.
+     *
      * @param id
      */
     public void delete(Long id) {
@@ -63,6 +67,7 @@ public class AccountService {
 
     /**
      * Finds an Account with its id.
+     *
      * @param id
      * @returns the found Account.
      */
@@ -72,6 +77,7 @@ public class AccountService {
 
     /**
      * Finds all the known Accounts.
+     *
      * @return
      */
     public List<Account> findAll() {

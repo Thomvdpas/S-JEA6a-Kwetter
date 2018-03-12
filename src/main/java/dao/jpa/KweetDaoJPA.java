@@ -4,11 +4,9 @@ import dao.GenericDaoJPAImpl;
 import dao.JPA;
 import dao.KweetDao;
 import domain.Account;
-import domain.Hashtag;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**

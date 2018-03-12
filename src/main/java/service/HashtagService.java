@@ -2,12 +2,10 @@ package service;
 
 import dao.HashtagDao;
 import dao.JPA;
-import dao.jpa.HashtagDaoJPA;
 import domain.Hashtag;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,6 +29,7 @@ public class HashtagService {
 
     /**
      * Persists a new Hashtag using the Dao.
+     *
      * @param hashtag
      * @returns the created Hashtag.
      */
@@ -40,6 +39,7 @@ public class HashtagService {
 
     /**
      * Updates a Hashtag via the Dao.
+     *
      * @param hashtag
      * @returns the freshly updated Hashtag.
      */
@@ -49,6 +49,7 @@ public class HashtagService {
 
     /**
      * Deletes a Hashtag using the HashtagDao.
+     *
      * @param hashtag
      */
     public void delete(Hashtag hashtag) {
@@ -57,6 +58,7 @@ public class HashtagService {
 
     /**
      * Deletes a Hashtag based on its id.
+     *
      * @param id
      */
     public void delete(Long id) {
@@ -65,6 +67,7 @@ public class HashtagService {
 
     /**
      * Finds a Hashtag by its id.
+     *
      * @param id
      * @returns the found Hashtag.
      */
@@ -74,6 +77,7 @@ public class HashtagService {
 
     /**
      * Finds a Hashtag based on its bodyText.
+     *
      * @param bodyText
      * @returns the found Hashtags.
      */
@@ -83,6 +87,7 @@ public class HashtagService {
 
     /**
      * Returns all the Hashtags.
+     *
      * @return
      */
     public List<Hashtag> findAll() {

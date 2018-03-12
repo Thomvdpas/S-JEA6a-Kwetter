@@ -3,7 +3,6 @@ package dao.jpa;
 import dao.GenericDaoJPAImpl;
 import dao.JPA;
 import dao.ProfileDao;
-import domain.Account;
 import domain.Profile;
 
 import javax.ejb.Stateless;

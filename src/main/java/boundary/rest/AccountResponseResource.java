@@ -1,8 +1,6 @@
 package boundary.rest;
 
-import dao.AccountDao;
 import domain.Account;
-import domain.Hashtag;
 import service.AccountService;
 
 import javax.ejb.Stateless;
@@ -11,7 +9,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.*;
 import java.util.List;
 
 /**

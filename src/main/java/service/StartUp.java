@@ -1,7 +1,6 @@
 package service;
 
 import domain.Account;
-import domain.Hashtag;
 import domain.Profile;
 import domain.Role;
 

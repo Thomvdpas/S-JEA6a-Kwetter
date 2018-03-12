@@ -31,6 +31,7 @@ public class KweetService {
 
     /**
      * A method that searches all the Kweets of a sender.
+     *
      * @param account
      * @returns a List of Kweets or null if the Account didn't send any Kweet(s).
      */
@@ -40,6 +41,7 @@ public class KweetService {
 
     /**
      * Stores a new Kweet into the DataBase via the dao.
+     *
      * @param kweet
      * @returns the newly persisted Kweet.
      */
@@ -49,6 +51,7 @@ public class KweetService {
 
     /**
      * Updates a Kweet (If it is edited)
+     *
      * @param kweet
      * @returns the updated Kweet.
      */
@@ -58,6 +61,7 @@ public class KweetService {
 
     /**
      * Removes a Kweet from the DataBase.
+     *
      * @param kweet
      */
     public void delete(Kweet kweet) {
@@ -66,6 +70,7 @@ public class KweetService {
 
     /**
      * Removes a Kweet using it's id.
+     *
      * @param id
      */
     public void delete(Long id) {
@@ -74,6 +79,7 @@ public class KweetService {
 
     /**
      * Finds a Kweet by its id.
+     *
      * @param id
      * @returns the found Kweet or null if there is no Kweet known with that id.
      */
@@ -83,6 +89,7 @@ public class KweetService {
 
     /**
      * Finds all the Kweets.
+     *
      * @returns all the Kweets known in the DataBase.
      */
     public List<Kweet> findAll() {

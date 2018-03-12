@@ -3,7 +3,6 @@ package dao;
 import domain.Heart;
 import domain.Kweet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -7,9 +7,6 @@ import domain.Heart;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

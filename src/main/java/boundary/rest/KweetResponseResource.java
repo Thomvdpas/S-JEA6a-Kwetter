@@ -1,7 +1,6 @@
 package boundary.rest;
 
 import domain.Account;
-import domain.Heart;
 import domain.Kweet;
 import service.AccountService;
 import service.KweetService;

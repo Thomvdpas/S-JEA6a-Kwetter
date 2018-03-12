@@ -1,9 +1,6 @@
 package boundary.rest;
 
 import domain.Hashtag;
-import domain.Heart;
-import domain.Kweet;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import service.HashtagService;
 
 import javax.ejb.Stateless;

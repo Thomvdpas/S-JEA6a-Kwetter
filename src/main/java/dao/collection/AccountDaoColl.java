@@ -2,8 +2,6 @@ package dao.collection;
 
 import dao.AccountDao;
 import domain.Account;
-import domain.Hashtag;
-import jdk.nashorn.api.scripting.AbstractJSObject;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -36,6 +34,7 @@ public class AccountDaoColl implements AccountDao {
             }
         }
     }
+
     public void deleteById(Long id) {
         Account account = findById(id);
         if (account != null) {
@@ -54,5 +53,9 @@ public class AccountDaoColl implements AccountDao {
 
     public List<Account> findAll() {
         return accounts;
+    }
+
+    public Account findByUsername(String username) {
+        return null;
     }
 }

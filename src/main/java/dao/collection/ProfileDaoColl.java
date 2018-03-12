@@ -1,8 +1,6 @@
 package dao.collection;
 
-import dao.KweetDao;
 import dao.ProfileDao;
-import domain.Kweet;
 import domain.Profile;
 
 import javax.ejb.Stateless;
@@ -35,6 +33,7 @@ public class ProfileDaoColl implements ProfileDao {
             }
         }
     }
+
     public void deleteById(Long id) {
         Profile profile = findById(id);
         if (profile != null) {
@@ -53,5 +52,9 @@ public class ProfileDaoColl implements ProfileDao {
 
     public List<Profile> findAll() {
         return profiles;
+    }
+
+    public Profile findByUsername(String username) {
+        return null;
     }
 }
