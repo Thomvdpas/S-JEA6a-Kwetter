@@ -7,19 +7,17 @@ import service.KweetService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 /**
  * @author Thom van de Pas on 10-3-2018
  */
-@Path("/hearts")
+@Path("hearts")
 @Stateless
 public class HeartResponseResource {
 
@@ -37,6 +35,7 @@ public class HeartResponseResource {
     }
 
     @GET
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response findByKweet(@QueryParam("kweetId") Long id) {
         Kweet kweet = kweetService.findById(id);
@@ -47,5 +46,35 @@ public class HeartResponseResource {
             return Response.ok(entity).build();
         }
         return null;
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editHeart(Heart heart) {
+        Heart foundHeart = heartService.findById(heart.getId());
+        if (foundHeart == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        heartService.update(heart);
+        return Response.ok(foundHeart).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createHeart(Heart heart) {
+        if (heart == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        heartService.create(heart);
+        URI id = URI.create(heart.toString());
+        return Response.created(id).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response deleteStudent(@PathParam("id") Long id) {
+        heartService.delete(id);
+        return Response.noContent().build();
     }
 }

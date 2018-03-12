@@ -89,4 +89,7 @@ public class HeartService {
         return this.heartDao.findByKweet(kweet);
     }
 
+    public void setDao(HeartDao heartDao) {
+        this.heartDao = heartDao;
+    }
 }

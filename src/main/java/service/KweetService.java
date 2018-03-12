@@ -95,4 +95,8 @@ public class KweetService {
     public List<Kweet> findAll() {
         return this.kweetDao.findAll();
     }
+
+    public void setDao(KweetDao kweetDao) {
+        this.kweetDao = kweetDao;
+    }
 }

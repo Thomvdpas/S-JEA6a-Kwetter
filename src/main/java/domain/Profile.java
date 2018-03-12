@@ -55,6 +55,10 @@ public class Profile implements Serializable {
         this.account = account;
     }
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
     //<editor-fold desc="Getters/Setters">
     public Long getId() {
         return id;

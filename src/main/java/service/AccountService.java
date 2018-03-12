@@ -28,6 +28,16 @@ public class AccountService {
     }
 
     /**
+     * Finds an Account by its username.
+     *
+     * @param username
+     * @returns the Account.
+     */
+    public Account findByUsername(String username) {
+        return this.accountDao.findByUsername(username);
+    }
+
+    /**
      * Persists a new Account.
      *
      * @param account
@@ -82,5 +92,9 @@ public class AccountService {
      */
     public List<Account> findAll() {
         return this.accountDao.findAll();
+    }
+
+    public void setDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
     }
 }

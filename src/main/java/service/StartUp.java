@@ -28,7 +28,7 @@ public class StartUp {
     }
 
     /**
-     * Creates some Accounts.
+     * Creates some data to test the API with.
      */
     @PostConstruct
     public void initData() {

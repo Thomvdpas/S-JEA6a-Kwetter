@@ -93,4 +93,8 @@ public class HashtagService {
     public List<Hashtag> findAll() {
         return this.hashtagDao.findAll();
     }
+
+    public void setDao(HashtagDao hashtagDao) {
+        this.hashtagDao = hashtagDao;
+    }
 }

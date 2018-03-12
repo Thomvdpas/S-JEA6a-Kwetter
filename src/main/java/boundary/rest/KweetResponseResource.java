@@ -7,13 +7,11 @@ import service.KweetService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -38,7 +36,7 @@ public class KweetResponseResource {
     }
 
     @GET
-    @Path("{id}")
+    @Path("{senderId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response findKweetsBySender(@QueryParam("senderId") Long id) {
         Account account = accountService.findById(id);
@@ -48,5 +46,35 @@ public class KweetResponseResource {
             return Response.ok(entity).build();
         }
         return null;
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editKweet(Kweet kweet) {
+        Kweet foundKweet = kweetService.findById(kweet.getId());
+        if (foundKweet == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        kweetService.update(kweet);
+        return Response.ok(foundKweet).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createKweet(Kweet kweet) {
+        if (kweet == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        kweetService.create(kweet);
+        URI id = URI.create(kweet.getMessageBody());
+        return Response.created(id).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    public Response deleteStudent(@PathParam("id") Long id) {
+        kweetService.delete(id);
+        return Response.noContent().build();
     }
 }

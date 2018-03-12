@@ -93,4 +93,8 @@ public class ProfileService {
     public List<Profile> findAll() {
         return this.profileDao.findAll();
     }
+
+    public void setDao(ProfileDao profileDao) {
+        this.profileDao = profileDao;
+    }
 }

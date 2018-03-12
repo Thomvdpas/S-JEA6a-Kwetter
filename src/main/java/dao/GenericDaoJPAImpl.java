@@ -58,5 +58,6 @@ public abstract class GenericDaoJPAImpl<T> implements GenericDao<T> {
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
     //</editor-fold>
 }
