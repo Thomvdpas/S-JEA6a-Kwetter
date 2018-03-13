@@ -21,12 +21,19 @@ import java.util.List;
 @Stateless
 public class KweetResponseResource {
 
+    /**
+     * Injects the AccountService and KweetService.
+     */
     @Inject
     private AccountService accountService;
     @Inject
     private KweetService kweetService;
 
-
+    /**
+     * Finds all the Kweets.
+     *
+     * @returns a List of all the Kweets.
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
@@ -35,6 +42,12 @@ public class KweetResponseResource {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Finds a List of Kweets based on a Account (Gets all Users Kweet)
+     *
+     * @param id
+     * @returns a List of Kweets.
+     */
     @GET
     @Path("{senderId}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -48,6 +61,12 @@ public class KweetResponseResource {
         return null;
     }
 
+    /**
+     * Updates a Kweet.
+     *
+     * @param kweet
+     * @returns a Kweet in JSON format.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response editKweet(Kweet kweet) {
@@ -59,6 +78,12 @@ public class KweetResponseResource {
         return Response.ok(foundKweet).build();
     }
 
+    /**
+     * Creates a new Kweet.
+     *
+     * @param kweet
+     * @returns the new Kweet in JSON.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -71,10 +96,22 @@ public class KweetResponseResource {
         return Response.created(id).build();
     }
 
+    /**
+     * Deletes a Kweet based on its id.
+     *
+     * @param id
+     * @returns Status.NO_CONTENT
+     */
     @DELETE
     @Path("{id}")
-    public Response deleteStudent(@PathParam("id") Long id) {
+    public Response deleteKweet(@PathParam("id") Long id) {
         kweetService.delete(id);
         return Response.noContent().build();
+    }
+
+    /**
+     * Empty constructor.
+     */
+    public KweetResponseResource() {
     }
 }

@@ -19,9 +19,17 @@ import java.util.List;
 @Stateless
 public class AccountResponseResource {
 
+    /**
+     * Injects the AccountService in the AccountResponseResource.
+     */
     @Inject
     private AccountService accountService;
 
+    /**
+     * Gets all the Accounts
+     *
+     * @returns all the Accounts in JSON format.
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
@@ -30,6 +38,12 @@ public class AccountResponseResource {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Gets an account based on its id
+     *
+     * @param id
+     * @returns the found Account or a NOT_FOUND status if account == null;
+     */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -41,6 +55,12 @@ public class AccountResponseResource {
         return Response.ok(account).build();
     }
 
+    /**
+     * Updates an Account.
+     *
+     * @param account
+     * @returns Status.NOT_FOUND if there is no Account found.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateAccount(Account account) {
@@ -52,6 +72,12 @@ public class AccountResponseResource {
         return Response.ok(foundAccount).build();
     }
 
+    /**
+     * Creates a new Account
+     *
+     * @param account
+     * @returns the created Account.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -64,6 +90,12 @@ public class AccountResponseResource {
         return Response.created(id).build();
     }
 
+    /**
+     * Deletes an Account based on it's username.
+     *
+     * @param username
+     * @returns Status.NO_CONTENT
+     */
     @DELETE
     @Path("{username}")
     public Response deleteAccount(String username) {
@@ -71,6 +103,9 @@ public class AccountResponseResource {
         return Response.noContent().build();
     }
 
+    /**
+     * Empty constructor.
+     */
     public AccountResponseResource() {
     }
 }

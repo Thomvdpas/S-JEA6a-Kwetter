@@ -19,9 +19,17 @@ import java.util.List;
 @Stateless
 public class ProfileResponseResource {
 
+    /**
+     * Injects the ProfileService
+     */
     @Inject
     private ProfileService profileService;
 
+    /**
+     * Finds all the Profiles
+     *
+     * @returns a List of Profiles in JSON format.
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
@@ -30,6 +38,11 @@ public class ProfileResponseResource {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Gets a Profile based on its id.
+     * @param username
+     * @returns the Profile in JSON format.
+     */
 //    @GET
 //    @Path("{id}")
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -41,6 +54,12 @@ public class ProfileResponseResource {
 //        return Response.ok(profile).build();
 //    }
 
+    /**
+     * Finds a Profile based on its Username.
+     *
+     * @param username
+     * @returns a Profile in JSON format or Status.NOT_FOUND.
+     */
     @GET
     @Path("{username}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -52,6 +71,12 @@ public class ProfileResponseResource {
         return Response.ok(profile).build();
     }
 
+    /**
+     * Updates a Profile
+     *
+     * @param profile
+     * @returns the updated Profile in JSON format.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response editProfile(Profile profile) {
@@ -63,6 +88,12 @@ public class ProfileResponseResource {
         return Response.ok(foundProfile).build();
     }
 
+    /**
+     * Creates a new Profile
+     *
+     * @param profile
+     * @returns the created Profile in JSON format.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -75,10 +106,22 @@ public class ProfileResponseResource {
         return Response.created(id).build();
     }
 
+    /**
+     * Deletes a Profile by its username.
+     *
+     * @param username
+     * @returns Status.NO_CONTENT if succeeded.
+     */
     @DELETE
     @Path("{username}")
-    public Response deleteStudent(@PathParam("username") String username) {
+    public Response deleteProfile(@PathParam("username") String username) {
         profileService.delete(profileService.findByUsername(username));
         return Response.noContent().build();
+    }
+
+    /**
+     * Empty constructor
+     */
+    public ProfileResponseResource() {
     }
 }

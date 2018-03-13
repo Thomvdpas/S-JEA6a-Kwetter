@@ -19,9 +19,17 @@ import java.util.List;
 @Stateless
 public class HashtagResponseResource {
 
+    /**
+     * Injects the HashtagService.
+     */
     @Inject
     private HashtagService hashtagService;
 
+    /**
+     * Finds all the Hashtags
+     *
+     * @returns all the Hashtag in JSON format.
+     */
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
@@ -30,6 +38,11 @@ public class HashtagResponseResource {
         return Response.ok(entity).build();
     }
 
+    /**
+     * Finds a Hashtag based on its id.
+     * @param bodyText
+     * @returns the found Hashtag or null.
+     */
 //    @GET
 //    @Path("{id}")
 //    @Produces({MediaType.APPLICATION_JSON})
@@ -41,6 +54,12 @@ public class HashtagResponseResource {
 //        return Response.ok(hashtag).build();
 //    }
 
+    /**
+     * Gets Hashtags based on the bodytext.
+     *
+     * @param bodyText
+     * @returns a List of Hashtags in JSON format.
+     */
     @GET
     @Path("{bodyText}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -54,6 +73,12 @@ public class HashtagResponseResource {
         return null;
     }
 
+    /**
+     * Updates a Hashtag.
+     *
+     * @param hashtag
+     * @returns the updated Hashtag in JSON format.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Response editHashtag(Hashtag hashtag) {
@@ -65,6 +90,12 @@ public class HashtagResponseResource {
         return Response.ok(foundHashtag).build();
     }
 
+    /**
+     * Creates a new Hashtag.
+     *
+     * @param hashtag
+     * @returns the new Hashtag in JSON format.
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +108,12 @@ public class HashtagResponseResource {
         return Response.noContent().build();
     }
 
+    /**
+     * Deletes a Hashtag based on its id.
+     *
+     * @param id
+     * @returns a Status.NO_CONTENT
+     */
     @DELETE
     @Path("{id}")
     public Response deleteHashtag(@PathParam("id") Long id) {
