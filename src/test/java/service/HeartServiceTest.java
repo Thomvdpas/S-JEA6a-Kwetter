@@ -3,6 +3,7 @@ package service;
 import dao.jpa.HeartDaoJPA;
 import domain.Heart;
 import domain.Kweet;
+import domain.Profile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.Date;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -40,14 +39,14 @@ public class HeartServiceTest {
 
     @Test
     public void savingHeartSuccessful() {
-        Heart heart = new Heart(new Date(), new Kweet());
+        Heart heart = new Heart(new Kweet(), new Profile());
         service.create(heart);
         verify(heartDao, Mockito.times(1)).create(heart);
     }
 
     @Test
     public void findHeartSuccessfull() {
-        Heart heart = new Heart(new Date(), new Kweet());
+        Heart heart = new Heart(new Kweet(), new Profile());
         heart.setId(1L);
 
         when(service.findById(heart.getId())).thenReturn(heart);

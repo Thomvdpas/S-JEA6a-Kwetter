@@ -1,8 +1,8 @@
 package dao.collection;
 
 import dao.KweetDao;
-import domain.Account;
 import domain.Kweet;
+import domain.Profile;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -56,7 +56,7 @@ public class KweetDaoColl implements KweetDao {
         return kweets;
     }
 
-    public List<Kweet> findBySender(Account sender) {
+    public List<Kweet> findBySender(Profile sender) {
         return null;
     }
 }

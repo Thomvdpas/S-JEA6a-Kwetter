@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.util.Date;
 
 /**
  * @author Thom van de Pas on 27-2-2018
@@ -39,15 +38,13 @@ public class StartUp {
      */
     @PostConstruct
     public void initData() {
-        Profile profile = new Profile("Thom", "van de Pas");
-        profileService.create(profile);
-        Profile profile2 = new Profile("Sjef", "Beun");
-        profileService.create(profile2);
-
         Account account = new Account();
         account.setUsername("thomvdpas");
         account.setEmailaddress("thomvandepas@hotmail.com");
         account.setPassword("Test!2");
+        Profile profile = new Profile();
+        profile.setFirstName("Thom");
+        profile.setLastName("van de Pas");
         account.setRole(Role.MODERATOR);
         account.setProfile(profile);
         accountService.create(account);
@@ -56,24 +53,33 @@ public class StartUp {
         account2.setUsername("sjef2");
         account2.setEmailaddress("sjefbeun@hotmail.com");
         account2.setPassword("sjefje!@#");
+        Profile profile2 = new Profile();
+        profile2.setFirstName("Sjef");
+        profile2.setLastName("Beun");
         account2.setRole(Role.GENERAL);
         account2.setProfile(profile2);
         accountService.create(account2);
 
-        account.setProfile(profile);
-        account2.setProfile(profile2);
-        accountService.update(account);
-        accountService.update(account2);
-        profile.setAccount(account);
-        profile2.setAccount(account2);
-        profileService.update(profile);
-        profileService.update(profile2);
+        Profile firstProfile = new Profile();
+        firstProfile.setAccount(account);
+        firstProfile.setFirstName("Martijn");
+        firstProfile.setLastName("Peijnenburg");
+        firstProfile.setBiography("test");
+        firstProfile.setAvatarPath("google.com/test");
 
-        Kweet kweet = new Kweet("Dit is een test Kweet", profile);
-        Heart heart = new Heart(new Date(), kweet);
-        Hashtag hashtag = new Hashtag("test", kweet);
-        hashtagService.create(hashtag);
-        heartService.create(heart);
-        kweetService.create(kweet);
+
+        Kweet kweet = new Kweet("Dit is een test Kweet", firstProfile);
+        firstProfile.addKweet(kweet);
+
+        Heart heart = new Heart(kweet, firstProfile);
+        kweet.addHeart(heart);
+
+        Hashtag hashtag = new Hashtag("Football");
+        kweet.addHashtag(hashtag);
+
+        profileService.create(firstProfile);
+
+        firstProfile.setLocation("Tilburg");
+        profileService.update(firstProfile);
     }
 }

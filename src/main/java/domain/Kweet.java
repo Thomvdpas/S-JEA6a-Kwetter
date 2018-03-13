@@ -1,11 +1,11 @@
 package domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,36 +27,41 @@ public class Kweet implements Serializable {
     @Size(min = 1, max = 140)
     private String messageBody;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
     private Profile sender;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Heart> hearts;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Profile> mentions;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Hashtag> hashtags;
 
     public Kweet() {
+        this.hashtags = new ArrayList<Hashtag>();
+        this.mentions = new ArrayList<Profile>();
+        this.hearts = new ArrayList<Heart>();
     }
 
-    public Kweet(String messageBody, Profile sender) {
+    public Kweet(@Size(max = 140) String messageBody, Profile sender) {
+        this();
         this.messageBody = messageBody;
         this.sender = sender;
     }
 
-    public Kweet(String messageBody, Profile sender, List<Heart> hearts, List<Profile> mentions, List<Hashtag> hashtags) {
-        this.messageBody = messageBody;
-        this.sender = sender;
-        this.hearts = hearts;
-        this.mentions = mentions;
-        this.hashtags = hashtags;
+    public void addHashtag(Hashtag hashtag) {
+        this.hashtags.add(hashtag);
+    }
+
+    public void addHeart(Heart heart) {
+        this.hearts.add(heart);
+    }
+
+    public void addMention(Profile mention) {
+        this.mentions.add(mention);
     }
 
     //<editor-fold desc="Getters/Setters">

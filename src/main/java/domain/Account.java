@@ -24,7 +24,6 @@ public class Account implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @Column(unique = true)
     @Size(min = 4, max = 20)
     private String username;
@@ -34,13 +33,10 @@ public class Account implements Serializable {
     @Email
     private String emailaddress;
 
-    @NotNull
     @Size(min = 4, max = 16)
     @JsonIgnore
     private String password;
 
-    @NotNull
-    @JoinColumn(unique = true)
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
@@ -52,6 +48,7 @@ public class Account implements Serializable {
     }
 
     public Account(String username, String emailaddress, String password, Role role) {
+        this();
         this.username = username;
         this.emailaddress = emailaddress;
         this.password = password;

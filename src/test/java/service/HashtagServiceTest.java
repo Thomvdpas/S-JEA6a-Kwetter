@@ -36,7 +36,7 @@ public class HashtagServiceTest {
         service = new HashtagService();
         service.setDao(hashtagDao);
         kweet = new Kweet();
-        hashtag = new Hashtag("Test", kweet);
+        hashtag = new Hashtag("Test");
         hashtag.setId(1L);
     }
 

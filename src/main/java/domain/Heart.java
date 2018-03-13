@@ -20,18 +20,19 @@ public class Heart implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    private Date dateOfHearting;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Kweet kweet;
+
+    @OneToOne
+    private Profile sender;
 
     public Heart() {
     }
 
-    public Heart(Date dateOfHearting, Kweet kweet) {
-        this.dateOfHearting = dateOfHearting;
+    public Heart(Kweet kweet, Profile sender) {
+        this();
         this.kweet = kweet;
+        this.sender = sender;
     }
 
     //<editor-fold desc="Getters/Setters">
@@ -43,20 +44,20 @@ public class Heart implements Serializable {
         this.id = id;
     }
 
-    public Date getDateOfHearting() {
-        return dateOfHearting;
-    }
-
-    public void setDateOfHearting(Date dateOfHearting) {
-        this.dateOfHearting = dateOfHearting;
-    }
-
     public Kweet getKweet() {
         return kweet;
     }
 
     public void setKweet(Kweet kweet) {
         this.kweet = kweet;
+    }
+
+    public Profile getSender() {
+        return sender;
+    }
+
+    public void setSender(Profile sender) {
+        this.sender = sender;
     }
     //</editor-fold>
 

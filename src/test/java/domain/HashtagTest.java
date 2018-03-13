@@ -1,16 +1,10 @@
 package domain;
 
 
-import domain.Hashtag;
-import domain.Kweet;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.ejb.BeforeCompletion;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Thom van de Pas on 1-3-2018
@@ -25,7 +19,7 @@ public class HashtagTest {
     public void setUp() {
         kweet = new Kweet();
         hashtag = new Hashtag();
-        hashtag = new Hashtag("test", new Kweet());
+        hashtag = new Hashtag("test");
     }
 
     @Test
@@ -38,29 +32,11 @@ public class HashtagTest {
     }
 
     @Test
-    public void testGetId() {
-        Long id = 12345L;
-        hashtag.setId(id);
-        Long expResult = id;
-        Long result = hashtag.getId();
-        assertEquals("ExpectedResult and Result are not equal", expResult, result);
-
-    }
-
-    @Test
     public void testGetAndSetBodyText() {
         String bodyText = "Test hashtag body";
         hashtag.setBodyText(bodyText);
         String expResult = bodyText;
         String result = hashtag.getBodyText();
-        assertEquals("ExpectedResult and Result are not equal", expResult, result);
-    }
-
-    @Test
-    public void testGetAndSetKweet() {
-        hashtag.setKweet(kweet);
-        Kweet expResult = kweet;
-        Kweet result = hashtag.getKweet();
         assertEquals("ExpectedResult and Result are not equal", expResult, result);
     }
 

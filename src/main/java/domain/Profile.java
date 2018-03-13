@@ -1,10 +1,11 @@
 package domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,10 +33,10 @@ public class Profile implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     @OneToMany(cascade = CascadeType.ALL)
-    @JsonBackReference
+    @CascadeOnDelete
     private List<Kweet> kweets;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Profile> followers;
     @Transient
     private List<Profile> followees;
@@ -43,14 +44,17 @@ public class Profile implements Serializable {
     public Profile() {
         this.followers = new ArrayList<Profile>();
         this.followees = new ArrayList<Profile>();
+        this.kweets = new LinkedList<Kweet>();
     }
 
     public Profile(String firstName, String lastName) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Profile(String firstName, String lastName, Account account) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.account = account;
@@ -68,6 +72,18 @@ public class Profile implements Serializable {
 
     public String getFullName() {
         return firstName + " " + lastName;
+    }
+
+    public void addKweet(Kweet kweet) {
+        this.kweets.add(kweet);
+    }
+
+    public void addFollowee(Profile followee) {
+        this.followees.add(followee);
+    }
+
+    public void addFollower(Profile follower) {
+        this.followers.add(follower);
     }
 
     //<editor-fold desc="Getters/Setters">

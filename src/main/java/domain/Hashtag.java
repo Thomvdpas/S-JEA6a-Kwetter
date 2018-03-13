@@ -1,7 +1,11 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.eclipse.persistence.annotations.CascadeOnDelete;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,15 +25,17 @@ public class Hashtag implements Serializable {
 
     private String bodyText;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Kweet kweet;
+    @OneToMany(cascade = CascadeType.ALL)
+    @CascadeOnDelete
+    @JsonManagedReference
+    private List<Kweet> kweets;
 
     public Hashtag() {
     }
 
-    public Hashtag(String bodyText, Kweet kweet) {
+    public Hashtag(String bodyText) {
+        this();
         this.bodyText = bodyText;
-        this.kweet = kweet;
     }
 
     //<editor-fold desc="Getters/Setters">
@@ -49,13 +55,14 @@ public class Hashtag implements Serializable {
         this.bodyText = bodyText;
     }
 
-    public Kweet getKweet() {
-        return kweet;
+    public List<Kweet> getKweets() {
+        return kweets;
     }
 
-    public void setKweet(Kweet kweet) {
-        this.kweet = kweet;
+    public void addKweet(Kweet kweet) {
+        this.kweets.add(kweet);
     }
+
     //</editor-fold>
 
     //<editor-fold desc="hashCode/equals">

@@ -3,8 +3,8 @@ package dao.jpa;
 import dao.GenericDaoJPAImpl;
 import dao.JPA;
 import dao.KweetDao;
-import domain.Account;
 import domain.Kweet;
+import domain.Profile;
 
 import javax.ejb.Stateless;
 import java.util.List;
@@ -19,7 +19,7 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
     public KweetDaoJPA() {
     }
 
-    public List<Kweet> findBySender(Account sender) {
+    public List<Kweet> findBySender(Profile sender) {
         return getEntityManager().createNamedQuery("kweet.findByAccount", Kweet.class)
                 .setParameter("sender", sender)
                 .getResultList();

@@ -1,9 +1,8 @@
 package boundary.rest;
 
-import domain.Account;
 import domain.Kweet;
-import service.AccountService;
 import service.KweetService;
+import service.ProfileService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -25,7 +24,7 @@ public class KweetResponseResource {
      * Injects the AccountService and KweetService.
      */
     @Inject
-    private AccountService accountService;
+    private ProfileService profileService;
     @Inject
     private KweetService kweetService;
 
@@ -43,23 +42,41 @@ public class KweetResponseResource {
     }
 
     /**
-     * Finds a List of Kweets based on a Account (Gets all Users Kweet)
-     *
+     * Get Kweet by its id.
      * @param id
-     * @returns a List of Kweets.
+     * @returns the found Kweet in JSON or throws a WebApplicationException.
      */
     @GET
-    @Path("{senderId}")
+    @Path("{kweetId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findKweetsBySender(@QueryParam("senderId") Long id) {
-        Account account = accountService.findById(id);
-        if (account != null) {
-            GenericEntity entity = new GenericEntity<List<Kweet>>(kweetService.findBySender(account)) {
-            };
-            return Response.ok(entity).build();
+    public Response getKweetById(@QueryParam("kweetId") Long id) {
+        Kweet kweet = kweetService.findById(id);
+
+        if (kweet == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return null;
+
+        return Response.ok(kweet).build();
     }
+
+//    /**
+//     * Finds a List of Kweets based on a Account (Gets all Users Kweet)
+//     *
+//     * @param id
+//     * @returns a List of Kweets.
+//     */
+//    @GET
+//    @Path("{senderId}")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public Response findKweetsBySender(@QueryParam("senderId") Long id) {
+//        Profile profile = profileService.findById(id);
+//        if (profile != null) {
+//            GenericEntity entity = new GenericEntity<List<Kweet>>(kweetService.findBySender(profile)) {
+//            };
+//            return Response.ok(entity).build();
+//        }
+//        return null;
+//    }
 
     /**
      * Updates a Kweet.

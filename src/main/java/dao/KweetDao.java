@@ -1,7 +1,7 @@
 package dao;
 
-import domain.Account;
 import domain.Kweet;
+import domain.Profile;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface KweetDao extends GenericDao<Kweet> {
 
-    List<Kweet> findBySender(Account sender);
+    List<Kweet> findBySender(Profile sender);
 }

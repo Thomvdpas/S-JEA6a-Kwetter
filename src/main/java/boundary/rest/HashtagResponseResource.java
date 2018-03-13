@@ -43,35 +43,35 @@ public class HashtagResponseResource {
      * @param bodyText
      * @returns the found Hashtag or null.
      */
-//    @GET
-//    @Path("{id}")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response getHashtag(@PathParam("id") Long id) {
-//        Hashtag hashtag = hashtagService.findById(id);
-//        if (hashtag == null) {
-//            throw new WebApplicationException(Response.Status.NOT_FOUND);
-//        }
-//        return Response.ok(hashtag).build();
-//    }
-
-    /**
-     * Gets Hashtags based on the bodytext.
-     *
-     * @param bodyText
-     * @returns a List of Hashtags in JSON format.
-     */
     @GET
-    @Path("{bodyText}")
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getByBodyText(@PathParam("bodyText") String bodyText) {
-        if (bodyText != null) {
-            GenericEntity entity = new GenericEntity<List<Hashtag>>(hashtagService.findByBodyText(bodyText)) {
-            };
-
-            return Response.ok(entity).build();
+    public Response getHashtag(@PathParam("id") Long id) {
+        Hashtag hashtag = hashtagService.findById(id);
+        if (hashtag == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return null;
+        return Response.ok(hashtag).build();
     }
+
+//    /**
+//     * Gets Hashtags based on the bodytext.
+//     *
+//     * @param bodyText
+//     * @returns a List of Hashtags in JSON format.
+//     */
+//    @GET
+//    @Path("{bodyText}")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public Response getByBodyText(@PathParam("bodyText") String bodyText) {
+//        if (bodyText != null) {
+//            GenericEntity entity = new GenericEntity<List<Hashtag>>(hashtagService.findByBodyText(bodyText)) {
+//            };
+//
+//            return Response.ok(entity).build();
+//        }
+//        return null;
+//    }
 
     /**
      * Updates a Hashtag.

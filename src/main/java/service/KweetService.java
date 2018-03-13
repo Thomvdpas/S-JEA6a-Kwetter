@@ -2,8 +2,8 @@ package service;
 
 import dao.JPA;
 import dao.KweetDao;
-import domain.Account;
 import domain.Kweet;
+import domain.Profile;
 import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
@@ -37,8 +37,8 @@ public class KweetService {
      * @param account
      * @returns a List of Kweets or null if the Account didn't send any Kweet(s).
      */
-    public List<Kweet> findBySender(Account account) {
-        return this.kweetDao.findBySender(account);
+    public List<Kweet> findBySender(Profile profile) {
+        return this.kweetDao.findBySender(profile);
     }
 
     /**
