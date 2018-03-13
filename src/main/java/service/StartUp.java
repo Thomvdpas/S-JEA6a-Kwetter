@@ -61,7 +61,7 @@ public class StartUp {
         accountService.create(account2);
 
         Profile firstProfile = new Profile();
-        firstProfile.setAccount(account);
+        firstProfile.setAccount(account2);
         firstProfile.setFirstName("Martijn");
         firstProfile.setLastName("Peijnenburg");
         firstProfile.setBiography("test");
@@ -81,5 +81,11 @@ public class StartUp {
 
         firstProfile.setLocation("Tilburg");
         profileService.update(firstProfile);
+
+        profile.setAccount(account);
+        profile.setLocation("Cahors");
+        profile.setBiography("Ik speel iedere dag Pokémon Go!");
+        profile.setAvatarPath("www.google.com/Search?search=test");
+        profileService.update(profile);
     }
 }

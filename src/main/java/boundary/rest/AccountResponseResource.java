@@ -52,7 +52,7 @@ public class AccountResponseResource {
         if (account == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(account).build();
+        return Response.ok(account.toJson()).build();
     }
 
     /**

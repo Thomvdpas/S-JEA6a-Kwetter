@@ -2,6 +2,8 @@ package domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -40,7 +42,6 @@ public class Account implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
-    @NotNull
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
@@ -54,6 +55,17 @@ public class Account implements Serializable {
         this.password = password;
         this.role = role;
         this.profile = new Profile();
+    }
+
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("username", this.username)
+                .add("emailaddress", this.emailaddress)
+                .add("role", this.role.toString())
+                .add("profile", Json.createObjectBuilder()
+                        .add("firstName", profile.getFirstName())
+                        .add("lastName", profile.getLastName()).build())
+                .build();
     }
 
     //<editor-fold desc="Getters/Setters">

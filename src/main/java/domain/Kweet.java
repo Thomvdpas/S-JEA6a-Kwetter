@@ -2,6 +2,8 @@ package domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -50,6 +52,15 @@ public class Kweet implements Serializable {
         this();
         this.messageBody = messageBody;
         this.sender = sender;
+    }
+
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("messageBody", this.messageBody)
+                .add("sender", Json.createObjectBuilder()
+                        .add("firstName", sender.getFirstName())
+                        .add("lastName", sender.getLastName()).build())
+                .build();
     }
 
     public void addHashtag(Hashtag hashtag) {

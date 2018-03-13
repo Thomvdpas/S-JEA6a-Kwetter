@@ -25,7 +25,7 @@ public class AccountResourceTest {
                 .then()
                 .statusCode(200)
                 .body("username", equalTo("thomvdpas"),
-                        "profile.id", equalTo(2));
+                        "profile.id", equalTo(1));
     }
 
     @Test

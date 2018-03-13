@@ -56,7 +56,7 @@ public class KweetResponseResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        return Response.ok(kweet).build();
+        return Response.ok(kweet.toJson()).build();
     }
 
 //    /**
