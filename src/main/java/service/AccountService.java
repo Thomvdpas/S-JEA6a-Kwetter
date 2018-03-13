@@ -3,9 +3,13 @@ package service;
 import dao.AccountDao;
 import dao.JPA;
 import domain.Account;
+import event.AccountEvent;
+import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -20,6 +24,8 @@ public class AccountService {
     @Inject
     @JPA
     private AccountDao accountDao;
+    @Inject
+    private Event<AccountEvent> accountEvent;
 
     /**
      * Empty constructor for the JPA.
@@ -43,8 +49,10 @@ public class AccountService {
      * @param account
      * @returns the created Account.
      */
+    @Interceptors(LoggingInterceptor.class)
     public Account create(Account account) {
         return this.accountDao.create(account);
+//        accountEvent.fire(new AccountEvent(account));
     }
 
     /**
@@ -90,6 +98,7 @@ public class AccountService {
      *
      * @return
      */
+    @Interceptors(LoggingInterceptor.class)
     public List<Account> findAll() {
         return this.accountDao.findAll();
     }

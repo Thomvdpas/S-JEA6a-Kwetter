@@ -3,9 +3,11 @@ package service;
 import dao.HashtagDao;
 import dao.JPA;
 import domain.Hashtag;
+import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ public class HashtagService {
      * @param hashtag
      * @returns the created Hashtag.
      */
+    @Interceptors(LoggingInterceptor.class)
     public Hashtag create(Hashtag hashtag) {
         return this.hashtagDao.create(hashtag);
     }

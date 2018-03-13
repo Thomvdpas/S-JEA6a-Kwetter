@@ -4,9 +4,11 @@ import dao.JPA;
 import dao.KweetDao;
 import domain.Account;
 import domain.Kweet;
+import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -45,6 +47,7 @@ public class KweetService {
      * @param kweet
      * @returns the newly persisted Kweet.
      */
+    @Interceptors(LoggingInterceptor.class)
     public Kweet create(Kweet kweet) {
         return this.kweetDao.create(kweet);
     }

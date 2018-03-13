@@ -4,9 +4,11 @@ import dao.HeartDao;
 import dao.JPA;
 import domain.Heart;
 import domain.Kweet;
+import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -28,6 +30,7 @@ public class HeartService {
      * @param heart
      * @returns the newly persisted Heart.
      */
+    @Interceptors(LoggingInterceptor.class)
     public Heart create(Heart heart) {
         return this.heartDao.create(heart);
     }

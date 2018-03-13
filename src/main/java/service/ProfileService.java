@@ -3,9 +3,11 @@ package service;
 import dao.JPA;
 import dao.ProfileDao;
 import domain.Profile;
+import interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import java.util.List;
 
 /**
@@ -43,6 +45,7 @@ public class ProfileService {
      * @param profile
      * @returns the created Profile
      */
+    @Interceptors(LoggingInterceptor.class)
     public Profile create(Profile profile) {
         return this.profileDao.create(profile);
     }
