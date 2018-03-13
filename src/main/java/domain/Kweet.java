@@ -46,6 +46,11 @@ public class Kweet implements Serializable {
     public Kweet() {
     }
 
+    public Kweet(String messageBody, Profile sender) {
+        this.messageBody = messageBody;
+        this.sender = sender;
+    }
+
     public Kweet(String messageBody, Profile sender, List<Heart> hearts, List<Profile> mentions, List<Hashtag> hashtags) {
         this.messageBody = messageBody;
         this.sender = sender;

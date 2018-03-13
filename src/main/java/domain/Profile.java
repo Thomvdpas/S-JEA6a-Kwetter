@@ -45,6 +45,17 @@ public class Profile implements Serializable {
         this.followees = new ArrayList<Profile>();
     }
 
+    public Profile(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Profile(String firstName, String lastName, Account account) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.account = account;
+    }
+
     public Profile(String firstName, String lastName, String avatarPath, String location, String biography, Account account) {
         this();
         this.firstName = firstName;
