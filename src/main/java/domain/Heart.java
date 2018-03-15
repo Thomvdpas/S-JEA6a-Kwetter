@@ -24,7 +24,7 @@ public class Heart implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Kweet kweet;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Profile sender;
 
     public Heart() {

@@ -1,8 +1,7 @@
 package util;
 
 
-import domain.Account;
-import domain.Hashtag;
+import domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
@@ -12,7 +11,7 @@ import java.sql.SQLException;
 public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
-        Account.class, Hashtag.class
+            Heart.class, Hashtag.class, Kweet.class, Account.class, Profile.class
     };
     private final EntityManager em;
 
@@ -31,7 +30,7 @@ public class DatabaseCleaner {
     }
 
     private void deleteEntities(Class<?> entityType) {
-        em.createQuery("delete from " + getEntityName(entityType)).executeUpdate();
+        em.createQuery("DELETE from " + getEntityName(entityType)).executeUpdate();
     }
 
     protected String getEntityName(Class<?> clazz) {
