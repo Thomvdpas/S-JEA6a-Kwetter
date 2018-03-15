@@ -2,6 +2,8 @@ package domain;
 
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -68,6 +70,15 @@ public class Profile implements Serializable {
         this.location = location;
         this.biography = biography;
         this.account = account;
+    }
+
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("fullName", this.getFullName())
+                .add("avatarPath", this.getAvatarPath())
+                .add("location", this.getLocation())
+                .add("biography", this.getBiography())
+                .build();
     }
 
     public String getFullName() {

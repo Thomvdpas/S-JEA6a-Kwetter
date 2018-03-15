@@ -3,6 +3,8 @@ package domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.eclipse.persistence.annotations.CascadeOnDelete;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +38,12 @@ public class Hashtag implements Serializable {
     public Hashtag(String bodyText) {
         this();
         this.bodyText = bodyText;
+    }
+
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("bodyText", this.getBodyText())
+                .build();
     }
 
     //<editor-fold desc="Getters/Setters">

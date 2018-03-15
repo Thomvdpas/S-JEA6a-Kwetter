@@ -1,8 +1,9 @@
 package domain;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -33,6 +34,15 @@ public class Heart implements Serializable {
         this();
         this.kweet = kweet;
         this.sender = sender;
+    }
+
+    public JsonObject toJson() {
+        return Json.createObjectBuilder()
+                .add("kweet", Json.createObjectBuilder()
+                        .add("messageBody", this.kweet.getMessageBody()).build())
+                .add("profile", Json.createObjectBuilder()
+                        .add("fullName", this.sender.getFullName()).build())
+                .build();
     }
 
     //<editor-fold desc="Getters/Setters">
@@ -74,7 +84,7 @@ public class Heart implements Serializable {
             return false;
         }
         final Heart other = (Heart) o;
-        return Objects.equals(this.kweet, other.kweet);
+        return Objects.equals(this.sender, other.sender);
     }
 
     @Override

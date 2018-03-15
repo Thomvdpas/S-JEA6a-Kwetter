@@ -56,7 +56,15 @@ public class KweetDaoColl implements KweetDao {
         return kweets;
     }
 
+    public List<Kweet> findByBodyText(String bodyText) {
+        return null;
+    }
+
     public List<Kweet> findBySender(Profile sender) {
+        return null;
+    }
+
+    public List<Kweet> findByMention(Profile mention) {
         return null;
     }
 }
