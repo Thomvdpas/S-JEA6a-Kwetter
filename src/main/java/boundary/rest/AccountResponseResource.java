@@ -1,6 +1,7 @@
 package boundary.rest;
 
 import domain.Account;
+import io.swagger.annotations.Api;
 import service.AccountService;
 
 import javax.ejb.Stateless;
@@ -15,6 +16,7 @@ import java.util.List;
  * @author Thom van de Pas on 9-3-2018
  */
 @Path("accounts")
+@Api
 @Stateless
 public class AccountResponseResource {
 

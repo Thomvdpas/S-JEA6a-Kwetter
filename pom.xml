@@ -80,6 +80,19 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Swagger.io -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-jaxrs</artifactId>
+            <version>1.5.16</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.13</version>
+        </dependency>
+
     </dependencies>
 
     <build>

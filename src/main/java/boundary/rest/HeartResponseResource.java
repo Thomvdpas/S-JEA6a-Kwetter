@@ -2,6 +2,7 @@ package boundary.rest;
 
 import domain.Heart;
 import domain.Kweet;
+import io.swagger.annotations.Api;
 import service.HeartService;
 import service.KweetService;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * @author Thom van de Pas on 10-3-2018
  */
 @Path("hearts")
+@Api
 @Stateless
 public class HeartResponseResource {
 

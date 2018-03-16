@@ -1,6 +1,7 @@
 package boundary.rest;
 
 import domain.Hashtag;
+import io.swagger.annotations.Api;
 import service.HashtagService;
 
 import javax.ejb.Stateless;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author Thom van de Pas on 9-3-2018
  */
 @Path("hashtags")
+@Api
 @Stateless
 public class HashtagResponseResource {
 

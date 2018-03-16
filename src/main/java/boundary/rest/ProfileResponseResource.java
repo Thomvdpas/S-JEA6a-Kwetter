@@ -1,6 +1,7 @@
 package boundary.rest;
 
 import domain.Profile;
+import io.swagger.annotations.Api;
 import service.ProfileService;
 
 import javax.ejb.Stateless;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author Thom van de Pas on 10-3-2018
  */
 @Path("profiles")
+@Api
 @Stateless
 public class ProfileResponseResource {
 
