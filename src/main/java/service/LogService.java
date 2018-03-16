@@ -7,6 +7,8 @@ import domain.Log;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import static util.HelperFunctions.isNull;
+
 /**
  * @author Thom van de Pas on 16-3-2018
  */
@@ -27,7 +29,7 @@ public class LogService {
      * @returns the saved Log.
      */
     public Log save(Log log) {
-        if (log != null) {
+        if (!isNull(log)) {
             return this.logDao.create(log);
         }
         return null;

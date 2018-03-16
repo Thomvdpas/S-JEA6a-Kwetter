@@ -13,6 +13,8 @@ import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.HelperFunctions.isNull;
+
 /**
  * @author Thom van de Pas on 27-2-2018
  */
@@ -127,13 +129,5 @@ public class HashtagService {
 
     public void setDao(HashtagDao hashtagDao) {
         this.hashtagDao = hashtagDao;
-    }
-
-    private boolean isNull(Object object) {
-        return object == null;
-    }
-
-    private boolean isNull(Long id) {
-        return id == null;
     }
 }

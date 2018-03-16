@@ -24,7 +24,7 @@ public class AccountResourceTest {
                 when().get("/accounts/1")
                 .then()
                 .statusCode(200)
-                .body("username", equalTo("sjef2"));
+                .body("username", equalTo("thomvdpas"));
     }
 
     @Test

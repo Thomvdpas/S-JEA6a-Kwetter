@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import java.util.List;
 
+import static util.HelperFunctions.isNull;
+
 /**
  * @author Thom van de Pas on 27-2-2018
  */
@@ -110,13 +112,5 @@ public class HeartService {
 
     public void setDao(HeartDao heartDao) {
         this.heartDao = heartDao;
-    }
-
-    private boolean isNull(Object object) {
-        return object == null;
-    }
-
-    private boolean isNull(Long id) {
-        return id == null;
     }
 }

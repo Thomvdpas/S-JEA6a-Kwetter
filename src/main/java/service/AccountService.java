@@ -15,6 +15,8 @@ import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static util.HelperFunctions.isNull;
+
 /**
  * @author Thom van de Pas on 9-3-2018
  */
@@ -131,13 +133,5 @@ public class AccountService {
 
     public void setDao(AccountDao accountDao) {
         this.accountDao = accountDao;
-    }
-
-    private boolean isNull(Object object) {
-        return object == null;
-    }
-
-    private boolean isNull(Long id) {
-        return id == null;
     }
 }

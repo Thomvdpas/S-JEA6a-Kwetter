@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -26,10 +27,13 @@ public class KweetServiceTest {
     @Mock
     private KweetDaoJPA kweetDao;
 
+    Kweet kweet = null;
+
     @Before
     public void setUp() {
         service = new KweetService();
         service.setDao(kweetDao);
+        kweet = new Kweet();
     }
 
     @After
@@ -51,5 +55,12 @@ public class KweetServiceTest {
         when(service.findById(kweet.getId())).thenReturn(kweet);
         Kweet found = service.findById(kweet.getId());
         assertThat(found, is(kweet));
+    }
+
+    @Test
+    public void kweetIsNull() {
+        when(service.findById(1L)).thenReturn(kweet);
+        Kweet foundKweet = service.findById(null);
+        assertNull(foundKweet);
     }
 }
