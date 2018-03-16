@@ -21,9 +21,9 @@ public class HashtagResourceTest {
     public void getHashtagById(){
         given()
                 .when()
-                .get("/accounts/id?id=1")
+                .get("/hashtags/1")
                 .then()
                 .statusCode(200)
-                .body("bodyText", equalTo("Football"));
+                .body("bodyText", equalTo("#Football"));
     }
 }

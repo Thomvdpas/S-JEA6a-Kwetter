@@ -57,6 +57,15 @@ public class KweetResponseResource {
         return Response.ok(kweet.toJson()).build();
     }
 
+    @GET
+    @Path("find/{message}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findByMessage(@PathParam("message") String message) {
+        List<Kweet> kweets = kweetService.findByBodyText(message);
+        return Response.ok(this.kweetService.multipleToJson(kweets)).build();
+
+    }
+
 //    /**
 //     * Finds a List of Kweets based on a Account (Gets all Users Kweet)
 //     *

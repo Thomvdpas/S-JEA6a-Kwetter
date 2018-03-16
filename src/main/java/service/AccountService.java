@@ -18,6 +18,7 @@ import java.util.List;
  * @author Thom van de Pas on 9-3-2018
  */
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class AccountService {
 
     /**
@@ -51,7 +52,6 @@ public class AccountService {
      * @param account
      * @returns the created Account.
      */
-    @Interceptors(LoggingInterceptor.class)
     public Account create(Account account) {
         return this.accountDao.create(account);
 //        accountEvent.fire(new AccountEvent(account));
@@ -91,7 +91,6 @@ public class AccountService {
      * @param id
      * @returns the found Account.
      */
-//    @Interceptors(LoggingInterceptor.class)
     public Account findById(Long id) {
         return this.accountDao.findById(id);
     }
@@ -101,7 +100,6 @@ public class AccountService {
      *
      * @return
      */
-    @Interceptors(LoggingInterceptor.class)
     public List<Account> findAll() {
         return this.accountDao.findAll();
     }

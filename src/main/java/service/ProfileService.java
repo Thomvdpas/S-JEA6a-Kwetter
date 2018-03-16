@@ -14,6 +14,7 @@ import java.util.List;
  * @author Thom van de Pas on 9-3-2018
  */
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class ProfileService {
 
     /**
@@ -45,7 +46,6 @@ public class ProfileService {
      * @param profile
      * @returns the created Profile
      */
-    @Interceptors(LoggingInterceptor.class)
     public Profile create(Profile profile) {
         return this.profileDao.create(profile);
     }

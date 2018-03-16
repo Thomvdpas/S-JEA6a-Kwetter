@@ -20,7 +20,7 @@ public class HashtagDaoJPA extends GenericDaoJPAImpl<Hashtag> implements Hashtag
 
     public List<Hashtag> findByBodyText(String bodyText) {
         return getEntityManager().createNamedQuery("hashtag.findByBodyText", Hashtag.class)
-                .setParameter("bodyText", bodyText)
+                .setParameter("bodyText", "#" +  bodyText +"%")
                 .getResultList();
     }
 }

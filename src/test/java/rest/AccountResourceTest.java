@@ -21,11 +21,10 @@ public class AccountResourceTest {
     @Test
     public void getAccountById() {
         given().
-                when().get("/accounts/id?id=1")
+                when().get("/accounts/1")
                 .then()
                 .statusCode(200)
-                .body("username", equalTo("thomvdpas"),
-                        "profile.id", equalTo(1));
+                .body("username", equalTo("sjef2"));
     }
 
     @Test

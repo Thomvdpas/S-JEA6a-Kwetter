@@ -21,7 +21,7 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
 
     public List<Kweet> findByBodyText(String bodyText) {
         return getEntityManager().createNamedQuery("kweet.findByBodyText", Kweet.class)
-                .setParameter("bodyText", bodyText)
+                .setParameter("bodyText", "%" +  bodyText + "%")
                 .getResultList();
     }
 

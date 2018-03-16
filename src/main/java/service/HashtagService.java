@@ -8,12 +8,15 @@ import interceptor.LoggingInterceptor;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
+import javax.json.JsonObject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Thom van de Pas on 27-2-2018
  */
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class HashtagService {
 
     /**
@@ -95,6 +98,14 @@ public class HashtagService {
      */
     public List<Hashtag> findAll() {
         return this.hashtagDao.findAll();
+    }
+
+    public List<JsonObject> allToJson(List<Hashtag> hashtags) {
+        List<JsonObject> jsonObjects = new ArrayList<JsonObject>();
+        for (Hashtag hashtag : hashtags) {
+            jsonObjects.add(hashtag.toJson());
+        }
+        return jsonObjects;
     }
 
     public void setDao(HashtagDao hashtagDao) {

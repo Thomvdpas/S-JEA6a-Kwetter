@@ -74,7 +74,7 @@ public class StartUp {
         Heart heart = new Heart(kweet, firstProfile);
         kweet.addHeart(heart);
 
-        Hashtag hashtag = new Hashtag("Football");
+        Hashtag hashtag = new Hashtag("#Football");
         kweet.addHashtag(hashtag);
 
         profileService.create(firstProfile);

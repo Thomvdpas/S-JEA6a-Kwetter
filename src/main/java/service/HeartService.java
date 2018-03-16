@@ -15,6 +15,7 @@ import java.util.List;
  * @author Thom van de Pas on 27-2-2018
  */
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class HeartService {
 
     @Inject
@@ -30,7 +31,6 @@ public class HeartService {
      * @param heart
      * @returns the newly persisted Heart.
      */
-    @Interceptors(LoggingInterceptor.class)
     public Heart create(Heart heart) {
         return this.heartDao.create(heart);
     }

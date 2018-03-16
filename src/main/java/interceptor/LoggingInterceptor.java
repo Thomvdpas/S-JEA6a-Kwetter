@@ -5,6 +5,10 @@
  */
 package interceptor;
 
+import domain.Log;
+import service.LogService;
+
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
@@ -17,11 +21,19 @@ import java.util.Arrays;
 @Interceptor
 @Logging
 public class LoggingInterceptor {
+
+    @Inject
+    private LogService logService;
+
     @AroundInvoke
     public Object log(InvocationContext context) throws Exception {
-        String name = context.getMethod().getName();
-        String params = Arrays.toString(context.getParameters());
-        System.out.println("Logging: name = " +name + " params = "+ params);
+        String className = context.getMethod().getDeclaringClass().getName();
+        String methodName = context.getMethod().getName();
+        String parameters = Arrays.toString(context.getParameters());
+
+        Log log = new Log(className, methodName, parameters);
+        logService.save(log);
+
         return context.proceed();
     }
     

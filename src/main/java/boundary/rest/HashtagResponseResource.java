@@ -54,24 +54,23 @@ public class HashtagResponseResource {
         return Response.ok(hashtag).build();
     }
 
-//    /**
-//     * Gets Hashtags based on the bodytext.
-//     *
-//     * @param bodyText
-//     * @returns a List of Hashtags in JSON format.
-//     */
-//    @GET
-//    @Path("{bodyText}")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response getByBodyText(@PathParam("bodyText") String bodyText) {
-//        if (bodyText != null) {
-//            GenericEntity entity = new GenericEntity<List<Hashtag>>(hashtagService.findByBodyText(bodyText)) {
-//            };
-//
-//            return Response.ok(entity).build();
-//        }
-//        return null;
-//    }
+    /**
+     * Gets Hashtags based on the bodytext.
+     *
+     * @param bodyText
+     * @returns a List of Hashtags in JSON format.
+     */
+    @GET
+    @Path("find/{bodyText}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getByBodyText(@PathParam("bodyText") String bodyText) {
+        if (bodyText != null) {
+            List<Hashtag> hashtags = this.hashtagService.findByBodyText(bodyText);
+
+            return Response.ok(this.hashtagService.allToJson(hashtags)).build();
+        }
+        return null;
+    }
 
     /**
      * Updates a Hashtag.

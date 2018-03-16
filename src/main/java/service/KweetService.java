@@ -21,6 +21,7 @@ import java.util.List;
  * @author Thom van de Pas on 9-3-2018
  */
 @Stateless
+@Interceptors(LoggingInterceptor.class)
 public class KweetService {
 
     /**
