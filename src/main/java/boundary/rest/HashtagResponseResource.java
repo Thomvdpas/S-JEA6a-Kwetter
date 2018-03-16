@@ -53,7 +53,7 @@ public class HashtagResponseResource {
         if (hashtag == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(hashtag).build();
+        return Response.ok(hashtag.toJson()).build();
     }
 
     /**
