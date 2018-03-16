@@ -22,10 +22,14 @@ public class LogService {
 
     /**
      * Method to save a new Log.
+     *
      * @param log is the new Log.
      * @returns the saved Log.
      */
     public Log save(Log log) {
-        return this.logDao.create(log);
+        if (log != null) {
+            return this.logDao.create(log);
+        }
+        return null;
     }
 }

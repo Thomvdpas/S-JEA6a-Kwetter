@@ -48,7 +48,10 @@ public class KweetService {
      * @returns a List of Kweets or null if the Account didn't send any Kweet(s).
      */
     public List<Kweet> findBySender(Profile profile) {
-        return this.kweetDao.findBySender(profile);
+        if (!isNull(profile)) {
+            return this.kweetDao.findBySender(profile);
+        }
+        return null;
     }
 
     /**
@@ -57,9 +60,11 @@ public class KweetService {
      * @param kweet
      * @returns the newly persisted Kweet.
      */
-    @Interceptors(LoggingInterceptor.class)
     public Kweet create(Kweet kweet) {
-        return this.kweetDao.create(kweet);
+        if (!isNull(kweet)) {
+            return this.kweetDao.create(kweet);
+        }
+        return null;
     }
 
     /**
@@ -69,7 +74,10 @@ public class KweetService {
      * @returns the updated Kweet.
      */
     public Kweet update(Kweet kweet) {
-        return this.kweetDao.update(kweet);
+        if (!isNull(kweet)) {
+            return this.kweetDao.update(kweet);
+        }
+        return null;
     }
 
     /**
@@ -78,7 +86,9 @@ public class KweetService {
      * @param kweet
      */
     public void delete(Kweet kweet) {
-        this.kweetDao.delete(kweet);
+        if (!isNull(kweet)) {
+            this.kweetDao.delete(kweet);
+        }
     }
 
     /**
@@ -87,7 +97,9 @@ public class KweetService {
      * @param id
      */
     public void delete(Long id) {
-        this.kweetDao.deleteById(id);
+        if (!isNull(id)) {
+            this.kweetDao.deleteById(id);
+        }
     }
 
     /**
@@ -97,7 +109,10 @@ public class KweetService {
      * @returns the found Kweet or null if there is no Kweet known with that id.
      */
     public Kweet findById(Long id) {
-        return this.kweetDao.findById(id);
+        if (!isNull(id)) {
+            return this.kweetDao.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -227,5 +242,13 @@ public class KweetService {
             jsonObjects.add(kweet.toJson());
         }
         return jsonObjects;
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private boolean isNull(Long id) {
+        return id == null;
     }
 }

@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.jdbc.StringUtils;
 import dao.JPA;
 import dao.ProfileDao;
 import domain.Profile;
@@ -37,7 +38,10 @@ public class ProfileService {
      * @returns the found Profile or null.
      */
     public Profile findByUsername(String username) {
-        return this.profileDao.findByUsername(username);
+        if (!StringUtils.isNullOrEmpty(username)) {
+            return this.profileDao.findByUsername(username);
+        }
+        return null;
     }
 
     /**
@@ -47,7 +51,10 @@ public class ProfileService {
      * @returns the created Profile
      */
     public Profile create(Profile profile) {
-        return this.profileDao.create(profile);
+        if (!isNull(profile)) {
+            return this.profileDao.create(profile);
+        }
+        return null;
     }
 
     /**
@@ -57,7 +64,10 @@ public class ProfileService {
      * @returns the updated Profile.
      */
     public Profile update(Profile profile) {
-        return this.profileDao.update(profile);
+        if (!isNull(profile)) {
+            return this.profileDao.update(profile);
+        }
+        return null;
     }
 
     /**
@@ -66,7 +76,9 @@ public class ProfileService {
      * @param profile
      */
     public void delete(Profile profile) {
-        this.profileDao.delete(profile);
+        if (!isNull(profile)) {
+            this.profileDao.delete(profile);
+        }
     }
 
     /**
@@ -75,7 +87,9 @@ public class ProfileService {
      * @param id
      */
     public void delete(Long id) {
-        this.profileDao.deleteById(id);
+        if (!isNull(id)) {
+            this.profileDao.deleteById(id);
+        }
     }
 
     /**
@@ -85,7 +99,10 @@ public class ProfileService {
      * @returns the found Profile and returns null if there is no Profile with that id.
      */
     public Profile findById(Long id) {
-        return this.profileDao.findById(id);
+        if (!isNull(id)) {
+            return this.profileDao.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -99,5 +116,13 @@ public class ProfileService {
 
     public void setDao(ProfileDao profileDao) {
         this.profileDao = profileDao;
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private boolean isNull(Long id) {
+        return id == null;
     }
 }

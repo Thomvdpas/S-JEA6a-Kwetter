@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.jdbc.StringUtils;
 import dao.HashtagDao;
 import dao.JPA;
 import domain.Hashtag;
@@ -40,7 +41,10 @@ public class HashtagService {
      */
     @Interceptors(LoggingInterceptor.class)
     public Hashtag create(Hashtag hashtag) {
-        return this.hashtagDao.create(hashtag);
+        if (!isNull(hashtag)) {
+            return this.hashtagDao.create(hashtag);
+        }
+        return null;
     }
 
     /**
@@ -50,7 +54,10 @@ public class HashtagService {
      * @returns the freshly updated Hashtag.
      */
     public Hashtag update(Hashtag hashtag) {
-        return this.hashtagDao.update(hashtag);
+        if (!isNull(hashtag)) {
+            return this.hashtagDao.update(hashtag);
+        }
+        return null;
     }
 
     /**
@@ -59,7 +66,9 @@ public class HashtagService {
      * @param hashtag
      */
     public void delete(Hashtag hashtag) {
-        this.hashtagDao.delete(hashtag);
+        if (!isNull(hashtag)) {
+            this.hashtagDao.delete(hashtag);
+        }
     }
 
     /**
@@ -68,7 +77,9 @@ public class HashtagService {
      * @param id
      */
     public void delete(Long id) {
-        this.hashtagDao.deleteById(id);
+        if (!isNull(id)) {
+            this.hashtagDao.deleteById(id);
+        }
     }
 
     /**
@@ -78,7 +89,10 @@ public class HashtagService {
      * @returns the found Hashtag.
      */
     public Hashtag findById(Long id) {
-        return this.hashtagDao.findById(id);
+        if (!isNull(id)) {
+            return this.hashtagDao.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -88,7 +102,10 @@ public class HashtagService {
      * @returns the found Hashtags.
      */
     public List<Hashtag> findByBodyText(String bodyText) {
-        return this.hashtagDao.findByBodyText(bodyText);
+        if (!StringUtils.isNullOrEmpty(bodyText)) {
+            return this.hashtagDao.findByBodyText(bodyText);
+        }
+        return null;
     }
 
     /**
@@ -110,5 +127,13 @@ public class HashtagService {
 
     public void setDao(HashtagDao hashtagDao) {
         this.hashtagDao = hashtagDao;
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private boolean isNull(Long id) {
+        return id == null;
     }
 }

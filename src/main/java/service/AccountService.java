@@ -1,5 +1,6 @@
 package service;
 
+import com.mysql.jdbc.StringUtils;
 import dao.AccountDao;
 import dao.JPA;
 import domain.Account;
@@ -43,7 +44,10 @@ public class AccountService {
      * @returns the Account.
      */
     public Account findByUsername(String username) {
-        return this.accountDao.findByUsername(username);
+        if (!StringUtils.isNullOrEmpty(username)) {
+            return this.accountDao.findByUsername(username);
+        }
+        return null;
     }
 
     /**
@@ -53,8 +57,11 @@ public class AccountService {
      * @returns the created Account.
      */
     public Account create(Account account) {
-        return this.accountDao.create(account);
-//        accountEvent.fire(new AccountEvent(account));
+        if (!isNull(account)) {
+            return this.accountDao.create(account);
+//            accountEvent.fire(new AccountEvent(account));
+        }
+        return null;
     }
 
     /**
@@ -64,7 +71,10 @@ public class AccountService {
      * @returns the updated Account.
      */
     public Account update(Account account) {
-        return this.accountDao.update(account);
+        if (!isNull(account)) {
+            return this.accountDao.update(account);
+        }
+        return null;
     }
 
     /**
@@ -73,7 +83,9 @@ public class AccountService {
      * @param account
      */
     public void delete(Account account) {
-        this.accountDao.delete(account);
+        if (!isNull(account)) {
+            this.accountDao.delete(account);
+        }
     }
 
     /**
@@ -82,7 +94,9 @@ public class AccountService {
      * @param id
      */
     public void delete(Long id) {
-        this.accountDao.deleteById(id);
+        if (!isNull(id)) {
+            this.accountDao.deleteById(id);
+        }
     }
 
     /**
@@ -92,7 +106,10 @@ public class AccountService {
      * @returns the found Account.
      */
     public Account findById(Long id) {
-        return this.accountDao.findById(id);
+        if (!isNull(id)) {
+            return this.accountDao.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -114,5 +131,13 @@ public class AccountService {
 
     public void setDao(AccountDao accountDao) {
         this.accountDao = accountDao;
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private boolean isNull(Long id) {
+        return id == null;
     }
 }

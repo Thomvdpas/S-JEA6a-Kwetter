@@ -32,7 +32,10 @@ public class HeartService {
      * @returns the newly persisted Heart.
      */
     public Heart create(Heart heart) {
-        return this.heartDao.create(heart);
+        if (!isNull(heart)) {
+            return this.heartDao.create(heart);
+        }
+        return null;
     }
 
     /**
@@ -42,7 +45,10 @@ public class HeartService {
      * @returns the updated Heart
      */
     public Heart update(Heart heart) {
-        return this.heartDao.update(heart);
+        if (!isNull(heart)) {
+            return this.heartDao.update(heart);
+        }
+        return null;
     }
 
     /**
@@ -51,7 +57,9 @@ public class HeartService {
      * @param heart
      */
     public void delete(Heart heart) {
-        this.heartDao.delete(heart);
+        if (!isNull(heart)) {
+            this.heartDao.delete(heart);
+        }
     }
 
     /**
@@ -60,7 +68,9 @@ public class HeartService {
      * @param id
      */
     public void delete(Long id) {
-        this.heartDao.deleteById(id);
+        if (!isNull(id)) {
+            this.heartDao.deleteById(id);
+        }
     }
 
     /**
@@ -70,7 +80,10 @@ public class HeartService {
      * @return
      */
     public Heart findById(Long id) {
-        return this.heartDao.findById(id);
+        if (!isNull(id)) {
+            return this.heartDao.findById(id);
+        }
+        return null;
     }
 
     /**
@@ -89,10 +102,21 @@ public class HeartService {
      * @returns a list of Hearts
      */
     public List<Heart> findByKweet(Kweet kweet) {
-        return this.heartDao.findByKweet(kweet);
+        if (!isNull(kweet)) {
+            return this.heartDao.findByKweet(kweet);
+        }
+        return null;
     }
 
     public void setDao(HeartDao heartDao) {
         this.heartDao = heartDao;
+    }
+
+    private boolean isNull(Object object) {
+        return object == null;
+    }
+
+    private boolean isNull(Long id) {
+        return id == null;
     }
 }
