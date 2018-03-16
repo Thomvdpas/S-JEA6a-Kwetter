@@ -51,7 +51,7 @@ public class HeartResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findByKweet(@QueryParam("kweetId") Long id) {
+    public Response findByKweet(@PathParam("id") Long id) {
         Kweet kweet = kweetService.findById(id);
         if (kweet != null) {
             GenericEntity entity = new GenericEntity<List<Heart>>(heartService.findByKweet(kweet)) {

@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
+import javax.json.JsonObject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -89,6 +91,7 @@ public class AccountService {
      * @param id
      * @returns the found Account.
      */
+//    @Interceptors(LoggingInterceptor.class)
     public Account findById(Long id) {
         return this.accountDao.findById(id);
     }
@@ -101,6 +104,14 @@ public class AccountService {
     @Interceptors(LoggingInterceptor.class)
     public List<Account> findAll() {
         return this.accountDao.findAll();
+    }
+
+    public List<JsonObject> multipleToJson(List<Account> accounts) {
+        List<JsonObject> jsonObjects = new ArrayList<JsonObject>();
+        for (Account account : accounts) {
+            jsonObjects.add(account.toJson());
+        }
+        return jsonObjects;
     }
 
     public void setDao(AccountDao accountDao) {

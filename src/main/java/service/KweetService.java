@@ -13,6 +13,8 @@ import interceptor.LoggingInterceptor;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
+import javax.json.JsonObject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -216,5 +218,13 @@ public class KweetService {
 
     public void setDao(KweetDao kweetDao) {
         this.kweetDao = kweetDao;
+    }
+
+    public List<JsonObject> multipleToJson(List<Kweet> kweets) {
+        List<JsonObject> jsonObjects = new ArrayList<JsonObject>();
+        for (Kweet kweet : kweets) {
+            jsonObjects.add(kweet.toJson());
+        }
+        return jsonObjects;
     }
 }

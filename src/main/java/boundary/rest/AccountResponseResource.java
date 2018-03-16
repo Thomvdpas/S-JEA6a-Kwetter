@@ -6,7 +6,6 @@ import service.AccountService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -33,9 +32,8 @@ public class AccountResponseResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
-        GenericEntity entity = new GenericEntity<List<Account>>(accountService.findAll()) {
-        };
-        return Response.ok(entity).build();
+        List<Account> foundAccounts = this.accountService.findAll();
+        return Response.ok(this.accountService.multipleToJson(foundAccounts)).build();
     }
 
     /**
@@ -47,7 +45,7 @@ public class AccountResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getAccount(@QueryParam("id") Long id) {
+    public Response getAccount(@PathParam("id") Long id) {
         Account account = accountService.findById(id);
         if (account == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

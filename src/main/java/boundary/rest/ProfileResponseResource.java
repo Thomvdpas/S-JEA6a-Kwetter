@@ -63,7 +63,7 @@ public class ProfileResponseResource {
     @GET
     @Path("{username}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findByUsername(@QueryParam("username") String username) {
+    public Response findByUsername(@PathParam("username") String username) {
         Profile profile = profileService.findByUsername(username);
         if (profile == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);

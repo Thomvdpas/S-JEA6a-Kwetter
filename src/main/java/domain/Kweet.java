@@ -59,6 +59,7 @@ public class Kweet implements Serializable {
     public JsonObject toJson() {
         return Json.createObjectBuilder()
                 .add("messageBody", this.messageBody)
+                .add("likes", this.hearts.size())
                 .add("sender", Json.createObjectBuilder()
                         .add("firstName", sender.getFirstName())
                         .add("lastName", sender.getLastName()).build())

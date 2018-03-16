@@ -7,7 +7,6 @@ import service.ProfileService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -36,9 +35,8 @@ public class KweetResponseResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
-        GenericEntity entity = new GenericEntity<List<Kweet>>(kweetService.findAll()) {
-        };
-        return Response.ok(entity).build();
+        List<Kweet> allKweets = this.kweetService.findAll();
+        return Response.ok(this.kweetService.multipleToJson(allKweets)).build();
     }
 
     /**
@@ -47,9 +45,9 @@ public class KweetResponseResource {
      * @returns the found Kweet in JSON or throws a WebApplicationException.
      */
     @GET
-    @Path("{kweetId}")
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getKweetById(@QueryParam("kweetId") Long id) {
+    public Response getKweetById(@PathParam("id") long id) {
         Kweet kweet = kweetService.findById(id);
 
         if (kweet == null) {
