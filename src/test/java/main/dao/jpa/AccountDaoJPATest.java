@@ -1,7 +1,6 @@
 package main.dao.jpa;
 
 import main.domain.Account;
-import main.domain.Role;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -45,7 +44,7 @@ public class AccountDaoJPATest {
 
         this.accountDao = new AccountDaoJPA();
         accountDao.setEntityManager(em);
-        account = new Account("testName", "testEmail@live.com", "testPassword", Role.GENERAL);
+        account = new Account("testName", "testEmail@live.com", "testPassword");
     }
 
     @Test

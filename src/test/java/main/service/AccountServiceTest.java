@@ -2,7 +2,6 @@ package main.service;
 
 import main.dao.jpa.AccountDaoJPA;
 import main.domain.Account;
-import main.domain.Role;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +32,7 @@ public class AccountServiceTest {
     public void setUp() {
         service = new AccountService();
         service.setDao(accountDao);
-        account = new Account("testUsername", "testPassword", "test@testMail.com", Role.GENERAL);
+        account = new Account("testUsername", "testPassword", "test@testMail.com");
     }
 
     @After

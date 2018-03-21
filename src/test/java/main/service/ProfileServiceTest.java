@@ -3,7 +3,6 @@ package main.service;
 import main.dao.jpa.ProfileDaoJPA;
 import main.domain.Account;
 import main.domain.Profile;
-import main.domain.Role;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class ProfileServiceTest {
 
     @Test
     public void findProfileSuccessfull() {
-        Account account = new Account("test", "test@live.nl", "testPw", Role.GENERAL);
+        Account account = new Account("test", "test@live.nl", "testPw");
         Profile profile = new Profile();
         profile.setAccount(account);
         when(service.findByUsername(profile.getAccount().getUsername())).thenReturn(profile);

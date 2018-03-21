@@ -9,6 +9,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -42,18 +44,24 @@ public class Account implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
+    @JoinTable(name = "USERS_GROUPS",
+            joinColumns
+                    = @JoinColumn(name = "USERNAME", referencedColumnName = "name"),
+            inverseJoinColumns
+                    = @JoinColumn(name = "GROUPNAME", referencedColumnName = "groupName")
+    )
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private Collection<Group> group = new ArrayList<>();
+
 
     public Account() {
     }
 
-    public Account(String username, String emailaddress, String password, Role role) {
+    public Account(String username, String emailaddress, String password) {
         this();
         this.username = username;
         this.emailaddress = emailaddress;
         this.password = password;
-        this.role = role;
         this.profile = new Profile();
     }
 
@@ -61,7 +69,6 @@ public class Account implements Serializable {
         return Json.createObjectBuilder()
                 .add("username", this.username)
                 .add("emailaddress", this.emailaddress)
-                .add("role", this.role.toString())
                 .add("profile", Json.createObjectBuilder()
                         .add("firstName", profile.getFirstName())
                         .add("lastName", profile.getLastName()).build())
@@ -109,12 +116,16 @@ public class Account implements Serializable {
         this.profile = profile;
     }
 
-    public Role getRole() {
-        return role;
+    public Collection<Group> getGroup() {
+        return group;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setGroup(Collection<Group> group) {
+        this.group = group;
+    }
+
+    public void clearGroup() {
+        this.group.clear();
     }
     //</editor-fold>
 

@@ -3,11 +3,7 @@ package main.domain;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertFalse;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * @author Thom van de Pas on 1-3-2018
@@ -17,14 +13,12 @@ public class AccountTest {
     private Account account = null;
     private Account account2 = null;
     private Profile profile = null;
-    private Role role = null;
 
     @Before
     public void setUp() {
         account = new Account();
-        account2 = new Account("testUserName", "test@live.com", "testPassword", Role.GENERAL);
+        account2 = new Account("testUserName", "test@live.com", "testPassword");
         profile = new Profile();
-        role = Role.GENERAL;
     }
 
     @Test
@@ -72,16 +66,8 @@ public class AccountTest {
     }
 
     @Test
-    public void testGetAndSetRole() {
-        account.setRole(role);
-        Role expResult = role;
-        Role result = account.getRole();
-        assertEquals("ExpectedResult and Result are not equal", expResult, result);
-    }
-
-    @Test
     public void testEquals() {
-        Account test1 = new Account("Test", "test@live.nl", "test", Role.ADMINISTRATOR);
+        Account test1 = new Account("Test", "test@live.nl", "test");
         String userName = "testUserName";
         String emailAddress = "test@live.com";
         String password = "testPassword";

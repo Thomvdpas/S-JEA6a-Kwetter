@@ -40,7 +40,6 @@ public class StartUp {
         Profile profile = new Profile();
         profile.setFirstName("Thom");
         profile.setLastName("van de Pas");
-        account.setRole(Role.MODERATOR);
         account.setProfile(profile);
         accountService.create(account);
 
@@ -51,7 +50,6 @@ public class StartUp {
         Profile profile2 = new Profile();
         profile2.setFirstName("Sjef");
         profile2.setLastName("Beun");
-        account2.setRole(Role.GENERAL);
         account2.setProfile(profile2);
         accountService.create(account2);
 
