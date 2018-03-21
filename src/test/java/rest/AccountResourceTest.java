@@ -1,6 +1,7 @@
 package rest;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -11,6 +12,7 @@ import static rest.RestTestSetup.Setup;
 /**
  * @author Thom van de Pas on 13-3-2018
  */
+@Ignore
 public class AccountResourceTest {
 
     @BeforeClass

@@ -3,10 +3,11 @@ package main.dao.jpa;
 import main.domain.Hashtag;
 import main.domain.Kweet;
 import main.domain.Profile;
+import main.util.DatabaseCleaner;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import main.util.DatabaseCleaner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 /**
  * @author Thom van de Pas on 15-3-2018
  */
+@Ignore
 public class HashtagDaoJPATest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AccountTestPU");

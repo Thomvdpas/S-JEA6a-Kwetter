@@ -3,6 +3,7 @@ package main.dao.jpa;
 import main.domain.Account;
 import main.domain.Role;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import main.util.DatabaseCleaner;
 
@@ -19,6 +20,7 @@ import static org.junit.Assert.*;
 /**
  * @author Thom van de Pas on 2-3-2018
  */
+@Ignore
 public class AccountDaoJPATest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AccountTestPU");

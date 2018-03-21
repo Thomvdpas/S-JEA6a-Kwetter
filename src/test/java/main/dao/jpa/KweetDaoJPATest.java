@@ -6,6 +6,7 @@ import main.domain.Kweet;
 import main.domain.Profile;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import main.util.DatabaseCleaner;
 
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 /**
  * @author Thom van de Pas on 15-3-2018
  */
+@Ignore
 public class KweetDaoJPATest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AccountTestPU");
