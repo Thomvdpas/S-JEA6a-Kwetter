@@ -11,6 +11,8 @@
 
     <ui:define name="content">
         <h:form>
+            <p:growl id="growl" showDetail="true"/>
+
             <div id="content">
                 <p:panelGrid columns="2">
                     <h:outputLabel for="username" value="Username"/>
@@ -19,9 +21,7 @@
                     <h:outputLabel for="password" value="Password"/>
                     <p:password id="password" value="#{loginBean.password}"/>
                 </p:panelGrid>
-                <p:commandButton value="Inloggen" actionListener="#{loginBean.login}" update="growl">
-                    <p:ajax update="@form"/>
-                </p:commandButton>
+                <p:commandButton value="Inloggen" actionListener="#{loginBean.login}" update="growl"/>
             </div>
         </h:form>
     </ui:define>
