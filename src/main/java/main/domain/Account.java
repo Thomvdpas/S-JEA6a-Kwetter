@@ -1,16 +1,17 @@
 package main.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import main.util.EncryptionHelper;
 
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,8 +22,6 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username"),
-        @NamedQuery(name = "account.findByCredentials", query = "SELECT a FROM Account a " +
-                "WHERE a.username = :username AND a.password = :password")
 })
 public class Account implements Serializable {
 
@@ -44,24 +43,23 @@ public class Account implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile;
 
-    @JoinTable(name = "USERS_GROUPS",
-            joinColumns
-                    = @JoinColumn(name = "USERNAME", referencedColumnName = "name"),
-            inverseJoinColumns
-                    = @JoinColumn(name = "GROUPNAME", referencedColumnName = "groupName")
-    )
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    private Collection<Group> group = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "accounts")
+    private List<UserGroup> userGroups;
 
 
     public Account() {
+        this.userGroups = new ArrayList<>();
     }
 
     public Account(String username, String emailaddress, String password) {
         this();
         this.username = username;
         this.emailaddress = emailaddress;
-        this.password = password;
+        try {
+            this.password = EncryptionHelper.encryptData(password);
+        } catch (Exception ex) {
+            System.out.println("exception message = " + ex.getMessage());
+        }
         this.profile = new Profile();
     }
 
@@ -105,7 +103,11 @@ public class Account implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        try {
+            this.password = EncryptionHelper.encryptData(password);
+        } catch (Exception ex) {
+            System.out.println("exception message = " + ex.getMessage());
+        }
     }
 
     public Profile getProfile() {
@@ -116,16 +118,16 @@ public class Account implements Serializable {
         this.profile = profile;
     }
 
-    public Collection<Group> getGroup() {
-        return group;
+    public Collection<UserGroup> getUserGroups() {
+        return userGroups;
     }
 
-    public void setGroup(Collection<Group> group) {
-        this.group = group;
+    public void setUserGroup(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
     }
 
     public void clearGroup() {
-        this.group.clear();
+        this.userGroups.clear();
     }
     //</editor-fold>
 

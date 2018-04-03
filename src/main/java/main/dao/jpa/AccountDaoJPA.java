@@ -6,6 +6,7 @@ import main.dao.JPA;
 import main.domain.Account;
 
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  * @author Thom van de Pas on 1-3-2018
@@ -18,15 +19,9 @@ public class AccountDaoJPA extends GenericDaoJPAImpl<Account> implements Account
     }
 
     public Account findByUsername(String username) {
-        return getEntityManager().createNamedQuery("account.findByUsername", Account.class)
-                .setParameter("username", username)
-                .getSingleResult();
-    }
+        TypedQuery<Account> query =  getEntityManager().createNamedQuery("account.findByUsername", Account.class)
+                .setParameter("username", username);
 
-    public Account findByCredentials(String username, String encryptedPassword) {
-        return getEntityManager().createNamedQuery("account.findByCredentials", Account.class)
-                .setParameter("username", username)
-                .setParameter("password", encryptedPassword)
-                .getSingleResult();
+        return oneResult(query);
     }
 }

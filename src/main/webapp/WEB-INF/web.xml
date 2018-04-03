@@ -28,33 +28,25 @@
     </welcome-file-list>
     
     <security-constraint>
-        <display-name>Account</display-name>
         <web-resource-collection>
-            <web-resource-name>account</web-resource-name>
-            <description>account</description>
-            <url-pattern>/profile.xhtml</url-pattern>
+            <web-resource-name>Secure Pages</web-resource-name>
+            <url-pattern>/pages/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
-            <role-name>AdminRole</role-name>
-            <role-name>ModeratorRole</role-name>
-            <role-name>UserRole</role-name>
+            <role-name>RegularRole</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
-        <auth-method>BASIC</auth-method>
-        <realm-name>KwetterJDBCRealm</realm-name>
+        <auth-method>FORM</auth-method>
+        <realm-name>kwetter_security_realm</realm-name>
     </login-config>
     <security-role>
         <description/>
+        <role-name>RegularRole</role-name>
+    </security-role>
+    <security-role>
+        <description/>
         <role-name>AdminRole</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>ModeratorRole</role-name>
-    </security-role>
-    <security-role>
-        <description/>
-        <role-name>UserRole</role-name>
     </security-role>
 </web-app>

@@ -1,7 +1,6 @@
 package main.service;
 
 import main.domain.*;
-import main.util.EncryptionHelper;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -22,7 +21,10 @@ public class StartUp {
     @Inject
     private AccountService accountService;
     @Inject
+    private GroupService groupService;
+    @Inject
     private ProfileService profileService;
+
 
     public StartUp() {
 
@@ -36,7 +38,7 @@ public class StartUp {
         Account account = new Account();
         account.setUsername("thomvdpas");
         account.setEmailaddress("thomvandepas@hotmail.com");
-        account.setPassword(EncryptionHelper.encryptPassword(account.getUsername(), "Test!2"));
+        account.setPassword("Test!2");
         Profile profile = new Profile();
         profile.setFirstName("Thom");
         profile.setLastName("van de Pas");
@@ -46,7 +48,7 @@ public class StartUp {
         Account account2 = new Account();
         account2.setUsername("sjef2");
         account2.setEmailaddress("sjefbeun@hotmail.com");
-        account2.setPassword(EncryptionHelper.encryptPassword(account2.getUsername(),"sjefje!@#"));
+        account2.setPassword("sjefje!@#");
         Profile profile2 = new Profile();
         profile2.setFirstName("Sjef");
         profile2.setLastName("Beun");
@@ -80,5 +82,11 @@ public class StartUp {
         profile.setBiography("Ik speel iedere dag Pokémon Go!");
         profile.setAvatarPath("www.google.com/Search?search=test");
         profileService.update(profile);
+
+        UserGroup userGroup = new UserGroup("Regular");
+
+        userGroup.addAccount(account);
+        this.groupService.create(userGroup);
+
     }
 }

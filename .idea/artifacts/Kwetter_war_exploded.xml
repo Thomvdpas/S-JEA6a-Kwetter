@@ -32,6 +32,7 @@
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.2" />
           <element id="library" level="project" name="Maven: org.jasypt:jasypt:1.9.2" />
           <element id="library" level="project" name="Maven: org.omnifaces:omnifaces:3.0" />
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.11" />
         </element>
       </element>
       <element id="directory" name="META-INF">

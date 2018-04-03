@@ -2,23 +2,27 @@ package web.bean;
 
 import main.domain.Account;
 import main.service.AccountService;
+import web.core.RedirectHelper;
 
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
  * @author Thom van de Pas on 19-3-2018
  */
 @Named("loginBean")
-@RequestScoped
+@ViewScoped
 public class LoginBean implements Serializable {
 
     @Inject
     private AccountService accountService;
+    @Inject
+    private SessionBean sessionBean;
 
     private String username;
     private String password;
@@ -27,19 +31,25 @@ public class LoginBean implements Serializable {
     public void init() {
     }
 
-    public void login() {
+    public String login() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+
         try {
-            possibleAccount = accountService.login(username, password);
-
-            if (possibleAccount != null) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/Kwetter/profile.xhtml");
-            }
-
-        } catch (Exception e) {
+            request.login(this.username, this.password);
+        } catch (ServletException e) {
             e.printStackTrace();
-            FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage("Oeps..", "Er is iets mis gegaan bij het inloggen."));
         }
+
+        Account loggedInAccount = this.accountService.findByUsername(request.getRemoteUser());
+        this.sessionBean.setLoggedInAccount(loggedInAccount);
+
+        boolean isRegular = request.isUserInRole("RegularRole");
+
+        if (isRegular) {
+            RedirectHelper.redirect("/pages/profile.xhtml");
+        }
+        return "";
     }
 
     //<editor-fold desc="Getters/Setters">

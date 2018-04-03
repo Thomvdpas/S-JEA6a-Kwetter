@@ -1,7 +1,6 @@
 package main.service;
 
 import com.mysql.jdbc.StringUtils;
-import main.util.EncryptionHelper;
 import main.dao.AccountDao;
 import main.dao.JPA;
 import main.domain.Account;
@@ -49,13 +48,6 @@ public class AccountService {
     public Account findByUsername(String username) {
         if (!StringUtils.isNullOrEmpty(username)) {
             return this.accountDao.findByUsername(username);
-        }
-        return null;
-    }
-
-    public Account findByCredentials(String username, String password) {
-        if (!StringUtils.isNullOrEmpty(username) && !StringUtils.isNullOrEmpty(password)) {
-            return this.accountDao.findByCredentials(username, EncryptionHelper.encryptPassword(username, password));
         }
         return null;
     }
@@ -118,19 +110,6 @@ public class AccountService {
     public Account findById(Long id) {
         if (!isNull(id)) {
             return this.accountDao.findById(id);
-        }
-        return null;
-    }
-
-    public Account login(String username, String password) {
-        if (!StringUtils.isNullOrEmpty(username) && !StringUtils.isNullOrEmpty(password)) {
-            String lowerCaseUsername = username.toLowerCase();
-            lowerCaseUsername = lowerCaseUsername.trim();
-
-            Account possibleAccount = findByCredentials(lowerCaseUsername, password);
-
-            if (possibleAccount != null) return possibleAccount;
-
         }
         return null;
     }
