@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<div class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+    <a class="navbar-brand" href="#">Kwetter</a>
+    <button class="navbar-toggler" type="button">
+        <span class="navbar-toggler-icon"/>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Items on the left -->
+        <ul class="navbar-nav mr-auto">
+
+            <!-- Active Link -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#{root}/pages/profile.xhtml">Dashboard <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+        <!-- Items on the right -->
+        <ul class="navbar-nav ml-auto">
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"><ui:insert name="username"/></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Profile</a>
+                    <div class="dropdown-divider"/>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+</div>
+
+</html>

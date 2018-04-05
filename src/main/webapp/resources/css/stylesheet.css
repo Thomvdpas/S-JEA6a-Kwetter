@@ -1,0 +1,124 @@
+/** GENERIC **/
+
+body
+{
+    height: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #444;
+    background-color: white;
+}
+
+.login-background
+{
+    background: linear-gradient(to top right, #79c2e6, #66c3dc);
+}
+
+/** CARDS **/
+
+.card
+{
+    border: none;
+    padding: 24px;
+    border-radius: 0px;
+    box-shadow: 0px 5px 5px 3px rgba(0,0,0,0.25);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+a:hover
+{
+    text-decoration: none;
+}
+
+.card-title
+{
+    font-weight: bold;
+}
+
+.login-card
+{
+    margin: 28px;
+    width: 350px;
+    background: white;
+    color: black;
+}
+
+/** CUSTOM INPUT **/
+
+input
+{
+    height: 50px;
+}
+
+.form-control
+{
+    border: none;
+    border-radius: 0px;
+    background-color: #EFEFEF;
+}
+
+/** CUSTOM BUTTON **/
+
+.btn
+{
+    padding: 14px 24px;
+    border: 0 none;
+    border-radius: 0px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus
+{
+    outline: 0 none;
+}
+
+.btn-primary
+{
+    background: #0099cc;
+    color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary
+{
+    background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active
+{
+    background: #007299;
+    box-shadow: none;
+}
+
+/** LOGIN **/
+
+#registerHelper
+{
+    margin-top: 16px;
+}
+
+.card-title
+{
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 28px;
+}
+
+/** NAVBAR **/
+
+/*.navbar*/
+/*{*/
+    /*background: linear-gradient(to right, #E61E78, #2D7EDC);*/
+    /*box-shadow: 0px 2px 2px 2px rgba(0,0,0,0.25);*/
+    /*color: white;*/
+/*}*/
+
+/** UTILS **/
+
+.vertical-center
+{
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+    display: flex;
+    align-items: center;
+}
