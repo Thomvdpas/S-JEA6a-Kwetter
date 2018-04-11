@@ -38,14 +38,16 @@ public class Profile implements Serializable {
     @CascadeOnDelete
     private List<Kweet> kweets;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Profile> followers;
+
     @Transient
-    private List<Profile> followees;
+    private List<Profile> followers;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Profile> followings;
 
     public Profile() {
         this.followers = new ArrayList<Profile>();
-        this.followees = new ArrayList<Profile>();
+        this.followings = new ArrayList<Profile>();
         this.kweets = new LinkedList<Kweet>();
     }
 
@@ -89,13 +91,10 @@ public class Profile implements Serializable {
         this.kweets.add(kweet);
     }
 
-    public void addFollowee(Profile followee) {
-        this.followees.add(followee);
+    public void addFollowing(Profile following) {
+        this.followings.add(following);
     }
 
-    public void addFollower(Profile follower) {
-        this.followers.add(follower);
-    }
 
     //<editor-fold desc="Getters/Setters">
     public Long getId() {
@@ -170,12 +169,12 @@ public class Profile implements Serializable {
         this.followers = followers;
     }
 
-    public List<Profile> getFollowees() {
-        return followees;
+    public List<Profile> getFollowings() {
+        return followings;
     }
 
-    public void setFollowees(List<Profile> followees) {
-        this.followees = followees;
+    public void setFollowings(List<Profile> followings) {
+        this.followings = followings;
     }
 //</editor-fold>
 

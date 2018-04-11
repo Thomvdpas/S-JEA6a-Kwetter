@@ -1,5 +1,6 @@
 package main.dao.jpa;
 
+import main.domain.Account;
 import main.domain.Hashtag;
 import main.domain.Kweet;
 import main.domain.Profile;
@@ -25,6 +26,7 @@ import java.util.logging.Logger;
 public class HashtagDaoJPATest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AccountTestPU");
+    private Account firstAccount;
     private EntityManager em;
     private EntityTransaction tx;
     private HashtagDaoJPA hashtagDao;
@@ -43,7 +45,7 @@ public class HashtagDaoJPATest {
 
         hashtagDao = new HashtagDaoJPA();
         hashtagDao.setEntityManager(em);
-        profileFirst = new Profile();
+        this.firstAccount = new Account();
     }
 
     @Test
@@ -75,7 +77,7 @@ public class HashtagDaoJPATest {
         profileFirst.setBiography("I like football");
 
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
         hashtag.addKweet(kweet);
 
         tx.begin();

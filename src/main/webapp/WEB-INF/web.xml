@@ -32,26 +32,48 @@
         <param-value>none</param-value>
     </context-param>
 
+    <context-param>
+        <param-name>primefaces.skin</param-name>
+        <param-value>none</param-value>
+    </context-param>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secure Pages</web-resource-name>
-            <url-pattern>/pages/*</url-pattern>
+            <url-pattern>/pages/regular/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
             <role-name>RegularRole</role-name>
+            <role-name>AdminRole</role-name>
         </auth-constraint>
     </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Secure Pages</web-resource-name>
+            <url-pattern>/pages/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>AdminRole</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>kwetter_security_realm</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/login.xhtml</form-error-page>
+        </form-login-config>
     </login-config>
     <security-role>
-        <description/>
+        <description>Default user role</description>
         <role-name>RegularRole</role-name>
     </security-role>
     <security-role>
-        <description/>
+        <description>Administrator role</description>
         <role-name>AdminRole</role-name>
     </security-role>
 </web-app>

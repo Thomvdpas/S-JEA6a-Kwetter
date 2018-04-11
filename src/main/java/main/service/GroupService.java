@@ -31,4 +31,10 @@ public class GroupService {
     public UserGroup create(UserGroup userGroup) {
         return this.groupDao.create(userGroup);
     }
+
+    public void update(UserGroup regularGroup) {
+        if (regularGroup != null) {
+            this.groupDao.update(regularGroup);
+        }
+    }
 }

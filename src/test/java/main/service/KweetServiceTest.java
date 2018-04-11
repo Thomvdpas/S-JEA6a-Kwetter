@@ -1,8 +1,8 @@
 package main.service;
 
 import main.dao.jpa.KweetDaoJPA;
+import main.domain.Account;
 import main.domain.Kweet;
-import main.domain.Profile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,7 +50,7 @@ public class KweetServiceTest {
     @Test
     public void findKweetSuccessfull() {
         Kweet kweet = new Kweet();
-        kweet.setSender(new Profile());
+        kweet.setSender(new Account());
         kweet.setId(1L);
         when(service.findById(kweet.getId())).thenReturn(kweet);
         Kweet found = service.findById(kweet.getId());

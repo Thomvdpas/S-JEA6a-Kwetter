@@ -51,10 +51,10 @@ public class Account implements Serializable {
         this.userGroups = new ArrayList<>();
     }
 
-    public Account(String username, String emailaddress, String password) {
+    public Account(String username, String emailAddress, String password) {
         this();
         this.username = username;
-        this.emailaddress = emailaddress;
+        this.emailaddress = emailAddress;
         try {
             this.password = EncryptionHelper.encryptData(password);
         } catch (Exception ex) {

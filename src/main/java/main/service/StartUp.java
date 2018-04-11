@@ -35,15 +35,15 @@ public class StartUp {
      */
     @PostConstruct
     public void initData() {
-        Account account = new Account();
-        account.setUsername("thomvdpas");
-        account.setEmailaddress("thomvandepas@hotmail.com");
-        account.setPassword("Test!2");
-        Profile profile = new Profile();
-        profile.setFirstName("Thom");
-        profile.setLastName("van de Pas");
-        account.setProfile(profile);
-        accountService.create(account);
+        Account account1 = new Account();
+        account1.setUsername("thomvdpas");
+        account1.setEmailaddress("thomvandepas@hotmail.com");
+        account1.setPassword("Test!2");
+        Profile profile1 = new Profile();
+        profile1.setFirstName("Thom");
+        profile1.setLastName("van de Pas");
+        account1.setProfile(profile1);
+        accountService.create(account1);
 
         Account account2 = new Account();
         account2.setUsername("sjef2");
@@ -55,38 +55,48 @@ public class StartUp {
         account2.setProfile(profile2);
         accountService.create(account2);
 
-        Profile firstProfile = new Profile();
-        firstProfile.setAccount(account2);
-        firstProfile.setFirstName("Martijn");
-        firstProfile.setLastName("Peijnenburg");
-        firstProfile.setBiography("test");
-        firstProfile.setAvatarPath("google.com/test");
+        Account account3 = new Account();
+        account3.setUsername("Henk");
+        account3.setEmailaddress("henkPol@hotmail.com");
+        account3.setPassword("Henkie!!");
+        Profile profile3 = new Profile();
+        profile3.setFirstName("Henk");
+        profile3.setLastName("van der Pol");
+        account3.setProfile(profile3);
+        accountService.create(account3);
 
+        Kweet kweet = new Kweet("Dit is een test Kweet", account1);
+        profile1.addKweet(kweet);
 
-        Kweet kweet = new Kweet("Dit is een test Kweet", firstProfile);
-        firstProfile.addKweet(kweet);
-
-        Heart heart = new Heart(kweet, firstProfile);
+        Heart heart = new Heart(kweet, profile1);
         kweet.addHeart(heart);
 
         Hashtag hashtag = new Hashtag("#Football");
         kweet.addHashtag(hashtag);
 
-        profileService.create(firstProfile);
 
-        firstProfile.setLocation("Tilburg");
-        profileService.update(firstProfile);
+        profile1.setLocation("Cahors");
+        profile1.setBiography("Ik speel iedere dag Pokémon Go!");
+        profile1.setAvatarPath("www.google.com/Search?search=test");
+        profile1.addFollowing(profile2);
+        profile1.addFollowing(profile3);
+        profileService.update(profile1);
 
-        profile.setAccount(account);
-        profile.setLocation("Cahors");
-        profile.setBiography("Ik speel iedere dag Pokémon Go!");
-        profile.setAvatarPath("www.google.com/Search?search=test");
-        profileService.update(profile);
+        profile2.addFollowing(profile1);
+        profile2.addFollowing(profile3);
+        profileService.update(profile2);
+
+        profile3.addFollowing(profile1);
+        profileService.update(profile3);
 
         UserGroup userGroup = new UserGroup("Regular");
+        UserGroup adminGroup = new UserGroup("Admin");
 
-        userGroup.addAccount(account);
+        userGroup.addAccount(account1);
+        userGroup.addAccount(account2);
         this.groupService.create(userGroup);
 
+        adminGroup.addAccount(account1);
+        this.groupService.create(adminGroup);
     }
 }

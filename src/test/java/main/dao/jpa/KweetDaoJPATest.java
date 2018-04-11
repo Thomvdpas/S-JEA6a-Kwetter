@@ -1,14 +1,11 @@
 package main.dao.jpa;
 
-import main.domain.Hashtag;
-import main.domain.Heart;
-import main.domain.Kweet;
-import main.domain.Profile;
+import main.domain.*;
+import main.util.DatabaseCleaner;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import main.util.DatabaseCleaner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -26,6 +23,7 @@ import java.util.logging.Logger;
 public class KweetDaoJPATest {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AccountTestPU");
+    private Account firstAccount;
     private EntityManager em;
     private EntityTransaction tx;
     private KweetDaoJPA kweetDao;
@@ -44,7 +42,7 @@ public class KweetDaoJPATest {
 
         kweetDao = new KweetDaoJPA();
         kweetDao.setEntityManager(em);
-        profileFirst = new Profile();
+        this.firstAccount = new Account();
     }
 
     @Test
@@ -52,7 +50,7 @@ public class KweetDaoJPATest {
         profileFirst.setLocation("Tilburg");
         profileFirst.setBiography("I like football");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
 
         tx.begin();
         kweetDao.create(kweet);
@@ -72,7 +70,7 @@ public class KweetDaoJPATest {
         profileFirst.setLocation("Tilburg");
         profileFirst.setBiography("I like football");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
 
         kweet.addHashtag(new Hashtag("Fietsen"));
 
@@ -107,7 +105,7 @@ public class KweetDaoJPATest {
         profileSecond.setLocation("Amsterdam");
         profileSecond.setBiography("I like tennis");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst", profileFirst);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst", firstAccount);
         kweet.addMention(profileSecond);
 
         tx.begin();
@@ -142,7 +140,7 @@ public class KweetDaoJPATest {
         profileSecond.setLocation("Amsterdam");
         profileSecond.setBiography("I like tennis");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst", profileFirst);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst", firstAccount);
         tx.begin();
         kweetDao.create(kweet);
         List<Kweet> kweets = kweetDao.findAll();

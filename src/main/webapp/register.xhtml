@@ -12,7 +12,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Kwetter | Login</title>
+    <title>Kwetter | Register</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"/>
@@ -49,7 +49,7 @@
             <div class="row h-100 justify-content-center align-items-center vertical-center">
                 <div class="card login-card justify-content-center">
 
-                    <h1 class="card-title">Inloggen</h1>
+                    <h1 class="card-title">Registreer</h1>
 
                     <div class="form-group">
                         <p:inputText id="username"
@@ -57,7 +57,16 @@
                                      required="true"
                                      requiredMessage="Vul uw gebruikersnaam in."
                                      styleClass="form-control"
-                                     value="#{loginBean.username}"/>
+                                     value="#{registrationBean.username}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <p:inputText id="email"
+                                     placeholder="Emailadres"
+                                     required="true"
+                                     requiredMessage="Vul een emailadres in."
+                                     styleClass="form-control"
+                                     value="#{registrationBean.emailAddress}"/>
                     </div>
 
                     <div class="form-group">
@@ -67,17 +76,17 @@
                                     requiredMessage="Vul uw wachtwoord in."
                                     styleClass="form-control"
                                     type="password"
-                                    value="#{loginBean.password}"/>
+                                    value="#{registrationBean.password}"/>
                     </div>
 
-                    <p:commandButton action="#{loginBean.login}"
+                    <p:commandButton action="#{registrationBean.register}"
                                      styleClass="btn btn-primary w-100"
                                      update="defaultForm:growl"
-                                     value="Login"/>
+                                     value="Registreer"/>
 
-                    <span id="registerHelper"
-                          class="form-text text-muted text-center">Don't have an account yet? <strong>
-                        <a href="./register.xhtml">Create an account</a></strong>
+                    <span id="loginHelper"
+                          class="form-text text-muted text-center">Already got an account? <strong>
+                        <a href="./login.xhtml.xhtml">Login</a></strong>
                     </span>
 
                 </div>
@@ -88,4 +97,5 @@
     </div>
 
 </h:body>
+
 </html>

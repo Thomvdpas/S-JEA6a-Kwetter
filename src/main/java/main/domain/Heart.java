@@ -38,10 +38,8 @@ public class Heart implements Serializable {
 
     public JsonObject toJson() {
         return Json.createObjectBuilder()
-                .add("kweet", Json.createObjectBuilder()
-                        .add("messageBody", this.kweet.getMessageBody()).build())
                 .add("profile", Json.createObjectBuilder()
-                        .add("fullName", this.sender.getFullName()).build())
+                        .add("id", this.sender.getId()).build())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package main.dao;
 
+import main.domain.Account;
 import main.domain.Kweet;
 import main.domain.Profile;
 
@@ -12,7 +13,7 @@ public interface KweetDao extends GenericDao<Kweet> {
 
     List<Kweet> findByBodyText(String bodyText);
 
-    List<Kweet> findBySender(Profile sender);
+    List<Kweet> findBySender(Account sender);
 
     List<Kweet> findByMention(Profile mention);
 }

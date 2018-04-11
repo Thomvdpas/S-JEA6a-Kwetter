@@ -1,7 +1,9 @@
 package main.boundary.rest;
 
-import main.domain.Kweet;
 import io.swagger.annotations.Api;
+import main.domain.Account;
+import main.domain.Kweet;
+import main.service.AccountService;
 import main.service.KweetService;
 import main.service.ProfileService;
 
@@ -25,6 +27,8 @@ public class KweetResponseResource {
      * Injects the AccountService and KweetService.
      */
     @Inject
+    private AccountService accountService;
+    @Inject
     private ProfileService profileService;
     @Inject
     private KweetService kweetService;
@@ -43,6 +47,7 @@ public class KweetResponseResource {
 
     /**
      * Get Kweet by its id.
+     *
      * @param id
      * @returns the found Kweet in JSON or throws a WebApplicationException.
      */
@@ -133,6 +138,27 @@ public class KweetResponseResource {
     public Response deleteKweet(@PathParam("id") Long id) {
         kweetService.delete(id);
         return Response.noContent().build();
+    }
+
+    /**
+     * Finds all the Kweets of followers by a accountId.
+     * @param id
+     * @return the Response.
+     */
+    @GET
+    @Path("findKweetsByAccountFollowings/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAllFollowingsKweets(@PathParam("id") Long id) {
+        if (id == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        Account foundAccount = this.accountService.findById(id);
+        if (foundAccount == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+//        return Response.ok(this.kweetService.findAllKweetsFromFollowers(foundAccount)).build();
+        return null;
     }
 
     /**

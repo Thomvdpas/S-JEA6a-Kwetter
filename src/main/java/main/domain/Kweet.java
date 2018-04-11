@@ -3,11 +3,16 @@ package main.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +27,7 @@ import java.util.Objects;
         @NamedQuery(name = "kweet.findByAccount", query = "SELECT k FROM Kweet k WHERE k.sender = :sender"),
         @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention IN(k.mentions)")
 })
-public class Kweet implements Serializable {
+public class Kweet implements Serializable, Comparable<Kweet> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +36,12 @@ public class Kweet implements Serializable {
     @Size(min = 1, max = 140)
     private String messageBody;
 
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    private Date timeOfPosting;
+
     @OneToOne(cascade = CascadeType.ALL)
-    private Profile sender;
+    private Account sender;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Heart> hearts;
@@ -45,24 +54,39 @@ public class Kweet implements Serializable {
     private List<Hashtag> hashtags;
 
     public Kweet() {
+        this.timeOfPosting = new Date();
         this.hashtags = new ArrayList<Hashtag>();
         this.mentions = new ArrayList<Profile>();
         this.hearts = new ArrayList<Heart>();
     }
 
-    public Kweet(@Size(max = 140) String messageBody, Profile sender) {
+    public Kweet(@Size(max = 140) String messageBody, Account sender) {
         this();
         this.messageBody = messageBody;
         this.sender = sender;
     }
 
     public JsonObject toJson() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        JsonArrayBuilder hashtagArrayBuilder = Json.createArrayBuilder();
+        JsonArrayBuilder heartsArrayBuilder = Json.createArrayBuilder();
+
+        for (Hashtag hashtag : hashtags) {
+            hashtagArrayBuilder.add(hashtag.toJson());
+        }
+
+        for (Heart heart : hearts) {
+            heartsArrayBuilder.add(heart.toJson());
+        }
+
+
         return Json.createObjectBuilder()
                 .add("messageBody", this.messageBody)
-                .add("likes", this.hearts.size())
-                .add("sender", Json.createObjectBuilder()
-                        .add("firstName", sender.getFirstName())
-                        .add("lastName", sender.getLastName()).build())
+                .add("likes", heartsArrayBuilder)
+                .add("date", dateFormat.format(this.timeOfPosting))
+                .add("hashtags", hashtagArrayBuilder)
+                .add("account", this.sender.getId())
                 .build();
     }
 
@@ -95,11 +119,11 @@ public class Kweet implements Serializable {
         this.messageBody = messageBody;
     }
 
-    public Profile getSender() {
+    public Account getSender() {
         return sender;
     }
 
-    public void setSender(Profile sender) {
+    public void setSender(Account sender) {
         this.sender = sender;
     }
 
@@ -126,6 +150,15 @@ public class Kweet implements Serializable {
     public void setHashtags(List<Hashtag> hashtags) {
         this.hashtags = hashtags;
     }
+
+    public Date getTimeOfPosting() {
+        return timeOfPosting;
+    }
+
+    public void setTimeOfPosting(Date timeOfPosting) {
+        this.timeOfPosting = timeOfPosting;
+    }
+
     //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
@@ -149,6 +182,11 @@ public class Kweet implements Serializable {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
+    }
+
+    @Override
+    public int compareTo(Kweet o) {
+        return this.getTimeOfPosting().compareTo(o.timeOfPosting);
     }
     //</editor-fold>
 }

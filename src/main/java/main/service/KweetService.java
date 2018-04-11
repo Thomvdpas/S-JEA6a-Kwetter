@@ -4,10 +4,7 @@ import com.mysql.jdbc.StringUtils;
 import main.dao.JPA;
 import main.dao.KweetDao;
 import main.dao.ProfileDao;
-import main.domain.Hashtag;
-import main.domain.Heart;
-import main.domain.Kweet;
-import main.domain.Profile;
+import main.domain.*;
 import main.interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
@@ -15,6 +12,7 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.json.JsonObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static main.util.HelperFunctions.isNull;
@@ -49,9 +47,9 @@ public class KweetService {
      * @param account
      * @returns a List of Kweets or null if the Account didn't send any Kweet(s).
      */
-    public List<Kweet> findBySender(Profile profile) {
-        if (!isNull(profile)) {
-            return this.kweetDao.findBySender(profile);
+    public List<Kweet> findBySender(Account account) {
+        if (!isNull(account)) {
+            return this.kweetDao.findBySender(account);
         }
         return null;
     }
@@ -162,6 +160,7 @@ public class KweetService {
 
     /**
      * Adds a Heart to a Kweet.
+     *
      * @param kweet the Kweet on which the heart has to be added to.
      * @param heart the Heart which has to be added.
      * @returns the updated Kweet.
@@ -183,6 +182,7 @@ public class KweetService {
 
     /**
      * Removes a Heart from a Kweet.
+     *
      * @param kweet the Kweet from which a Heart has to be removed.
      * @param heart the Heart which has to be removed.
      * @return the updated Kweet.
@@ -198,7 +198,8 @@ public class KweetService {
 
     /**
      * Adds a Hashtag object to a Kweet.
-     * @param kweet the Kweet on which the Hashtag has to be added.
+     *
+     * @param kweet   the Kweet on which the Hashtag has to be added.
      * @param hashtag the Hashtag that has to be added to a Kweet.
      * @returns the updated Kweet.
      */
@@ -215,6 +216,7 @@ public class KweetService {
 
     /**
      * Gets a List of Kweets by bodytext.
+     *
      * @param bodyText the bodyText on which is searched.
      * @returns a List of Kweets.
      */

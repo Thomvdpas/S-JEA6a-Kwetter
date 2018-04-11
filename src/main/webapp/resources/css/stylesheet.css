@@ -105,6 +105,9 @@ input
 }
 
 /** NAVBAR **/
+.logout-btn {
+    float:right;
+}
 
 /*.navbar*/
 /*{*/
