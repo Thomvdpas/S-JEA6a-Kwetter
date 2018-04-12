@@ -7,18 +7,19 @@ import main.domain.UserGroup;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * @author Thom van de Pas on 3-4-2018
  */
 @Stateless
-public class GroupService {
+public class UserGroupService {
 
     @Inject
     @JPA
     private GroupDao groupDao;
 
-    public GroupService() {
+    public UserGroupService() {
     }
 
     public UserGroup findByGroupName(String groupName) {
@@ -32,9 +33,13 @@ public class GroupService {
         return this.groupDao.create(userGroup);
     }
 
-    public void update(UserGroup regularGroup) {
-        if (regularGroup != null) {
-            this.groupDao.update(regularGroup);
+    public void update(UserGroup userGroup) {
+        if (userGroup != null) {
+            this.groupDao.update(userGroup);
         }
+    }
+
+    public List<UserGroup> findAll() {
+        return this.groupDao.findAll();
     }
 }

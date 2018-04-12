@@ -21,7 +21,7 @@ public class StartUp {
     @Inject
     private AccountService accountService;
     @Inject
-    private GroupService groupService;
+    private UserGroupService userGroupService;
     @Inject
     private ProfileService profileService;
 
@@ -95,11 +95,10 @@ public class StartUp {
         UserGroup userGroup = new UserGroup("Regular");
         UserGroup adminGroup = new UserGroup("Admin");
 
-        userGroup.addAccount(account1);
         userGroup.addAccount(account2);
-        this.groupService.create(userGroup);
+        this.userGroupService.create(userGroup);
 
         adminGroup.addAccount(account1);
-        this.groupService.create(adminGroup);
+        this.userGroupService.create(adminGroup);
     }
 }

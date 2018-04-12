@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/template.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="accountId" value="#{userDetailsBean.accountId}"/>
+        <f:event type="preRenderView" listener="#{userDetailsBean.init()}"/>
+    </f:metadata>
+    <ui:define name="title">Kweets</ui:define>
+
+    <ui:define name="content">
+
+        <div class="container">
+
+            <header class="header">
+                <h1>Kweets</h1>
+                <h5 class="text-muted">Manage all existing Kweets</h5>
+            </header>
+
+            <div class="content-container">
+
+                <div class="ui-g">
+                    <div class="ui-g-3">
+
+                        <h:form id="manageUserForm">
+                            <p:outputLabel value="Naam" for="accountName"/>
+                            <p:inputText disabled="true" value="#{userDetailsBean.sender.username}" id="accountName"/>
+
+                            <p:outputLabel value="Emailadres" for="accountEmail"/>
+                            <p:inputText disabled="true" value="#{userDetailsBean.sender.emailaddress}"
+                                         id="accountEmail"/>
+
+                            <p:outputLabel value="Groep" for="accountGroup"/>
+                            <p:selectOneMenu id="accountGroup" value="#{userDetailsBean.userGroup}">
+                                <f:selectItem itemLabel="Regular" itemValue="Regular" />
+                                <f:selectItem itemLabel="Admin" itemValue="Admin" />
+                            </p:selectOneMenu>
+
+                            <p:commandButton value="Wijzig" action="#{userDetailsBean.update}" ajax="true"/>
+                        </h:form>
+                    </div>
+
+                    <div class="ui-g-9">
+                        <h:form>
+
+                            <p:dataTable emptyMessage="No matching accounts found"
+                                         filteredValue="#{userDetailsBean.filteredKweets}"
+                                         paginator="true"
+                                         id="kweetTable"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10, 20, 50"
+                                         value="#{userDetailsBean.kweets}" var="kweet"
+                                         widgetVar="kweetOverviewDataTable">
+
+                                <p:column headerText="#" filterBy="#{kweet.id}" filterMatchMode="contains" width="10%">
+                                    <h:outputText value="#{kweet.id}"/>
+                                </p:column>
+
+                                <p:column headerText="Text" filterBy="#{kweet.messageBody}" width="70%"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{kweet.messageBody}"/>
+                                </p:column>
+
+                                <p:column styleClass="text-align-center" width="20%">
+                                    <p:commandButton action="#{userDetailsBean.remove(kweet)}"
+                                                     id="remove"
+                                                     update="kweetTable"
+                                                     value="Delete"
+                                                     styleClass="btn btn-danger">
+                                        <p:confirm header="Weet u het zeker?"
+                                                   message="Wil u deze Kweet echt verwijderen?"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </h:form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </ui:define>
+</ui:composition>

@@ -34,7 +34,7 @@ public class AccountOverviewBean implements Serializable {
 
     public void onRowSelect(SelectEvent event) {
         Account selectedAccount = (Account) event.getObject();
-        RedirectHelper.redirect("/pages/admin/kweets.xhtml?accountId=" + selectedAccount.getId());
+        RedirectHelper.redirect("/pages/admin/details.xhtml?accountId=" + selectedAccount.getId());
     }
 
     public void remove(Account account) {

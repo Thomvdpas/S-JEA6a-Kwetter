@@ -8,4 +8,6 @@ import main.domain.UserGroup;
 public interface GroupDao extends GenericDao<UserGroup> {
 
     UserGroup findByGroupName(String groupName);
+
+    UserGroup findByAccount(String username);
 }

@@ -10,8 +10,11 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "group.findByGroupName", query = "SELECT u FROM UserGroup u WHERE u.groupName = :groupName")
+        @NamedQuery(name = "group.findByGroupName", query = "SELECT u FROM UserGroup u WHERE u.groupName = :groupName"),
+        @NamedQuery(name = "group.findByAccount",
+                query = "SELECT ug FROM UserGroup ug JOIN ug.accounts uga JOIN uga.userGroups ugc WHERE ugc.groupName = :username")
 })
+
 public class UserGroup implements Serializable {
 
     public static final String ADMIN_GROUP = "AdminGroup", MODERTOR_GROUP = "ModeratorGroup", USER_GROUP = "UserGroup";
@@ -55,5 +58,9 @@ public class UserGroup implements Serializable {
 
     public void addAccount(Account account) {
         this.accounts.add(account);
+    }
+
+    public String toString() {
+        return this.getGroupName();
     }
 }

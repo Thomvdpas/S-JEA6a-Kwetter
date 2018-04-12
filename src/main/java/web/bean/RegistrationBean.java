@@ -8,7 +8,7 @@ import com.mysql.jdbc.StringUtils;
 import main.domain.Account;
 import main.domain.UserGroup;
 import main.service.AccountService;
-import main.service.GroupService;
+import main.service.UserGroupService;
 import web.core.FrontendHelper;
 import web.core.RedirectHelper;
 
@@ -25,7 +25,7 @@ public class RegistrationBean implements Serializable {
     @Inject
     private AccountService accountService;
     @Inject
-    private GroupService groupService;
+    private UserGroupService userGroupService;
 
     private UserGroup regularGroup;
     private String emailAddress;
@@ -34,7 +34,7 @@ public class RegistrationBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        this.regularGroup = this.groupService.findByGroupName("Regular");
+        this.regularGroup = this.userGroupService.findByGroupName("Regular");
     }
 
     public void register() {
@@ -42,7 +42,7 @@ public class RegistrationBean implements Serializable {
             Account newAccount = new Account(username, emailAddress, password);
             this.accountService.create(newAccount);
             this.regularGroup.addAccount(newAccount);
-            this.groupService.update(regularGroup);
+            this.userGroupService.update(regularGroup);
             RedirectHelper.redirect("/login.xhtml");
         }
         FrontendHelper.displayErrorSmallMessage("Helaas.", "De velden zijn onjuist ingevuld.");

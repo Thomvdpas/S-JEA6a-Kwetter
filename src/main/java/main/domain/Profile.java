@@ -35,7 +35,7 @@ public class Profile implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", orphanRemoval = true)
     private List<Kweet> kweets;
 
-    @ManyToMany (cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
     private List<Kweet> mentionKweets;
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "followings")
@@ -46,9 +46,9 @@ public class Profile implements Serializable {
 
     public Profile() {
         this.mentionKweets = new ArrayList<>();
-        this.followers = new ArrayList<Profile>();
-        this.followings = new ArrayList<Profile>();
-        this.kweets = new LinkedList<Kweet>();
+        this.followers = new ArrayList<>();
+        this.followings = new ArrayList<>();
+        this.kweets = new LinkedList<>();
     }
 
     public Profile(String firstName, String lastName) {

@@ -25,4 +25,14 @@ public class GroupDaoJPAImpl extends GenericDaoJPAImpl<UserGroup> implements Gro
 
         return oneResult(query);
     }
+
+    @Override
+    public UserGroup findByAccount(String username) {
+        TypedQuery<UserGroup> query = getEntityManager().createNamedQuery("group.findByAccount", UserGroup.class)
+                .setParameter("username", username);
+
+        return oneResult(query);
+    }
+
+
 }
