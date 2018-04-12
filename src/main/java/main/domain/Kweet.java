@@ -25,7 +25,9 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "kweet.findByBodyText", query = "SELECT K FROM Kweet k WHERE k.messageBody LIKE :bodyText"),
         @NamedQuery(name = "kweet.findByAccount", query = "SELECT k FROM Kweet k WHERE k.sender = :sender"),
-        @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention IN(k.mentions)")
+        @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention IN(k.mentions)"),
+        @NamedQuery(name = "kweet.findByFollowings",
+                query = "SELECT k FROM Kweet k WHERE k.sender IN :followings")
 })
 public class Kweet implements Serializable {
 
@@ -83,10 +85,10 @@ public class Kweet implements Serializable {
 
         return Json.createObjectBuilder()
                 .add("messageBody", this.messageBody)
-                .add("likes", heartsArrayBuilder)
+                .add("hearts", heartsArrayBuilder)
                 .add("date", dateFormat.format(this.timeOfPosting))
                 .add("hashtags", hashtagArrayBuilder)
-                .add("account", this.sender.getId())
+                .add("sender", this.sender.toJson())
                 .build();
     }
 

@@ -36,4 +36,11 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
                 .setParameter("mention", mention)
                 .getResultList();
     }
+
+    @Override
+    public List<Kweet> findFollowerKweetsBySender(Profile profile) {
+        return getEntityManager().createNamedQuery("kweet.findByFollowings", Kweet.class)
+                .setParameter("followings", profile.getFollowings())
+                .getResultList();
+    }
 }

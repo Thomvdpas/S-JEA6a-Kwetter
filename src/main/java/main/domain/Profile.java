@@ -77,9 +77,7 @@ public class Profile implements Serializable {
 
     public JsonObject toJson() {
         return Json.createObjectBuilder()
-                .add("fullName", this.getFullName())
-                .add("avatarPath", this.getAvatarPath())
-                .add("location", this.getLocation())
+                .add("name", this.getFullName())
                 .add("biography", this.getBiography())
                 .build();
     }

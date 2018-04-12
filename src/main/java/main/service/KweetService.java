@@ -247,5 +247,7 @@ public class KweetService {
         return jsonObjects;
     }
 
-
+    public List<Kweet> findAllKweetsFromFollowers(Account account) {
+        return this.kweetDao.findFollowerKweetsBySender(account.getProfile());
+    }
 }

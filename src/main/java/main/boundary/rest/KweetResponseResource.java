@@ -42,7 +42,7 @@ public class KweetResponseResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response findAll() {
         List<Kweet> allKweets = this.kweetService.findAll();
-        return Response.ok(this.kweetService.multipleToJson(allKweets)).build();
+        return Response.ok(this.kweetService.multipleToJson(allKweets)).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**
@@ -157,8 +157,9 @@ public class KweetResponseResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-//        return Response.ok(this.kweetService.findAllKweetsFromFollowers(foundAccount)).build();
-        return null;
+        List<Kweet> allFoundKweets = this.kweetService.findAllKweetsFromFollowers(foundAccount);
+
+        return Response.ok(this.kweetService.multipleToJson(allFoundKweets)).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**

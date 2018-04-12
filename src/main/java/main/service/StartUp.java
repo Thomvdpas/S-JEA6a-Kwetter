@@ -35,70 +35,86 @@ public class StartUp {
      */
     @PostConstruct
     public void initData() {
-        Account account1 = new Account();
-        account1.setUsername("thomvdpas");
-        account1.setEmailaddress("thomvandepas@hotmail.com");
-        account1.setPassword("Test!2");
-        Profile profile1 = new Profile();
-        profile1.setFirstName("Thom");
-        profile1.setLastName("van de Pas");
-        profile1.setAccount(account1);
-        account1.setProfile(profile1);
-        accountService.create(account1);
+        Account accountThom = new Account();
+        accountThom.setUsername("thomvdpas");
+        accountThom.setEmailaddress("thomvandepas@hotmail.com");
+        accountThom.setPassword("Test!2");
+        Profile profileThom = new Profile();
+        profileThom.setFirstName("Thom");
+        profileThom.setLastName("van de Pas");
+        profileThom.setAccount(accountThom);
+        accountThom.setProfile(profileThom);
+        accountService.create(accountThom);
 
-        Account account2 = new Account();
-        account2.setUsername("sjef2");
-        account2.setEmailaddress("sjefbeun@hotmail.com");
-        account2.setPassword("sjefje!@#");
-        Profile profile2 = new Profile();
-        profile2.setFirstName("Sjef");
-        profile2.setLastName("Beun");
-        profile2.setAccount(account2);
-        account2.setProfile(profile2);
-        accountService.create(account2);
+        Account accountSjef = new Account();
+        accountSjef.setUsername("sjef2");
+        accountSjef.setEmailaddress("sjefbeun@hotmail.com");
+        accountSjef.setPassword("sjefje!@#");
+        Profile profileSjef = new Profile();
+        profileSjef.setFirstName("Sjef");
+        profileSjef.setLastName("Beun");
+        profileSjef.setBiography("Hockeyen!");
+        profileSjef.setAccount(accountSjef);
+        accountSjef.setProfile(profileSjef);
+        accountService.create(accountSjef);
 
-        Account account3 = new Account();
-        account3.setUsername("Henk");
-        account3.setEmailaddress("henkPol@hotmail.com");
-        account3.setPassword("Henkie!!");
-        Profile profile3 = new Profile();
-        profile3.setFirstName("Henk");
-        profile3.setLastName("van der Pol");
-        profile3.setAccount(account3);
-        account3.setProfile(profile3);
-        accountService.create(account3);
+        Account accountHenk = new Account();
+        accountHenk.setUsername("Henk");
+        accountHenk.setEmailaddress("henkPol@hotmail.com");
+        accountHenk.setPassword("Henkie!!");
+        Profile profileHenk = new Profile();
+        profileHenk.setFirstName("Henk");
+        profileHenk.setLastName("van der Pol");
+        profileHenk.setBiography("Voetballen.");
+        profileHenk.setAccount(accountHenk);
+        accountHenk.setProfile(profileHenk);
+        accountService.create(accountHenk);
 
-        Kweet kweet = new Kweet("Dit is een test Kweet", profile1);
-        profile1.addKweet(kweet);
+        Kweet kweet = new Kweet("Dit is een test Kweet", profileThom);
+        Kweet kweet2 = new Kweet("Test Kweet 2", profileThom);
+        Kweet kweet3 = new Kweet("Test Kweet 3", profileThom);
+        profileThom.addKweet(kweet);
+        profileThom.addKweet(kweet2);
+        profileThom.addKweet(kweet3);
 
-        Heart heart = new Heart(kweet, profile1);
+        Heart heart = new Heart(kweet, profileThom);
         kweet.addHeart(heart);
 
         Hashtag hashtag = new Hashtag("#Football");
         kweet.addHashtag(hashtag);
 
+        profileThom.setLocation("Cahors");
+        profileThom.setBiography("Ik speel iedere dag Pokémon Go!");
+        profileThom.setAvatarPath("www.google.com/Search?search=test");
+        profileThom.addFollowing(profileSjef);
+        profileThom.addFollowing(profileHenk);
+        profileService.update(profileThom);
 
-        profile1.setLocation("Cahors");
-        profile1.setBiography("Ik speel iedere dag Pokémon Go!");
-        profile1.setAvatarPath("www.google.com/Search?search=test");
-        profile1.addFollowing(profile2);
-        profile1.addFollowing(profile3);
-        profileService.update(profile1);
+        Kweet kweet4 = new Kweet("Test Kweet Sjef 1", profileSjef);
+        Kweet kweet5 = new Kweet("Test Kweet Sjef 2", profileSjef);
+        profileSjef.addKweet(kweet4);
+        profileSjef.addKweet(kweet5);
 
-        profile2.addFollowing(profile1);
-        profile2.addFollowing(profile3);
-        profileService.update(profile2);
+        profileSjef.addFollowing(profileThom);
+        profileSjef.addFollowing(profileHenk);
+        profileService.update(profileSjef);
 
-        profile3.addFollowing(profile1);
-        profileService.update(profile3);
+
+        Kweet kweet6 = new Kweet("Test Kweet Henk 1", profileHenk);
+        Kweet kweet7 = new Kweet("Test Kweet Henk 2", profileHenk);
+        profileHenk.addKweet(kweet6);
+        profileHenk.addKweet(kweet7);
+
+        profileHenk.addFollowing(profileThom);
+        profileService.update(profileHenk);
 
         UserGroup userGroup = new UserGroup("Regular");
         UserGroup adminGroup = new UserGroup("Admin");
 
-        userGroup.addAccount(account2);
+        userGroup.addAccount(accountSjef);
         this.userGroupService.create(userGroup);
 
-        adminGroup.addAccount(account1);
+        adminGroup.addAccount(accountThom);
         this.userGroupService.create(adminGroup);
     }
 }

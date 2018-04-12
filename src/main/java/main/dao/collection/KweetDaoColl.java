@@ -68,4 +68,9 @@ public class KweetDaoColl implements KweetDao {
     public List<Kweet> findByMention(Profile mention) {
         return null;
     }
+
+    @Override
+    public List<Kweet> findFollowerKweetsBySender(Profile profile) {
+        return null;
+    }
 }
