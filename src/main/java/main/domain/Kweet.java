@@ -55,9 +55,9 @@ public class Kweet implements Serializable {
 
     public Kweet() {
         this.timeOfPosting = new Date();
-        this.hashtags = new ArrayList<Hashtag>();
-        this.mentions = new ArrayList<Profile>();
-        this.hearts = new ArrayList<Heart>();
+        this.hashtags = new ArrayList<>();
+        this.mentions = new ArrayList<>();
+        this.hearts = new ArrayList<>();
     }
 
     public Kweet(@Size(max = 140) String messageBody, Profile sender) {

@@ -32,6 +32,7 @@ public class Profile implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", orphanRemoval = true)
     private List<Kweet> kweets;
 
