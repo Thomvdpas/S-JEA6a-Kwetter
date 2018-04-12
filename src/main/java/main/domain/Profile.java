@@ -1,7 +1,5 @@
 package main.domain;
 
-import org.eclipse.persistence.annotations.CascadeOnDelete;
-
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.*;
@@ -34,18 +32,20 @@ public class Profile implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-    @OneToMany(cascade = CascadeType.ALL)
-    @CascadeOnDelete
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", orphanRemoval = true)
     private List<Kweet> kweets;
 
+    @ManyToMany (cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH})
+    private List<Kweet> mentionKweets;
 
-    @Transient
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "followings")
     private List<Profile> followers;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Profile> followings;
 
     public Profile() {
+        this.mentionKweets = new ArrayList<>();
         this.followers = new ArrayList<Profile>();
         this.followings = new ArrayList<Profile>();
         this.kweets = new LinkedList<Kweet>();
@@ -176,7 +176,15 @@ public class Profile implements Serializable {
     public void setFollowings(List<Profile> followings) {
         this.followings = followings;
     }
-//</editor-fold>
+
+    public List<Kweet> getMentionKweets() {
+        return mentionKweets;
+    }
+
+    public void setMentionKweets(List<Kweet> mentionKweets) {
+        this.mentionKweets = mentionKweets;
+    }
+    //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
     @Override

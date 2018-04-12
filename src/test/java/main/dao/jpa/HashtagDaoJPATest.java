@@ -77,7 +77,7 @@ public class HashtagDaoJPATest {
         profileFirst.setBiography("I like football");
 
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
         hashtag.addKweet(kweet);
 
         tx.begin();

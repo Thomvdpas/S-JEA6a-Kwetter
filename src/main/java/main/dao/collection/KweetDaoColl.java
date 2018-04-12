@@ -1,7 +1,6 @@
 package main.dao.collection;
 
 import main.dao.KweetDao;
-import main.domain.Account;
 import main.domain.Kweet;
 import main.domain.Profile;
 
@@ -62,9 +61,10 @@ public class KweetDaoColl implements KweetDao {
     }
 
     @Override
-    public List<Kweet> findBySender(Account sender) {
+    public List<Kweet> findBySender(Profile sender) {
         return null;
     }
+
     public List<Kweet> findByMention(Profile mention) {
         return null;
     }

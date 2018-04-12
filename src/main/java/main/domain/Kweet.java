@@ -27,7 +27,7 @@ import java.util.Objects;
         @NamedQuery(name = "kweet.findByAccount", query = "SELECT k FROM Kweet k WHERE k.sender = :sender"),
         @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention IN(k.mentions)")
 })
-public class Kweet implements Serializable, Comparable<Kweet> {
+public class Kweet implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,16 +40,16 @@ public class Kweet implements Serializable, Comparable<Kweet> {
     @Temporal(TemporalType.DATE)
     private Date timeOfPosting;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Account sender;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+    private Profile sender;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Heart> hearts;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<Profile> mentions;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonBackReference
     private List<Hashtag> hashtags;
 
@@ -60,7 +60,7 @@ public class Kweet implements Serializable, Comparable<Kweet> {
         this.hearts = new ArrayList<Heart>();
     }
 
-    public Kweet(@Size(max = 140) String messageBody, Account sender) {
+    public Kweet(@Size(max = 140) String messageBody, Profile sender) {
         this();
         this.messageBody = messageBody;
         this.sender = sender;
@@ -119,11 +119,11 @@ public class Kweet implements Serializable, Comparable<Kweet> {
         this.messageBody = messageBody;
     }
 
-    public Account getSender() {
+    public Profile getSender() {
         return sender;
     }
 
-    public void setSender(Account sender) {
+    public void setSender(Profile sender) {
         this.sender = sender;
     }
 
@@ -182,11 +182,6 @@ public class Kweet implements Serializable, Comparable<Kweet> {
         int hash = 7;
         hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
-    }
-
-    @Override
-    public int compareTo(Kweet o) {
-        return this.getTimeOfPosting().compareTo(o.timeOfPosting);
     }
     //</editor-fold>
 }

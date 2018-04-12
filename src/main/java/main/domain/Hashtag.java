@@ -1,7 +1,6 @@
 package main.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.eclipse.persistence.annotations.CascadeOnDelete;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,8 +26,7 @@ public class Hashtag implements Serializable {
 
     private String bodyText;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @CascadeOnDelete
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JsonManagedReference
     private List<Kweet> kweets;
 

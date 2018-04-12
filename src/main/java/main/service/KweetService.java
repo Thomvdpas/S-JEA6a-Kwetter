@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.json.JsonObject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static main.util.HelperFunctions.isNull;
@@ -49,7 +48,7 @@ public class KweetService {
      */
     public List<Kweet> findBySender(Account account) {
         if (!isNull(account)) {
-            return this.kweetDao.findBySender(account);
+            return this.kweetDao.findBySender(account.getProfile());
         }
         return null;
     }

@@ -50,7 +50,7 @@ public class KweetDaoJPATest {
         profileFirst.setLocation("Tilburg");
         profileFirst.setBiography("I like football");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
 
         tx.begin();
         kweetDao.create(kweet);
@@ -70,7 +70,7 @@ public class KweetDaoJPATest {
         profileFirst.setLocation("Tilburg");
         profileFirst.setBiography("I like football");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst.", firstAccount);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst.", profileFirst);
 
         kweet.addHashtag(new Hashtag("Fietsen"));
 
@@ -105,7 +105,7 @@ public class KweetDaoJPATest {
         profileSecond.setLocation("Amsterdam");
         profileSecond.setBiography("I like tennis");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst", firstAccount);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst", profileFirst);
         kweet.addMention(profileSecond);
 
         tx.begin();
@@ -140,7 +140,7 @@ public class KweetDaoJPATest {
         profileSecond.setLocation("Amsterdam");
         profileSecond.setBiography("I like tennis");
 
-        Kweet kweet = new Kweet("Gisteren lekker gefietst", firstAccount);
+        Kweet kweet = new Kweet("Gisteren lekker gefietst", profileFirst);
         tx.begin();
         kweetDao.create(kweet);
         List<Kweet> kweets = kweetDao.findAll();

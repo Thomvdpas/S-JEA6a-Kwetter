@@ -42,6 +42,7 @@ public class StartUp {
         Profile profile1 = new Profile();
         profile1.setFirstName("Thom");
         profile1.setLastName("van de Pas");
+        profile1.setAccount(account1);
         account1.setProfile(profile1);
         accountService.create(account1);
 
@@ -52,6 +53,7 @@ public class StartUp {
         Profile profile2 = new Profile();
         profile2.setFirstName("Sjef");
         profile2.setLastName("Beun");
+        profile2.setAccount(account2);
         account2.setProfile(profile2);
         accountService.create(account2);
 
@@ -62,10 +64,11 @@ public class StartUp {
         Profile profile3 = new Profile();
         profile3.setFirstName("Henk");
         profile3.setLastName("van der Pol");
+        profile3.setAccount(account3);
         account3.setProfile(profile3);
         accountService.create(account3);
 
-        Kweet kweet = new Kweet("Dit is een test Kweet", account1);
+        Kweet kweet = new Kweet("Dit is een test Kweet", profile1);
         profile1.addKweet(kweet);
 
         Heart heart = new Heart(kweet, profile1);
