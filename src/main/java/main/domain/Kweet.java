@@ -25,9 +25,11 @@ import java.util.Objects;
 @NamedQueries({
         @NamedQuery(name = "kweet.findByBodyText", query = "SELECT K FROM Kweet k WHERE k.messageBody LIKE :bodyText"),
         @NamedQuery(name = "kweet.findByAccount", query = "SELECT k FROM Kweet k WHERE k.sender = :sender"),
-        @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention IN(k.mentions)"),
+        @NamedQuery(name = "kweet.findByMention", query = "SELECT k FROM Kweet k WHERE :mention MEMBER OF k.mentions"),
         @NamedQuery(name = "kweet.findByFollowings",
-                query = "SELECT k FROM Kweet k WHERE k.sender IN :followings")
+                query = "SELECT k FROM Kweet k WHERE k.sender IN :followings"),
+        @NamedQuery(name = "kweet.findMyKweetsOrderedByDate",
+                query = "SELECT k FROM Kweet k WHERE k.sender = :sender ORDER BY k.timeOfPosting DESC")
 })
 public class Kweet implements Serializable {
 

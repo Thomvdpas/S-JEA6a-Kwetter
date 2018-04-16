@@ -27,15 +27,8 @@ public class HashtagDaoColl implements HashtagDao {
     public HashtagDaoColl() {
     }
 
-    public List<Hashtag> findByBodyText(String bodyText) {
-        List<Hashtag> foundHashtags = new ArrayList<Hashtag>();
-        for (Hashtag hashtag : hashtags) {
-            if (hashtag.getBodyText().contentEquals(bodyText)) {
-                foundHashtags.add(hashtag);
-            }
-            return foundHashtags;
-        }
-        return null;
+    public Hashtag findByBodyText(String bodyText) {
+       return null;
     }
 
     public ArrayList<Hashtag> getHashtags() {

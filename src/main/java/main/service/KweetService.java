@@ -1,17 +1,17 @@
 package main.service;
 
 import com.mysql.jdbc.StringUtils;
+import main.dao.AccountDao;
 import main.dao.JPA;
 import main.dao.KweetDao;
 import main.dao.ProfileDao;
 import main.domain.*;
-import main.interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.json.JsonObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static main.util.HelperFunctions.isNull;
@@ -20,18 +20,23 @@ import static main.util.HelperFunctions.isNull;
  * @author Thom van de Pas on 9-3-2018
  */
 @Stateless
-@Interceptors(LoggingInterceptor.class)
 public class KweetService {
 
     /**
      * Injects the Service and has the JPA annotation
      * So that the container knows the JPA implementation should be used.
      */
+
+    @Inject
+    @JPA
+    private AccountDao accountDao;
+
     @Inject
     @JPA
     private KweetDao kweetDao;
 
     @Inject
+    @JPA
     private ProfileDao profileDao;
 
     /**
@@ -61,6 +66,12 @@ public class KweetService {
      */
     public Kweet create(Kweet kweet) {
         if (!isNull(kweet)) {
+            Long senderId = kweet.getSender().getId();
+            if (senderId != null) {
+                Account account = this.accountDao.findById(senderId);
+                kweet.setSender(account.getProfile());
+                kweet.setTimeOfPosting(new Date());
+            }
             return this.kweetDao.create(kweet);
         }
         return null;
@@ -249,5 +260,17 @@ public class KweetService {
 
     public List<Kweet> findAllKweetsFromFollowers(Account account) {
         return this.kweetDao.findFollowerKweetsBySender(account.getProfile());
+    }
+
+    public List<Kweet> findMyLastTenKweets(Account account) {
+        return this.kweetDao.findMyLastTenKweets(account.getProfile());
+    }
+
+    public List<Kweet> findByMention(Account account) {
+        return this.kweetDao.findByMention(account.getProfile());
+    }
+
+    public Kweet findLast(Account account) {
+        return this.kweetDao.findLast(account.getProfile());
     }
 }

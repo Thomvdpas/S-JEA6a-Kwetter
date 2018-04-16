@@ -4,11 +4,9 @@ import com.mysql.jdbc.StringUtils;
 import main.dao.HashtagDao;
 import main.dao.JPA;
 import main.domain.Hashtag;
-import main.interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import javax.json.JsonObject;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,6 @@ import static main.util.HelperFunctions.isNull;
  * @author Thom van de Pas on 27-2-2018
  */
 @Stateless
-@Interceptors(LoggingInterceptor.class)
 public class HashtagService {
 
     /**
@@ -41,7 +38,6 @@ public class HashtagService {
      * @param hashtag
      * @returns the created Hashtag.
      */
-    @Interceptors(LoggingInterceptor.class)
     public Hashtag create(Hashtag hashtag) {
         if (!isNull(hashtag)) {
             return this.hashtagDao.create(hashtag);
@@ -103,7 +99,7 @@ public class HashtagService {
      * @param bodyText
      * @returns the found Hashtags.
      */
-    public List<Hashtag> findByBodyText(String bodyText) {
+    public Hashtag findByBodyText(String bodyText) {
         if (!StringUtils.isNullOrEmpty(bodyText)) {
             return this.hashtagDao.findByBodyText(bodyText);
         }

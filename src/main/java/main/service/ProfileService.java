@@ -4,11 +4,11 @@ import com.mysql.jdbc.StringUtils;
 import main.dao.JPA;
 import main.dao.ProfileDao;
 import main.domain.Profile;
-import main.interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
+import javax.json.JsonObject;
+import java.util.ArrayList;
 import java.util.List;
 
 import static main.util.HelperFunctions.isNull;
@@ -17,7 +17,6 @@ import static main.util.HelperFunctions.isNull;
  * @author Thom van de Pas on 9-3-2018
  */
 @Stateless
-@Interceptors(LoggingInterceptor.class)
 public class ProfileService {
 
     /**
@@ -105,6 +104,14 @@ public class ProfileService {
             return this.profileDao.findById(id);
         }
         return null;
+    }
+
+    public List<JsonObject> convertAllToJson(List<Profile> profiles) {
+        List<JsonObject> jsonObjects = new ArrayList<>();
+        for (Profile profile : profiles) {
+            jsonObjects.add(profile.toJson());
+        }
+        return jsonObjects;
     }
 
     /**

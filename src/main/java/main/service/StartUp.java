@@ -54,6 +54,8 @@ public class StartUp {
         profileSjef.setFirstName("Sjef");
         profileSjef.setLastName("Beun");
         profileSjef.setBiography("Hockeyen!");
+        profileSjef.setLocation("Tilburg");
+        profileSjef.setAvatarPath("https://www.twitter.com/CambridgeAnalytica");
         profileSjef.setAccount(accountSjef);
         accountSjef.setProfile(profileSjef);
         accountService.create(accountSjef);
@@ -64,6 +66,8 @@ public class StartUp {
         accountHenk.setPassword("Henkie!!");
         Profile profileHenk = new Profile();
         profileHenk.setFirstName("Henk");
+        profileHenk.setLocation("Parijs");
+        profileHenk.setAvatarPath("https://www.facebook.com/CambridgeAnalytica");
         profileHenk.setLastName("van der Pol");
         profileHenk.setBiography("Voetballen.");
         profileHenk.setAccount(accountHenk);
@@ -71,11 +75,31 @@ public class StartUp {
         accountService.create(accountHenk);
 
         Kweet kweet = new Kweet("Dit is een test Kweet", profileThom);
+        kweet.addMention(profileThom);
         Kweet kweet2 = new Kweet("Test Kweet 2", profileThom);
         Kweet kweet3 = new Kweet("Test Kweet 3", profileThom);
+        Kweet kweet4 = new Kweet("Dit is een test 4", profileThom);
+        Kweet kweet5 = new Kweet("Test Kweet 5", profileThom);
+        Kweet kweet6 = new Kweet("Test Kweet 6", profileThom);
+        Kweet kweet7 = new Kweet("Dit is een 7", profileThom);
+        Kweet kweet8 = new Kweet("Test Kweet 8", profileThom);
+        Kweet kweet9 = new Kweet("Test Kweet 9", profileThom);
+        Kweet kweet10 = new Kweet("Dit is een 10", profileThom);
+        kweet10.addMention(profileThom);
+        Kweet kweet11 = new Kweet("Test Kweet 11", profileThom);
+        Kweet kweet12 = new Kweet("Test Kweet 12", profileThom);
         profileThom.addKweet(kweet);
         profileThom.addKweet(kweet2);
         profileThom.addKweet(kweet3);
+        profileThom.addKweet(kweet4);
+        profileThom.addKweet(kweet5);
+        profileThom.addKweet(kweet6);
+        profileThom.addKweet(kweet7);
+        profileThom.addKweet(kweet8);
+        profileThom.addKweet(kweet9);
+        profileThom.addKweet(kweet10);
+        profileThom.addKweet(kweet11);
+        profileThom.addKweet(kweet12);
 
         Heart heart = new Heart(kweet, profileThom);
         kweet.addHeart(heart);
@@ -90,20 +114,21 @@ public class StartUp {
         profileThom.addFollowing(profileHenk);
         profileService.update(profileThom);
 
-        Kweet kweet4 = new Kweet("Test Kweet Sjef 1", profileSjef);
-        Kweet kweet5 = new Kweet("Test Kweet Sjef 2", profileSjef);
-        profileSjef.addKweet(kweet4);
-        profileSjef.addKweet(kweet5);
+        Kweet kweet13 = new Kweet("Test Kweet Sjef 1", profileSjef);
+        Kweet kweet14 = new Kweet("Test Kweet Sjef 2", profileSjef);
+        profileSjef.addKweet(kweet13);
+        profileSjef.addKweet(kweet14);
 
         profileSjef.addFollowing(profileThom);
         profileSjef.addFollowing(profileHenk);
         profileService.update(profileSjef);
 
 
-        Kweet kweet6 = new Kweet("Test Kweet Henk 1", profileHenk);
-        Kweet kweet7 = new Kweet("Test Kweet Henk 2", profileHenk);
-        profileHenk.addKweet(kweet6);
-        profileHenk.addKweet(kweet7);
+        Kweet kweet15 = new Kweet("Test Kweet Henk 1", profileHenk);
+        kweet15.addMention(profileThom);
+        Kweet kweet16 = new Kweet("Test Kweet Henk 2", profileHenk);
+        profileHenk.addKweet(kweet15);
+        profileHenk.addKweet(kweet16);
 
         profileHenk.addFollowing(profileThom);
         profileService.update(profileHenk);

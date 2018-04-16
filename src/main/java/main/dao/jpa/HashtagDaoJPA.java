@@ -6,7 +6,6 @@ import main.dao.JPA;
 import main.domain.Hashtag;
 
 import javax.ejb.Stateless;
-import java.util.List;
 
 /**
  * @author Thom van de Pas on 27-2-2018
@@ -18,9 +17,9 @@ public class HashtagDaoJPA extends GenericDaoJPAImpl<Hashtag> implements Hashtag
     public HashtagDaoJPA() {
     }
 
-    public List<Hashtag> findByBodyText(String bodyText) {
+    public Hashtag findByBodyText(String bodyText) {
         return getEntityManager().createNamedQuery("hashtag.findByBodyText", Hashtag.class)
                 .setParameter("bodyText", "#" +  bodyText +"%")
-                .getResultList();
+                .getSingleResult();
     }
 }

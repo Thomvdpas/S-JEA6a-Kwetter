@@ -37,7 +37,7 @@ public class ProfileResponseResource {
     public Response findAll() {
         GenericEntity entity = new GenericEntity<List<Profile>>(profileService.findAll()) {
         };
-        return Response.ok(entity).build();
+        return Response.ok(entity).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**
@@ -45,16 +45,16 @@ public class ProfileResponseResource {
      * @param username
      * @returns the Profile in JSON format.
      */
-//    @GET
-//    @Path("{id}")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response findById(@QueryParam("senderId") Long id) {
-//        Profile profile = profileService.findById(id);
-//        if (profile == null) {
-//            throw new WebApplicationException(Response.Status.NOT_FOUND);
-//        }
-//        return Response.ok(profile).build();
-//    }
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findById(@PathParam("id") Long id) {
+        Profile profile = profileService.findById(id);
+        if (profile == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        return Response.ok(profile.toJson()).header("Access-Control-Allow-Origin", "*").build();
+    }
 
     /**
      * Finds a Profile based on its Username.
@@ -63,14 +63,38 @@ public class ProfileResponseResource {
      * @returns a Profile in JSON format or Status.NOT_FOUND.
      */
     @GET
-    @Path("{username}")
+    @Path("find/{username}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response findByUsername(@PathParam("username") String username) {
         Profile profile = profileService.findByUsername(username);
         if (profile == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(profile).build();
+        return Response.ok(profile.toJson()).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("find/followers/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFollowers(@PathParam("username") String username) {
+        Profile foundProfile = profileService.findByUsername(username);
+        if (foundProfile != null) {
+            List<Profile> followers = foundProfile.getFollowers();
+            return Response.ok(profileService.convertAllToJson(followers)).header("Access-Control-Allow-Origin", "*").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("find/following/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getFollowing(@PathParam("username") String username) {
+        Profile foundProfile = profileService.findByUsername(username);
+        if (foundProfile != null) {
+            List<Profile> followers = foundProfile.getFollowings();
+            return Response.ok(profileService.convertAllToJson(followers)).header("Access-Control-Allow-Origin", "*").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**

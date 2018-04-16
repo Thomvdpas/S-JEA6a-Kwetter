@@ -7,6 +7,7 @@ import main.domain.Kweet;
 import main.domain.Profile;
 
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -42,5 +43,21 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
         return getEntityManager().createNamedQuery("kweet.findByFollowings", Kweet.class)
                 .setParameter("followings", profile.getFollowings())
                 .getResultList();
+    }
+
+    @Override
+    public List<Kweet> findMyLastTenKweets(Profile profile) {
+        return getEntityManager().createNamedQuery("kweet.findMyKweetsOrderedByDate", Kweet.class)
+                .setParameter("sender", profile)
+                .setMaxResults(10)
+                .getResultList();
+    }
+
+    @Override
+    public Kweet findLast(Profile sender) {
+        TypedQuery<Kweet> query = getEntityManager().createNamedQuery("kweet.findLast", Kweet.class)
+                .setParameter("sender", sender);
+
+        return oneResult(query);
     }
 }

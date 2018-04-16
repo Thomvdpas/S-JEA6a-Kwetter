@@ -17,4 +17,8 @@ public interface KweetDao extends GenericDao<Kweet> {
     List<Kweet> findByMention(Profile mention);
 
     List<Kweet> findFollowerKweetsBySender(Profile profile);
+
+    List<Kweet> findMyLastTenKweets(Profile profile);
+
+    Kweet findLast(Profile profile);
 }

@@ -73,24 +73,24 @@ public class KweetResponseResource {
 
     }
 
-//    /**
-//     * Finds a List of Kweets based on a Account (Gets all Users Kweet)
-//     *
-//     * @param id
-//     * @returns a List of Kweets.
-//     */
-//    @GET
-//    @Path("{senderId}")
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public Response findKweetsBySender(@QueryParam("senderId") Long id) {
-//        Profile profile = profileService.findById(id);
-//        if (profile != null) {
-//            GenericEntity entity = new GenericEntity<List<Kweet>>(kweetService.findBySender(profile)) {
-//            };
-//            return Response.ok(entity).build();
-//        }
-//        return null;
-//    }
+    /**
+     * Finds a List of Kweets based on an Account (Gets all Users Kweet)
+     *
+     * @param id
+     * @returns a List of Kweets.
+     */
+    @GET
+    @Path("account/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findKweetsBySender(@PathParam("id") Long id) {
+        Account account = this.accountService.findById(id);
+        if (account != null) {
+            List<Kweet> myKweets = this.kweetService.findBySender(account);
+
+            return Response.ok(this.kweetService.multipleToJson(myKweets)).header("Access-Control-Allow-Origin", "*").build();
+        }
+        throw new WebApplicationException(Response.Status.NOT_FOUND);
+    }
 
     /**
      * Updates a Kweet.
@@ -124,7 +124,7 @@ public class KweetResponseResource {
         }
         kweetService.create(kweet);
         URI id = URI.create(kweet.getMessageBody());
-        return Response.created(id).build();
+        return Response.created(id).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**
@@ -142,11 +142,12 @@ public class KweetResponseResource {
 
     /**
      * Finds all the Kweets of followers by a accountId.
+     *
      * @param id
      * @return the Response.
      */
     @GET
-    @Path("findKweetsByAccountFollowings/{id}")
+    @Path("timelineKweets/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response findAllFollowingsKweets(@PathParam("id") Long id) {
         if (id == null) {
@@ -160,6 +161,57 @@ public class KweetResponseResource {
         List<Kweet> allFoundKweets = this.kweetService.findAllKweetsFromFollowers(foundAccount);
 
         return Response.ok(this.kweetService.multipleToJson(allFoundKweets)).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("lastTenKweets/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findMyTenLastKweets(@PathParam("id") Long id) {
+        if (id == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        Account foundAccount = this.accountService.findById(id);
+        if (foundAccount == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        List<Kweet> myTenLastKweets = this.kweetService.findMyLastTenKweets(foundAccount);
+
+        return Response.ok(this.kweetService.multipleToJson(myTenLastKweets)).header("Access-Control-Allow-Origin", "*").build();
+    }
+
+    @GET
+    @Path("last/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getLastKweet(@PathParam("id") Long id) {
+        if (id != null) {
+            Account foundAccount = this.accountService.findById(id);
+            if (foundAccount == null) {
+                throw new WebApplicationException(Response.Status.NOT_FOUND);
+            }
+
+            Kweet foundKweet = this.kweetService.findLast(foundAccount);
+            return Response.ok(foundKweet.toJson()).build();
+        } else {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+    }
+
+    @GET
+    @Path("mentions/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findMentions(@PathParam("id") Long id) {
+        if (id == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        Account foundAccount = this.accountService.findById(id);
+        if (foundAccount == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+        List<Kweet> myMentions = this.kweetService.findByMention(foundAccount);
+
+        return Response.ok(this.kweetService.multipleToJson(myMentions)).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**

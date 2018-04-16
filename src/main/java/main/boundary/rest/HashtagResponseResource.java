@@ -56,22 +56,15 @@ public class HashtagResponseResource {
         return Response.ok(hashtag.toJson()).build();
     }
 
-    /**
-     * Gets Hashtags based on the bodytext.
-     *
-     * @param bodyText
-     * @returns a List of Hashtags in JSON format.
-     */
     @GET
-    @Path("find/{bodyText}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getByBodyText(@PathParam("bodyText") String bodyText) {
-        if (bodyText != null) {
-            List<Hashtag> hashtags = this.hashtagService.findByBodyText(bodyText);
-
-            return Response.ok(this.hashtagService.allToJson(hashtags)).build();
+    @Path("find/{subject}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findBySubject(@PathParam("subject") String subject) {
+        Hashtag hashtag = hashtagService.findByBodyText(subject);
+        if (hashtag != null) {
+            return Response.ok(hashtag.toJson()).header("Access-Control-Allow-Origin", "*").build();
         }
-        return null;
+        return Response.status(Response.Status.NOT_FOUND).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**

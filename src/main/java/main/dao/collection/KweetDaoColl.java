@@ -73,4 +73,14 @@ public class KweetDaoColl implements KweetDao {
     public List<Kweet> findFollowerKweetsBySender(Profile profile) {
         return null;
     }
+
+    @Override
+    public List<Kweet> findMyLastTenKweets(Profile profile) {
+        return null;
+    }
+
+    @Override
+    public Kweet findLast(Profile profile) {
+        return null;
+    }
 }

@@ -17,7 +17,6 @@ import static main.util.HelperFunctions.isNull;
  * @author Thom van de Pas on 27-2-2018
  */
 @Stateless
-@Interceptors(LoggingInterceptor.class)
 public class HeartService {
 
     @Inject
