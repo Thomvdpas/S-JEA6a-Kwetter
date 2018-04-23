@@ -158,7 +158,7 @@ public class KweetResponseResource {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        List<Kweet> allFoundKweets = this.kweetService.findAllKweetsFromFollowers(foundAccount);
+        List<Kweet> allFoundKweets = this.kweetService.getTimelineKweets(foundAccount);
 
         return Response.ok(this.kweetService.multipleToJson(allFoundKweets)).header("Access-Control-Allow-Origin", "*").build();
     }
@@ -195,6 +195,17 @@ public class KweetResponseResource {
         } else {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+    }
+
+    @GET
+    @Path("hashtag/{bodyText}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response findAllKweetsByHashtagSubject(@PathParam("bodyText") String bodyText) {
+        List<Kweet> kweetList = kweetService.findAllKweetsByHashtagBodyText(bodyText);
+        if (kweetList != null) {
+            return Response.ok(kweetService.multipleToJson(kweetList)).header("Access-Control-Allow-Origin", "*").build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).header("Access-Control-Allow-Origin", "*").build();
     }
 
     @GET

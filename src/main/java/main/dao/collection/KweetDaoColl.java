@@ -70,7 +70,7 @@ public class KweetDaoColl implements KweetDao {
     }
 
     @Override
-    public List<Kweet> findFollowerKweetsBySender(Profile profile) {
+    public List<Kweet> getTimelineKweets(Profile profile) {
         return null;
     }
 
@@ -81,6 +81,11 @@ public class KweetDaoColl implements KweetDao {
 
     @Override
     public Kweet findLast(Profile profile) {
+        return null;
+    }
+
+    @Override
+    public List<Kweet> findByHashtagBodyText(String bodyText) {
         return null;
     }
 }

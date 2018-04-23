@@ -57,10 +57,10 @@ public class HashtagResponseResource {
     }
 
     @GET
-    @Path("find/{subject}")
+    @Path("find/{bodyText}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findBySubject(@PathParam("subject") String subject) {
-        Hashtag hashtag = hashtagService.findByBodyText(subject);
+    public Response findBySubject(@PathParam("bodyText") String bodyText) {
+        Hashtag hashtag = hashtagService.findByBodyText(bodyText);
         if (hashtag != null) {
             return Response.ok(hashtag.toJson()).header("Access-Control-Allow-Origin", "*").build();
         }

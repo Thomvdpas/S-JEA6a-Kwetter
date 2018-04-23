@@ -29,6 +29,7 @@ public class Profile implements Serializable {
     private String avatarPath;
     private String location;
     private String biography;
+    private String dateOfBirth;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
@@ -77,9 +78,16 @@ public class Profile implements Serializable {
 
     public JsonObject toJson() {
         return Json.createObjectBuilder()
-                .add("name", this.getFullName())
+                .add("id", this.getId())
+                .add("email", this.getAccount().getEmailaddress())
+                .add("username", this.getAccount().getUsername())
+                .add("firstName", this.getFirstName())
+                .add("lastName", this.getLastName())
                 .add("biography", this.getBiography())
                 .add("location", this.getLocation())
+                .add("dateOfBirth", this.getDateOfBirth())
+                .add("amountFollowers", this.getFollowers().size())
+                .add("amountFollowing", this.getFollowings().size())
                 .add("avatarPath", this.getAvatarPath())
                 .build();
     }
@@ -94,6 +102,10 @@ public class Profile implements Serializable {
 
     public void addFollowing(Profile following) {
         this.followings.add(following);
+    }
+
+    public void addFollower(Profile follower) {
+        this.followers.add(follower);
     }
 
 
@@ -185,6 +197,14 @@ public class Profile implements Serializable {
     public void setMentionKweets(List<Kweet> mentionKweets) {
         this.mentionKweets = mentionKweets;
     }
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
     //</editor-fold>
 
     //<editor-fold desc="equals/hashCode">
@@ -202,5 +222,6 @@ public class Profile implements Serializable {
 
         return Objects.hash(id, account);
     }
+
     //</editor-fold>
 }

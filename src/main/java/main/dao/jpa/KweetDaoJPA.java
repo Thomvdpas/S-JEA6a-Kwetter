@@ -7,7 +7,6 @@ import main.domain.Kweet;
 import main.domain.Profile;
 
 import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -39,9 +38,10 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
     }
 
     @Override
-    public List<Kweet> findFollowerKweetsBySender(Profile profile) {
-        return getEntityManager().createNamedQuery("kweet.findByFollowings", Kweet.class)
-                .setParameter("followings", profile.getFollowings())
+    public List<Kweet> getTimelineKweets(Profile profile) {
+        return getEntityManager().createNamedQuery("kweet.getTimeline", Kweet.class)
+                .setParameter("sender", profile)
+                .setParameter("following", profile.getFollowings())
                 .getResultList();
     }
 
@@ -55,9 +55,13 @@ public class KweetDaoJPA extends GenericDaoJPAImpl<Kweet> implements KweetDao {
 
     @Override
     public Kweet findLast(Profile sender) {
-        TypedQuery<Kweet> query = getEntityManager().createNamedQuery("kweet.findLast", Kweet.class)
-                .setParameter("sender", sender);
+        return null;
+    }
 
-        return oneResult(query);
+    @Override
+    public List<Kweet> findByHashtagBodyText(String bodyText) {
+        return getEntityManager().createNamedQuery("kweet.findByHashtagBodyText", Kweet.class)
+                .setParameter("bodyText", bodyText)
+                .getResultList();
     }
 }

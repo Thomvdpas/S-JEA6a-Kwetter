@@ -258,8 +258,8 @@ public class KweetService {
         return jsonObjects;
     }
 
-    public List<Kweet> findAllKweetsFromFollowers(Account account) {
-        return this.kweetDao.findFollowerKweetsBySender(account.getProfile());
+    public List<Kweet> getTimelineKweets(Account account) {
+        return this.kweetDao.getTimelineKweets(account.getProfile());
     }
 
     public List<Kweet> findMyLastTenKweets(Account account) {
@@ -272,5 +272,12 @@ public class KweetService {
 
     public Kweet findLast(Account account) {
         return this.kweetDao.findLast(account.getProfile());
+    }
+
+    public List<Kweet> findAllKweetsByHashtagBodyText(String bodyText) {
+        if (!StringUtils.isNullOrEmpty(bodyText)) {
+            return this.kweetDao.findByHashtagBodyText(bodyText);
+        }
+        return null;
     }
 }

@@ -16,7 +16,7 @@ import java.util.Objects;
 //@Setter
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "hashtag.findByBodyText", query = "SELECT h FROM Hashtag h WHERE h.bodyText LIKE :bodyText")
+        @NamedQuery(name = "hashtag.findByBodyText", query = "SELECT h FROM Hashtag h WHERE h.bodyText = :bodyText")
 })
 public class Hashtag implements Serializable {
 
