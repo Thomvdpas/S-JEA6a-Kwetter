@@ -24,4 +24,13 @@ public class AccountDaoJPA extends GenericDaoJPAImpl<Account> implements Account
 
         return oneResult(query);
     }
+
+    @Override
+    public Account findByCredentials(String username, String password) {
+        TypedQuery<Account> query = getEntityManager().createNamedQuery("account.findByCredentials", Account.class)
+                .setParameter("username", username)
+                .setParameter("password", password);
+
+        return oneResult(query);
+    }
 }

@@ -6,10 +6,10 @@ import main.service.HashtagService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 
@@ -48,12 +48,20 @@ public class HashtagResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getHashtag(@PathParam("id") Long id) {
+    public JsonObject findById(@PathParam("id") Long id) {
         Hashtag hashtag = hashtagService.findById(id);
         if (hashtag == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(hashtag.toJson()).build();
+
+        UriBuilder uriBuilder = UriBuilder.fromResource(HashtagResponseResource.class)
+                .path(HashtagResponseResource.class, "getKweetById");
+        Link link = Link.fromUri(uriBuilder.build(id)).rel("self").build();
+
+        return Json.createObjectBuilder()
+                .add("bodyText", hashtag.getBodyText())
+                .add(link.getRel(), link.getUri().getPath())
+                .build();
     }
 
     @GET

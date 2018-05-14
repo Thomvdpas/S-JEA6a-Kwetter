@@ -6,6 +6,7 @@ import main.dao.JPA;
 import main.domain.Account;
 import main.event.AccountEvent;
 import main.interceptor.LoggingInterceptor;
+import main.util.EncryptionHelper;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -133,5 +134,9 @@ public class AccountService {
 
     public void setDao(AccountDao accountDao) {
         this.accountDao = accountDao;
+    }
+
+    public Account findByCredentials(String username, String password) {
+        return this.accountDao.findByCredentials(username, EncryptionHelper.encryptData(password));
     }
 }

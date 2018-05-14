@@ -4,11 +4,9 @@ import main.dao.HeartDao;
 import main.dao.JPA;
 import main.domain.Heart;
 import main.domain.Kweet;
-import main.interceptor.LoggingInterceptor;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.interceptor.Interceptors;
 import java.util.List;
 
 import static main.util.HelperFunctions.isNull;

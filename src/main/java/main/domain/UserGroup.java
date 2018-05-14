@@ -12,7 +12,7 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "group.findByGroupName", query = "SELECT u FROM UserGroup u WHERE u.groupName = :groupName"),
         @NamedQuery(name = "group.findByAccount",
-                query = "SELECT ug FROM UserGroup ug JOIN ug.accounts uga JOIN uga.userGroups ugc WHERE ugc.groupName = :username")
+                query = "SELECT ug FROM UserGroup ug JOIN ug.accounts uga WHERE uga.username = :username")
 })
 
 public class UserGroup implements Serializable {

@@ -147,6 +147,7 @@ public class StartUp {
 
         userGroup.addAccount(accountSjef);
         userGroup.addAccount(accountHenk);
+        userGroup.addAccount(accountThom);
         this.userGroupService.create(userGroup);
 
         adminGroup.addAccount(accountThom);

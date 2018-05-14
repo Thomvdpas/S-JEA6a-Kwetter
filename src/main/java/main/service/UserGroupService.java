@@ -3,6 +3,7 @@ package main.service;
 import com.mysql.jdbc.StringUtils;
 import main.dao.GroupDao;
 import main.dao.JPA;
+import main.domain.Account;
 import main.domain.UserGroup;
 
 import javax.ejb.Stateless;
@@ -41,5 +42,9 @@ public class UserGroupService {
 
     public List<UserGroup> findAll() {
         return this.groupDao.findAll();
+    }
+
+    public List<UserGroup> findGroupsForAccount(Account foundAccount) {
+        return this.groupDao.findByAccount(foundAccount.getUsername());
     }
 }

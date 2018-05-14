@@ -2,17 +2,25 @@ package main.boundary.rest;
 
 import io.swagger.annotations.Api;
 import main.domain.Account;
+import main.domain.Hashtag;
+import main.domain.Heart;
 import main.domain.Kweet;
 import main.service.AccountService;
 import main.service.KweetService;
-import main.service.ProfileService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -28,8 +36,6 @@ public class KweetResponseResource {
      */
     @Inject
     private AccountService accountService;
-    @Inject
-    private ProfileService profileService;
     @Inject
     private KweetService kweetService;
 
@@ -54,14 +60,40 @@ public class KweetResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getKweetById(@PathParam("id") long id) {
+    public JsonObject getKweetById(@PathParam("id") long id) {
         Kweet kweet = kweetService.findById(id);
 
         if (kweet == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
-        return Response.ok(kweet.toJson()).build();
+
+        UriBuilder uriBuilder = UriBuilder.fromResource(KweetResponseResource.class)
+                .path(KweetResponseResource.class, "getKweetById");
+        Link link = Link.fromUri(uriBuilder.build(id)).rel("self").build();
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        JsonArrayBuilder hashtagArrayBuilder = Json.createArrayBuilder();
+        JsonArrayBuilder heartsArrayBuilder = Json.createArrayBuilder();
+
+        for (Hashtag hashtag : kweet.getHashtags()) {
+            hashtagArrayBuilder.add(hashtag.toJson());
+        }
+
+        for (Heart heart : kweet.getHearts()) {
+            heartsArrayBuilder.add(heart.toJson());
+        }
+
+
+        return Json.createObjectBuilder()
+                .add("messageBody", kweet.getMessageBody())
+                .add("hearts", heartsArrayBuilder)
+                .add("date", dateFormat.format(kweet.getTimeOfPosting()))
+                .add("hashtags", hashtagArrayBuilder)
+                .add("sender", kweet.getSender().toJson())
+                .add(link.getRel(), link.getUri().getPath())
+                .build();
     }
 
     @GET

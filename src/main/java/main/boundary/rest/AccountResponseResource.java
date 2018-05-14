@@ -1,14 +1,19 @@
 package main.boundary.rest;
 
-import main.domain.Account;
 import io.swagger.annotations.Api;
+import main.domain.Account;
 import main.service.AccountService;
 
+import javax.crypto.KeyGenerator;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Link;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.List;
 
@@ -47,12 +52,24 @@ public class AccountResponseResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getAccount(@PathParam("id") Long id) {
+    public JsonObject findById(@PathParam("id") Long id) {
         Account account = accountService.findById(id);
         if (account == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(account.toJson()).build();
+
+        UriBuilder uriBuilder = UriBuilder.fromResource(AccountResponseResource.class)
+                .path(AccountResponseResource.class, "findById");
+        Link link = Link.fromUri(uriBuilder.build(id)).rel("self").build();
+
+        return Json.createObjectBuilder()
+                .add("username", account.getUsername())
+                .add("emailaddress", account.getEmailaddress())
+                .add("profile", Json.createObjectBuilder()
+                        .add("firstName", account.getProfile().getFirstName())
+                        .add("lastName", account.getProfile().getLastName()).build())
+                .add(link.getRel(), link.getUri().getPath())
+                .build();
     }
 
     /**

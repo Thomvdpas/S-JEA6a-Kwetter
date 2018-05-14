@@ -8,4 +8,6 @@ import main.domain.Account;
 public interface AccountDao extends GenericDao<Account> {
 
     Account findByUsername(String username);
+
+    Account findByCredentials(String login, String password);
 }

@@ -23,6 +23,10 @@ public final class EncryptionHelper {
         return encryptData(saltedPassword);
     }
 
+    public static String getEncryptedPassword(String password) {
+        return encryptData(password);
+    }
+
     public static String encryptData(String data) {
         return DigestUtils.sha256Hex(data);
     }

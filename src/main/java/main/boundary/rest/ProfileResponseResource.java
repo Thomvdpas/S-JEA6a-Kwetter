@@ -6,10 +6,10 @@ import main.service.ProfileService;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 
@@ -42,18 +42,36 @@ public class ProfileResponseResource {
 
     /**
      * Gets a Profile based on its id.
-     * @param username
+     * @param id
      * @returns the Profile in JSON format.
      */
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response findById(@PathParam("id") Long id) {
+    public JsonObject findById(@PathParam("id") Long id) {
         Profile profile = profileService.findById(id);
         if (profile == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        return Response.ok(profile.toJson()).header("Access-Control-Allow-Origin", "*").build();
+
+        UriBuilder uriBuilder = UriBuilder.fromResource(ProfileResponseResource.class)
+                .path(ProfileResponseResource.class, "findById");
+        Link link = Link.fromUri(uriBuilder.build(id)).rel("self").build();
+
+        return Json.createObjectBuilder()
+                .add("id", profile.getId())
+                .add("email", profile.getAccount().getEmailaddress())
+                .add("username", profile.getAccount().getUsername())
+                .add("firstName", profile.getFirstName())
+                .add("lastName", profile.getLastName())
+                .add("biography", profile.getBiography())
+                .add("location", profile.getLocation())
+                .add("dateOfBirth", profile.getDateOfBirth())
+                .add("amountFollowers", profile.getFollowers().size())
+                .add("amountFollowing", profile.getFollowings().size())
+                .add("avatarPath", profile.getAvatarPath())
+                .add(link.getRel(), link.getUri().getPath())
+                .build();
     }
 
     /**

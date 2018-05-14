@@ -7,6 +7,7 @@ import main.domain.UserGroup;
 
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 /**
  * @author Thom van de Pas on 3-4-2018
@@ -27,12 +28,9 @@ public class GroupDaoJPAImpl extends GenericDaoJPAImpl<UserGroup> implements Gro
     }
 
     @Override
-    public UserGroup findByAccount(String username) {
-        TypedQuery<UserGroup> query = getEntityManager().createNamedQuery("group.findByAccount", UserGroup.class)
-                .setParameter("username", username);
-
-        return oneResult(query);
+    public List<UserGroup> findByAccount(String username) {
+        return getEntityManager().createNamedQuery("group.findByAccount", UserGroup.class)
+                .setParameter("username", username)
+                .getResultList();
     }
-
-
 }
